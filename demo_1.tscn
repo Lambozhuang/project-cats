@@ -1,3 +1,12 @@
-[gd_scene format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=3 format=3 uid="uid://bgnn78kuqqjks"]
+
+[ext_resource type="PackedScene" uid="uid://dvscac4fx2trn" path="res://player.tscn" id="1_6c8g1"]
+[ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://villain.tscn" id="2_5c1db"]
 
 [node name="Demo1" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_6c8g1")]
+position = Vector2(634, 368)
+
+[node name="Villain" parent="." instance=ExtResource("2_5c1db")]
+position = Vector2(413, 326)
