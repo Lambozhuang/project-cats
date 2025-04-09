@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://hibqxwj4bwo3"]
+
+[ext_resource type="Texture2D" uid="uid://dii4y3p2qsbse" path="res://box.png" id="1_tnite"]
+[ext_resource type="Script" uid="uid://wy1t8pvxjn7q" path="res://item.gd" id="1_ttk8k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ttk8k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kg5e7"]
+radius = 18.0
+
+[node name="Item" type="StaticBody2D"]
+script = ExtResource("1_ttk8k")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_tnite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ttk8k")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kg5e7")
