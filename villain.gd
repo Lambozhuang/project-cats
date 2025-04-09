@@ -15,9 +15,6 @@ func _ready() -> void:
 	# If the Player is instanced at runtime, you can store a reference via signals or
 	# pass it from the outside
 	_player = get_tree().get_root().find_child("Player", true, false)
-	
-func _process(delta: float) -> void:
-	wander_around(delta)
 
 func _physics_process(delta: float) -> void:
 	if not _player:
