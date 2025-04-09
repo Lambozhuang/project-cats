@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=5 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="PackedScene" uid="uid://by7mnayrkygvi" path="res://level_1_map.tscn" id="1_5c1db"]
 [ext_resource type="PackedScene" uid="uid://dvscac4fx2trn" path="res://player.tscn" id="1_6c8g1"]
@@ -10,10 +10,24 @@
 [node name="level1_map" parent="." instance=ExtResource("1_5c1db")]
 
 [node name="Player" parent="." instance=ExtResource("1_6c8g1")]
-position = Vector2(634, 368)
+position = Vector2(819, 980)
 
 [node name="Villain" parent="." instance=ExtResource("2_5c1db")]
-position = Vector2(413, 326)
+position = Vector2(565, 251)
 
-[node name="Item" parent="." instance=ExtResource("3_5c1db")]
-position = Vector2(810, 245)
+[node name="Node" type="Node" parent="."]
+
+[node name="Item" parent="Node" instance=ExtResource("3_5c1db")]
+position = Vector2(1752, 557)
+
+[node name="Item2" parent="Node" instance=ExtResource("3_5c1db")]
+position = Vector2(1306, 551)
+
+[node name="Item3" parent="Node" instance=ExtResource("3_5c1db")]
+position = Vector2(1395, 825)
+
+[node name="Item4" parent="Node" instance=ExtResource("3_5c1db")]
+position = Vector2(518, 844)
+
+[node name="Item5" parent="Node" instance=ExtResource("3_5c1db")]
+position = Vector2(1946, 664)
