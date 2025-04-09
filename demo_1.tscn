@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dvscac4fx2trn" path="res://player.tscn" id="1_6c8g1"]
 [ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://villain.tscn" id="2_5c1db"]
-[ext_resource type="PackedScene" uid="uid://bcnedx4sntr4l" path="res://item.tscn" id="3_5c1db"]
+[ext_resource type="PackedScene" uid="uid://hibqxwj4bwo3" path="res://item.tscn" id="3_5c1db"]
 
 [node name="Demo1" type="Node"]
 

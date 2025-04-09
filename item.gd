@@ -1,10 +1,6 @@
-extends RigidBody2D
+extends StaticBody2D
 
 var isCarried = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	freeze = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,7 +20,6 @@ func _input(event: InputEvent) -> void:
 			if body.name == "Player" and get_node("../Player").canCarry == true:
 				isCarried = true
 				get_node("../Player").canCarry = false
-				freeze = true
 				
 	elif Input.is_action_just_released("carry"):
 		if isCarried:
