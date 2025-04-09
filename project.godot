@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[dotnet]
+
+project/assembly_name="Project Cats"
+
 [input]
 
 move_up={
