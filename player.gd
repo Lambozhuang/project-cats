@@ -4,6 +4,9 @@ extends CharacterBody2D
 @export var speed := 200.0
 var canCarry = true
 
+func _process(delta: float) -> void:
+	position = position.clamp(Vector2.ZERO, Vector2(1920, 1280))
+
 func _physics_process(delta: float) -> void:
 	var input_vector = Vector2.ZERO
 
@@ -16,4 +19,8 @@ func _physics_process(delta: float) -> void:
 
 	# Apply movement
 	velocity = input_vector * speed
+	
+	if velocity.x != 0:
+		$Sprite2D.flip_h = velocity.x < 0
+		
 	move_and_slide()

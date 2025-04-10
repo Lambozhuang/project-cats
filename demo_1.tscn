@@ -9,11 +9,11 @@
 
 [node name="level1_map" parent="." instance=ExtResource("1_5c1db")]
 
-[node name="Player" parent="." instance=ExtResource("1_6c8g1")]
-position = Vector2(819, 980)
-
 [node name="Villain" parent="." instance=ExtResource("2_5c1db")]
-position = Vector2(565, 251)
+position = Vector2(569, 397)
+
+[node name="Player" parent="." instance=ExtResource("1_6c8g1")]
+position = Vector2(958, 842)
 
 [node name="Node" type="Node" parent="."]
 

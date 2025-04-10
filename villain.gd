@@ -15,6 +15,9 @@ func _ready() -> void:
 	# If the Player is instanced at runtime, you can store a reference via signals or
 	# pass it from the outside
 	_player = get_tree().get_root().find_child("Player", true, false)
+	
+func _process(delta: float) -> void:
+	position = position.clamp(Vector2.ZERO, Vector2(1920, 1080))
 
 func _physics_process(delta: float) -> void:
 	if not _player:
@@ -30,6 +33,8 @@ func _physics_process(delta: float) -> void:
 func chase_player(delta: float) -> void:
 	var direction = (_player.global_position - global_position).normalized()
 	velocity = direction * speed
+	if velocity.x != 0:
+		$Sprite2D.flip_h = velocity.x < 0
 	move_and_slide()
 
 func wander_around(delta: float) -> void:
@@ -42,4 +47,6 @@ func wander_around(delta: float) -> void:
 		_timer = wander_time
 
 	velocity = _wander_direction * (speed * 0.5)  # maybe wander slower
+	if velocity.x != 0:
+		$Sprite2D.flip_h = velocity.x < 0
 	move_and_slide()
