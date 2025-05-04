@@ -1,26 +1,39 @@
 # Player.gd
 extends CharacterBody2D
 
-@export var speed := 200.0
 var canCarry = true
+
+@export var speed := 200.0
+@export var synced_position := Vector2()
+
+@onready var inputs: Node = $Inputs
+
+func _ready() -> void:
+	position = synced_position
+	if str(name).is_valid_int():
+		$"Inputs/InputsSync".set_multiplayer_authority(str(name).to_int())
 
 func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, Vector2(1920, 1280))
 
 func _physics_process(delta: float) -> void:
-	var input_vector = Vector2.ZERO
+	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+		# The client which this player represent will update the controls state, and notify it to everyone.
+		inputs.update()
 
-	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
-
-	# Normalize so diagonal movement doesn’t exceed speed
-	if input_vector.length() > 0:
-		input_vector = input_vector.normalized()
-
-	# Apply movement
-	velocity = input_vector * speed
-	
-	if velocity.x != 0:
-		$Sprite2D.flip_h = velocity.x < 0
+	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
+		# The server updates the position that will be notified to the clients.
+		synced_position = position
+	else:
+		# The client simply updates the position to the last known one.
+		position = synced_position
 		
+	velocity = inputs.motion * speed
 	move_and_slide()
+
+@rpc("call_local")
+func set_player_name(value: String) -> void:
+	$Label.text = value
+	# Assign a random color to the player based on its name.
+	$Label.modulate = gamestate.get_player_color(value)
+	#$sprite.modulate = Color(0.5, 0.5, 0.5) + gamestate.get_player_color(value)

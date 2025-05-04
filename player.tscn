@@ -1,11 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvscac4fx2trn"]
+[gd_scene load_steps=8 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://cjkdc0a8v87h6" path="res://assets/sprites/cats/cat1.PNG" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player_controls.gd" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 15.0
 height = 60.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_onrkg"]
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:synced_position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hqtel"]
+properties/0/path = NodePath(".:motion")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -24,5 +42,28 @@ shape = SubResource("CapsuleShape2D_onrkg")
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -22)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.5, 1.5)
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = -74.88
+offset_right = 77.0
+offset_bottom = -51.88
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_onrkg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_onrkg")
+
+[node name="Inputs" type="Node" parent="."]
+script = ExtResource("3_i3pqv")
+
+[node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs"]
+replication_config = SubResource("SceneReplicationConfig_hqtel")

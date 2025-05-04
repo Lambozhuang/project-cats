@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=4 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="PackedScene" uid="uid://by7mnayrkygvi" path="res://level_1_map.tscn" id="1_5c1db"]
-[ext_resource type="PackedScene" uid="uid://dvscac4fx2trn" path="res://player.tscn" id="1_6c8g1"]
 [ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://villain.tscn" id="2_5c1db"]
 [ext_resource type="PackedScene" uid="uid://hibqxwj4bwo3" path="res://item.tscn" id="3_5c1db"]
 
@@ -11,9 +10,6 @@
 
 [node name="Villain" parent="." instance=ExtResource("2_5c1db")]
 position = Vector2(569, 397)
-
-[node name="Player" parent="." instance=ExtResource("1_6c8g1")]
-position = Vector2(958, 842)
 
 [node name="Node" type="Node" parent="."]
 
@@ -31,3 +27,9 @@ position = Vector2(518, 844)
 
 [node name="Item5" parent="Node" instance=ExtResource("3_5c1db")]
 position = Vector2(1946, 664)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://dvscac4fx2trn")
+spawn_path = NodePath("../Players")
