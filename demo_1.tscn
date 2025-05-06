@@ -9,24 +9,24 @@
 [node name="level1_map" parent="." instance=ExtResource("1_5c1db")]
 
 [node name="Villain" parent="." instance=ExtResource("2_5c1db")]
-position = Vector2(569, 397)
+position = Vector2(1049, 711)
 
-[node name="Node" type="Node" parent="."]
+[node name="Items" type="Node" parent="."]
 
-[node name="Item" parent="Node" instance=ExtResource("3_5c1db")]
-position = Vector2(1752, 557)
+[node name="Item" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1037, 148)
 
-[node name="Item2" parent="Node" instance=ExtResource("3_5c1db")]
-position = Vector2(1306, 551)
+[node name="Item2" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1037, 448)
 
-[node name="Item3" parent="Node" instance=ExtResource("3_5c1db")]
-position = Vector2(1395, 825)
+[node name="Item3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1037, 223)
 
-[node name="Item4" parent="Node" instance=ExtResource("3_5c1db")]
-position = Vector2(518, 844)
+[node name="Item4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1037, 371)
 
-[node name="Item5" parent="Node" instance=ExtResource("3_5c1db")]
-position = Vector2(1946, 664)
+[node name="Item5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1037, 297)
 
 [node name="Players" type="Node2D" parent="."]
 

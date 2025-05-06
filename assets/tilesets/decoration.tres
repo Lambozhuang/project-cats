@@ -1,9 +1,9 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://bafg07nk2nqhk"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://bafg07nk2nqhk"]
 
-[ext_resource type="Texture2D" uid="uid://l4t75bn32pxi" path="res://Assert/global2.png" id="1_5eldl"]
-[ext_resource type="Texture2D" uid="uid://c5npbg2evhujr" path="res://Assert/items_inventory 2.png" id="2_qcl1a"]
-[ext_resource type="Texture2D" uid="uid://wcuiy4ajgtoo" path="res://Assert/original source/box1.png" id="3_6mfo8"]
-[ext_resource type="Texture2D" uid="uid://nnn5fxqbvf5o" path="res://Assert/original source/box2.png" id="4_07c1d"]
+[ext_resource type="Texture2D" uid="uid://l4t75bn32pxi" path="res://Assets/global2.png" id="1_5eldl"]
+[ext_resource type="Texture2D" uid="uid://c5npbg2evhujr" path="res://Assets/items_inventory 2.png" id="2_qcl1a"]
+[ext_resource type="Texture2D" uid="uid://wcuiy4ajgtoo" path="res://Assets/original source/box1.png" id="3_6mfo8"]
+[ext_resource type="Texture2D" uid="uid://nnn5fxqbvf5o" path="res://Assets/original source/box2.png" id="4_07c1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0xo8l"]
 texture = ExtResource("1_5eldl")
@@ -44758,26 +44758,6 @@ texture = ExtResource("2_qcl1a")
 28:15/0 = 0
 29:15/0 = 0
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2u7jv"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3ngjr"]
-texture = SubResource("CompressedTexture2D_2u7jv")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6orn5"]
 texture = ExtResource("3_6mfo8")
 0:1/0 = 0
@@ -44810,7 +44790,6 @@ texture = ExtResource("4_07c1d")
 
 [resource]
 sources/1 = SubResource("TileSetAtlasSource_xfyss")
-sources/2 = SubResource("TileSetAtlasSource_3ngjr")
 sources/0 = SubResource("TileSetAtlasSource_0xo8l")
 sources/5 = SubResource("TileSetAtlasSource_6orn5")
 sources/6 = SubResource("TileSetAtlasSource_whnp6")

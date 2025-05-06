@@ -12,9 +12,17 @@ func _ready() -> void:
 	position = synced_position
 	if str(name).is_valid_int():
 		$"Inputs/InputsSync".set_multiplayer_authority(str(name).to_int())
+	
+	$AnimatedSprite2D.animation = "idle"
+	$AnimatedSprite2D.play()
 
 func _process(delta: float) -> void:
-	position = position.clamp(Vector2.ZERO, Vector2(1920, 1280))
+	position = position.clamp(Vector2.ZERO, Vector2(1152, 648))
+	if velocity.x != 0 || velocity.y != 0:
+		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.flip_h = velocity.x > 0
+	else:
+		$AnimatedSprite2D.animation = "idle"
 
 func _physics_process(delta: float) -> void:
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):

@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=4 uid="uid://yvbjsv0kohfw"]
 
-[ext_resource type="TileSet" uid="uid://x6pdxpri3xpm" path="res://ground.tres" id="1_q6r6c"]
-[ext_resource type="TileSet" uid="uid://6vyabwpm5mnj" path="res://ground_decoration.tres" id="2_kdubu"]
-[ext_resource type="TileSet" uid="uid://y7ikibeptv3b" path="res://building_obstacles.tres" id="3_d21ai"]
-[ext_resource type="TileSet" uid="uid://bnabe8xgscf7b" path="res://building_decoration.tres" id="4_rj586"]
-[ext_resource type="TileSet" uid="uid://bafg07nk2nqhk" path="res://decoration.tres" id="5_4d7sh"]
+[ext_resource type="TileSet" uid="uid://x6pdxpri3xpm" path="res://Assets/tilesets/ground.tres" id="1_q6r6c"]
+[ext_resource type="TileSet" uid="uid://6vyabwpm5mnj" path="res://Assets/tilesets/ground_decoration.tres" id="2_kdubu"]
+[ext_resource type="TileSet" uid="uid://y7ikibeptv3b" path="res://Assets/tilesets/building_obstacles.tres" id="3_d21ai"]
+[ext_resource type="TileSet" uid="uid://bnabe8xgscf7b" path="res://Assets/tilesets/building_decoration.tres" id="4_rj586"]
+[ext_resource type="TileSet" uid="uid://bafg07nk2nqhk" path="res://Assets/tilesets/decoration.tres" id="5_4d7sh"]
 
 [node name="Node2D" type="Node2D"]
 

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://8fxile8qg75i" path="res://Assets/sprites/villains/cop.PNG" id="2_hig5a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hig5a"]
-radius = 25.0
-height = 106.0
+radius = 12.0
+height = 46.0
 
 [node name="Villain" type="CharacterBody2D"]
 collision_layer = 2
@@ -16,8 +16,10 @@ speed = 150.0
 detection_range = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -13)
+scale = Vector2(0.465, 0.465)
 texture = ExtResource("2_hig5a")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(11, 37)
+position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_hig5a")
