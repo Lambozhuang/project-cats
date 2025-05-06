@@ -1,11 +1,11 @@
 [gd_resource type="TileSet" load_steps=13 format=3 uid="uid://delyxrii7n6qr"]
 
-[ext_resource type="Texture2D" uid="uid://b5l28k1wh15w7" path="res://assets/tilesets/l1_tileset.png" id="1_6xjby"]
-[ext_resource type="Texture2D" uid="uid://b8vakhxhfu1d2" path="res://assets/tilesets/l2_tileset.png" id="2_jomf0"]
-[ext_resource type="Texture2D" uid="uid://o7r2ovijx4i0" path="res://assets/sprites/map/level1/l2/l2_bench.PNG" id="3_mfgve"]
-[ext_resource type="Texture2D" uid="uid://do6fs3gahb1wf" path="res://assets/sprites/map/level1/l2/l2_bread_stand.PNG" id="4_ivhot"]
-[ext_resource type="Texture2D" uid="uid://doj87dhaa12ef" path="res://assets/sprites/map/level1/l2/l2_fountain.PNG" id="5_yt1ba"]
-[ext_resource type="Texture2D" uid="uid://b30wn4vxp6j8a" path="res://assets/sprites/map/level1/l2/l2_fruit_stand.PNG" id="6_6i7he"]
+[ext_resource type="Texture2D" uid="uid://b5l28k1wh15w7" path="res://Assets/tilesets/l1_tileset.png" id="1_6xjby"]
+[ext_resource type="Texture2D" uid="uid://b8vakhxhfu1d2" path="res://Assets/tilesets/l2_tileset.png" id="2_jomf0"]
+[ext_resource type="Texture2D" uid="uid://o7r2ovijx4i0" path="res://Assets/sprites/map/level1/l2/l2_bench.PNG" id="3_mfgve"]
+[ext_resource type="Texture2D" uid="uid://do6fs3gahb1wf" path="res://Assets/sprites/map/level1/l2/l2_bread_stand.PNG" id="4_ivhot"]
+[ext_resource type="Texture2D" uid="uid://doj87dhaa12ef" path="res://Assets/sprites/map/level1/l2/l2_fountain.PNG" id="5_yt1ba"]
+[ext_resource type="Texture2D" uid="uid://b30wn4vxp6j8a" path="res://Assets/sprites/map/level1/l2/l2_fruit_stand.PNG" id="6_6i7he"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k0whv"]
 texture = ExtResource("1_6xjby")

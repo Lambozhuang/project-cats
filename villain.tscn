@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://daxom7074rqp3"]
 
 [ext_resource type="Script" uid="uid://2kk2vfkelymc" path="res://villain.gd" id="1_hig5a"]
-[ext_resource type="Texture2D" uid="uid://8fxile8qg75i" path="res://assets/sprites/villains/cop.PNG" id="2_hig5a"]
+[ext_resource type="Texture2D" uid="uid://8fxile8qg75i" path="res://Assets/sprites/villains/cop.PNG" id="2_hig5a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hig5a"]
 radius = 25.0

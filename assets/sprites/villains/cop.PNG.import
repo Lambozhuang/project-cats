@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8fxile8qg75i"
-path="res://.godot/imported/cop.PNG-3ccc7106888b37ff3039c440c7c11ca5.ctex"
+path="res://.godot/imported/cop.PNG-d99922ff8fabd363ab7238e1a8d8b6dc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/villains/cop.PNG"
-dest_files=["res://.godot/imported/cop.PNG-3ccc7106888b37ff3039c440c7c11ca5.ctex"]
+source_file="res://Assets/sprites/villains/cop.PNG"
+dest_files=["res://.godot/imported/cop.PNG-d99922ff8fabd363ab7238e1a8d8b6dc.ctex"]
 
 [params]
 
