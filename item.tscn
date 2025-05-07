@@ -12,6 +12,7 @@ properties/0/replication_mode = 1
 radius = 30.0167
 
 [node name="Item" type="Area2D"]
+scale = Vector2(0.7, 0.7)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_ttk8k")
@@ -24,5 +25,4 @@ texture = ExtResource("2_ttk8k")
 replication_config = SubResource("SceneReplicationConfig_ttk8k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("CircleShape2D_kg5e7")

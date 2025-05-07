@@ -9,28 +9,49 @@ func _ready() -> void:
 	synced_position = position
 
 func _physics_process(delta: float) -> void:
-	if isCarried and multiplayer.is_server():
+	if isCarried:
 		var player = get_tree().get_root().get_node("Demo1/Players").get_node(str(carrier_id))
 		if player:
 			var attach_point = player.get_node("Marker2D").global_position
 			var offset = Vector2(0, -20)
-			synced_position = attach_point + offset
-			self.position = synced_position
+			
+			# Only the server updates synced_position
+			if multiplayer.is_server():
+				synced_position = attach_point + offset
+			
+			# All peers update their local position
+			self.position = attach_point + offset
 	else:
 		# On clients, follow the synced position from the server
 		if not multiplayer.is_server():
 			self.position = synced_position
 
 
-@rpc("call_local", "any_peer")
+# Client calls this to request a carry
+@rpc("any_peer", "call_local")
+func request_carry(player_id: int) -> void:
+	print("request carry item")
+	if not isCarried and multiplayer.is_server():
+		# Only server fulfills the request
+		carry.rpc(player_id)
+
+# Server authoritative carry execution
+@rpc("authority", "call_local")
 func carry(player_id: int) -> void:
 	print("item carry")
-	if not isCarried:
-		isCarried = true
-		carrier_id = player_id
-		print("Item carried by player", player_id)
+	isCarried = true
+	carrier_id = player_id
+	print("Item carried by player", player_id)
 
-@rpc("call_local", "any_peer")
+# Client calls this to request a release
+@rpc("any_peer", "call_local")
+func request_release() -> void:
+	if isCarried and multiplayer.is_server():
+		# Only server fulfills the request
+		release.rpc()
+
+# Server authoritative release execution
+@rpc("authority", "call_local")
 func release() -> void:
 	print("item release")
 	if isCarried:
@@ -41,8 +62,6 @@ func release() -> void:
 			var drop_offset = Vector2(0, 20)  # Adjust as needed
 			synced_position = drop_point + drop_offset
 			self.position = synced_position
-			print(synced_position)
-			print(position)
 		
 		isCarried = false
 		carrier_id = -1
