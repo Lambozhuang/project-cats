@@ -53,7 +53,8 @@ func try_to_carry_item() -> void:
 	if not canCarry:
 		return
 	print("try to carry")
-	for body in $CarryDetector.get_overlapping_bodies():
+	for body in $CarryDetector.get_overlapping_areas():
+		print(body)
 		if body.has_method("carry"):
 			body.carry.rpc(multiplayer.get_unique_id())
 			carried_item = body
