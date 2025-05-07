@@ -2,6 +2,7 @@
 extends CharacterBody2D
 
 var canCarry = true
+var carried_item: Node = null
 
 @export var speed := 200.0
 @export var synced_position := Vector2()
@@ -18,9 +19,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, Vector2(1152, 648))
-	if velocity.x != 0 || velocity.y != 0:
-		$AnimatedSprite2D.animation = "walk"
+	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x > 0
+		$AnimatedSprite2D.animation = "walk"
+	elif velocity.y != 0:
+		$AnimatedSprite2D.animation = "walk"
 	else:
 		$AnimatedSprite2D.animation = "idle"
 
@@ -38,6 +41,33 @@ func _physics_process(delta: float) -> void:
 		
 	velocity = inputs.motion * speed
 	move_and_slide()
+	
+		# Handle carry logic
+	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
+		if inputs.carry_pressed:
+			try_to_carry_item()
+		elif inputs.carry_released:
+			try_to_release_item()
+
+func try_to_carry_item() -> void:
+	if not canCarry:
+		return
+	print("try to carry")
+	for body in $CarryDetector.get_overlapping_bodies():
+		if body.has_method("carry"):
+			body.carry.rpc(multiplayer.get_unique_id())
+			carried_item = body
+			canCarry = false
+			break
+
+
+
+func try_to_release_item() -> void:
+	print("try to release")
+	if carried_item:
+		carried_item.release.rpc()
+		carried_item = null
+		canCarry = true
 
 @rpc("call_local")
 func set_player_name(value: String) -> void:

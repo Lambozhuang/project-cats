@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvscac4fx2trn"]
+[gd_scene load_steps=14 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://8gi4nssejema" path="res://Assets/sprites/cats/Rupert/Idle/Rupert_frame1.png" id="2_i3pqv"]
@@ -61,6 +61,9 @@ properties/0/path = NodePath(".:motion")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jxqw"]
+radius = 13.0
+
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 platform_on_leave = 2
@@ -108,3 +111,11 @@ script = ExtResource("3_i3pqv")
 
 [node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs"]
 replication_config = SubResource("SceneReplicationConfig_hqtel")
+
+[node name="CarryDetector" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarryDetector"]
+position = Vector2(0, 20)
+shape = SubResource("CircleShape2D_1jxqw")

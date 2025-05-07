@@ -17,7 +17,7 @@ position = Vector2(1049, 711)
 position = Vector2(1037, 148)
 
 [node name="Item2" parent="Items" instance=ExtResource("3_5c1db")]
-position = Vector2(1037, 448)
+position = Vector2(192, 608)
 
 [node name="Item3" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(1037, 223)
