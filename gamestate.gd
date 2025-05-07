@@ -126,8 +126,15 @@ func begin_game() -> void:
 		player.name = str(p_id)
 		world.get_node("Players").add_child(player)
 		# The RPC must be called after the player is added to the scene tree.
+		# TODO: maybe transfer the authority to the peer of its player
 		#player.set_multiplayer_authority(p_id)
-		player.set_player_name.rpc(player_name if p_id == multiplayer.get_unique_id() else players[p_id])
+		var name_to_set = player_name
+		if p_id == multiplayer.get_unique_id():
+			pass
+		else:
+			name_to_set = players[p_id]
+			
+		player.set_player_name.rpc(name_to_set, p_id)
 
 
 func end_game() -> void:

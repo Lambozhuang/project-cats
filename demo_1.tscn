@@ -9,7 +9,7 @@
 [node name="level1_map" parent="." instance=ExtResource("1_5c1db")]
 
 [node name="Villain" parent="." instance=ExtResource("2_5c1db")]
-position = Vector2(1049, 711)
+position = Vector2(667, 516)
 
 [node name="Items" type="Node" parent="."]
 

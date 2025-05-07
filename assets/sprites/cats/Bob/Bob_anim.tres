@@ -1,0 +1,29 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://clr3uijv3giuc"]
+
+[ext_resource type="Texture2D" uid="uid://bfmfeshhiyplu" path="res://Assets/sprites/cats/Bob/Idle/Bob_frame1.png" id="1_hwk4o"]
+[ext_resource type="Texture2D" uid="uid://d0y70qinn8pyi" path="res://Assets/sprites/cats/Bob/Idle/Bob_frame2.png" id="2_a833m"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hwk4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a833m")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hwk4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_a833m")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]

@@ -78,10 +78,13 @@ func try_to_release_item() -> void:
 		canCarry = true
 
 @rpc("call_local")
-func set_player_name(value: String) -> void:
+func set_player_name(value: String, peer_id: int) -> void:
 	print("lol")
 	print(multiplayer.get_unique_id())
 	$Label.text = value
 	# Assign a random color to the player based on its name.
 	$Label.modulate = gamestate.get_player_color(value)
 	#$sprite.modulate = Color(0.5, 0.5, 0.5) + gamestate.get_player_color(value)
+	print("value:" + value)
+	if peer_id != 1:
+		$AnimatedSprite2D.sprite_frames = ResourceCache.player_sprites["Bob"]

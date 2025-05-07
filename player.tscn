@@ -1,43 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvscac4fx2trn"]
+[gd_scene load_steps=10 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://8gi4nssejema" path="res://Assets/sprites/cats/Rupert/Idle/Rupert_frame1.png" id="2_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://crv8314e7afsn" path="res://Assets/sprites/cats/Rupert/Idle/Rupert_frame2.png" id="3_1jxqw"]
+[ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://Assets/sprites/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player_controls.gd" id="3_i3pqv"]
-[ext_resource type="Texture2D" uid="uid://ddkf158gynss" path="res://Assets/sprites/cats/Rupert/Walk/Rupert_walk_1and3.png" id="4_dw050"]
-[ext_resource type="Texture2D" uid="uid://cra4rdisgnvxd" path="res://Assets/sprites/cats/Rupert/Walk/Rupert_walk2.png" id="5_b26j0"]
-[ext_resource type="Texture2D" uid="uid://cbtloe3v56w4y" path="res://Assets/sprites/cats/Rupert/Walk/Rupert_walk4.png" id="6_n7ghd"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_nvl01"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_i3pqv")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_1jxqw")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_dw050")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_b26j0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_dw050")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_n7ghd")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 5.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 8.0
@@ -75,9 +41,9 @@ visible = false
 texture = ExtResource("2_i3pqv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_nvl01")
-animation = &"idle"
-frame_progress = 0.638447
+sprite_frames = ExtResource("3_hqtel")
+animation = &"walk"
+frame_progress = 0.598228
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 20)
