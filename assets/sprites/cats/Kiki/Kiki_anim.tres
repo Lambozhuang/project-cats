@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cy0djklu3q530"]
+
+[ext_resource type="Texture2D" uid="uid://dmiad7rocegpb" path="res://assets/sprites/cats/Kiki/Hold walk/Kiki walk hold1and3.png" id="1_ww8d2"]
+[ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://assets/sprites/cats/Kiki/Idle/Kiki idle1.png" id="2_2bdbd"]
+[ext_resource type="Texture2D" uid="uid://caepydrakh7v2" path="res://assets/sprites/cats/Kiki/Idle/Kiki idle2.png" id="3_leeyr"]
+[ext_resource type="Texture2D" uid="uid://c8noyvhhkpcje" path="res://assets/sprites/cats/Kiki/Walk/Kiki walk1and3.png" id="4_mhyol"]
+[ext_resource type="Texture2D" uid="uid://v52rqlsq3oeo" path="res://assets/sprites/cats/Kiki/Walk/Kiki walk2.png" id="5_moe26"]
+[ext_resource type="Texture2D" uid="uid://bggwixj1bvdew" path="res://assets/sprites/cats/Kiki/Walk/Kiki walk4.png" id="6_8s56c"]
+[ext_resource type="Texture2D" uid="uid://dlr5thnehbd2v" path="res://assets/sprites/cats/Kiki/Hold walk/Kiki walk hold2.png" id="7_0gph2"]
+[ext_resource type="Texture2D" uid="uid://cg7yumme12kgx" path="res://assets/sprites/cats/Kiki/Hold walk/Kiki walk hold4.png" id="8_phej8"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ww8d2")
+}],
+"loop": true,
+"name": &"hold",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2bdbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_leeyr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mhyol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_moe26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mhyol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8s56c")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ww8d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0gph2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ww8d2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_phej8")
+}],
+"loop": true,
+"name": &"walk_hold",
+"speed": 10.0
+}]

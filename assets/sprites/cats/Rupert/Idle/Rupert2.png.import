@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://le2hhply0sje"
+path="res://.godot/imported/Rupert2.png-1cc13dcd8bd99bdd5b10a350e3d485a3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Rupert/Idle/Rupert2.png"
+dest_files=["res://.godot/imported/Rupert2.png-1cc13dcd8bd99bdd5b10a350e3d485a3.ctex"]
 
 [params]
 

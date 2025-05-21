@@ -1,0 +1,66 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cevdtp22uqfk2"]
+
+[ext_resource type="Texture2D" uid="uid://lqbucge0c4s1" path="res://assets/sprites/cats/Tuna/Walk hold/Tuna walk hold1and3.png" id="1_5n2jo"]
+[ext_resource type="Texture2D" uid="uid://bawrmwi0geslj" path="res://assets/sprites/cats/Tuna/Idle/Tuna idle 1.png" id="2_jpjdq"]
+[ext_resource type="Texture2D" uid="uid://bmx5dm5uy8idk" path="res://assets/sprites/cats/Tuna/Idle/Tuna idle 2.png" id="3_g0sg8"]
+[ext_resource type="Texture2D" uid="uid://2wmk2syk0g28" path="res://assets/sprites/cats/Tuna/Walk/Tuna walk1and3.png" id="4_2hkv4"]
+[ext_resource type="Texture2D" uid="uid://bij478c1j44fq" path="res://assets/sprites/cats/Tuna/Walk/Tuna walk2.png" id="5_mtt3n"]
+[ext_resource type="Texture2D" uid="uid://chqq3uuvjp8qh" path="res://assets/sprites/cats/Tuna/Walk/Tuna walk4.png" id="6_v01yy"]
+[ext_resource type="Texture2D" uid="uid://b2vol1g8tikke" path="res://assets/sprites/cats/Tuna/Walk hold/Tuna walkhold2.png" id="7_qvu8l"]
+[ext_resource type="Texture2D" uid="uid://du1c3ba140hrj" path="res://assets/sprites/cats/Tuna/Walk hold/Tuna walkhold4.png" id="8_xfgv1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5n2jo")
+}],
+"loop": true,
+"name": &"hold",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jpjdq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g0sg8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_2hkv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_mtt3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2hkv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_v01yy")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_5n2jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qvu8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_5n2jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xfgv1")
+}],
+"loop": true,
+"name": &"walk_hold",
+"speed": 10.0
+}]

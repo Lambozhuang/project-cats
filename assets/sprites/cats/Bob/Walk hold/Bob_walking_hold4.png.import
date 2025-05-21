@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://cth6hwkj2cyue"
+path="res://.godot/imported/Bob_walking_hold4.png-619eadc1a42afb92279654327f271006.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Bob/Walk hold/Bob_walking_hold4.png"
+dest_files=["res://.godot/imported/Bob_walking_hold4.png-619eadc1a42afb92279654327f271006.ctex"]
 
 [params]
 

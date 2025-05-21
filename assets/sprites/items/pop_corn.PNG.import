@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://c6aep4ttcwads"
+path="res://.godot/imported/pop_corn.PNG-de5c6e66b364f38b3a2bc7db69208d27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/items/pop_corn.PNG"
+dest_files=["res://.godot/imported/pop_corn.PNG-de5c6e66b364f38b3a2bc7db69208d27.ctex"]
 
 [params]
 

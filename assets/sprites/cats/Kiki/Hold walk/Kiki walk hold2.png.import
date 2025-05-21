@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://dlr5thnehbd2v"
+path="res://.godot/imported/Kiki walk hold2.png-60dacb349970fe28862213c44581134e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Kiki/Hold walk/Kiki walk hold2.png"
+dest_files=["res://.godot/imported/Kiki walk hold2.png-60dacb349970fe28862213c44581134e.ctex"]
 
 [params]
 

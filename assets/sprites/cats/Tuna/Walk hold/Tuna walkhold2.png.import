@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://b2vol1g8tikke"
+path="res://.godot/imported/Tuna walkhold2.png-9b11a80e1c6fb51f69879663a8c1a092.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Tuna/Walk hold/Tuna walkhold2.png"
+dest_files=["res://.godot/imported/Tuna walkhold2.png-9b11a80e1c6fb51f69879663a8c1a092.ctex"]
 
 [params]
 

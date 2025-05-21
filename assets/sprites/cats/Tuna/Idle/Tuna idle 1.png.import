@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://bawrmwi0geslj"
+path="res://.godot/imported/Tuna idle 1.png-647d87fdd787a16e195ad0e21cd751ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Tuna/Idle/Tuna idle 1.png"
+dest_files=["res://.godot/imported/Tuna idle 1.png-647d87fdd787a16e195ad0e21cd751ce.ctex"]
 
 [params]
 

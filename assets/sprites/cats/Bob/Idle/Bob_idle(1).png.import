@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://rrgcrvcsrnlf"
+path="res://.godot/imported/Bob_idle(1).png-8c5600ea881cc1554c8c03d6c546c7aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Bob/Idle/Bob_idle(1).png"
+dest_files=["res://.godot/imported/Bob_idle(1).png-8c5600ea881cc1554c8c03d6c546c7aa.ctex"]
 
 [params]
 

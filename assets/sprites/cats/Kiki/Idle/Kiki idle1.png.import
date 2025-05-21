@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://q58tx7iwlcqa"
-path="res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"
+uid="uid://civqtb32rwqkv"
+path="res://.godot/imported/Kiki idle1.png-43c3636a43dd1d9cf9142ad0779bd917.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/apple.PNG"
-dest_files=["res://.godot/imported/apple.PNG-b953fdabaaab9e7ef8ce9044a6c2f774.ctex"]
+source_file="res://assets/sprites/cats/Kiki/Idle/Kiki idle1.png"
+dest_files=["res://.godot/imported/Kiki idle1.png-43c3636a43dd1d9cf9142ad0779bd917.ctex"]
 
 [params]
 

@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=51 format=3 uid="uid://6vyabwpm5mnj"]
 
-[ext_resource type="Texture2D" uid="uid://l4t75bn32pxi" path="res://assets/global2.png" id="1_3e7s2"]
 [ext_resource type="Texture2D" uid="uid://bjgiaddjgf51y" path="res://assets/original source/brick4.jpg" id="1_dk7a0"]
 [ext_resource type="Texture2D" uid="uid://dew7fgthbkniu" path="res://assets/original source/fish.png" id="2_jlmg6"]
 [ext_resource type="Texture2D" uid="uid://m5xqcg5bjgaq" path="res://assets/original source/breakbricks1.png" id="2_yrldv"]
 [ext_resource type="Texture2D" uid="uid://dg4qnrdhy2xjv" path="res://assets/original source/umbrella1.png" id="3_jbf6i"]
+[ext_resource type="Texture2D" uid="uid://l4t75bn32pxi" path="res://assets/global.png" id="3_yy02t"]
 [ext_resource type="Texture2D" uid="uid://wl4kywtv65ix" path="res://assets/original source/umbrella2.png" id="4_tt3cw"]
 [ext_resource type="Texture2D" uid="uid://dnskquavhum31" path="res://assets/original source/box3.png" id="5_0v7vl"]
 [ext_resource type="Texture2D" uid="uid://bx0q5xu8mhi4m" path="res://assets/original source/dots1.png" id="5_5gnxa"]
@@ -133,7 +133,7 @@ texture_region_size = Vector2i(32, 32)
 9:8/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kq1c5"]
-texture = ExtResource("1_3e7s2")
+texture = ExtResource("3_yy02t")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
