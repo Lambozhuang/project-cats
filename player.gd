@@ -4,7 +4,7 @@ extends CharacterBody2D
 var isCarryingItem = false 
 var carried_item: Node = null
 
-@export var speed := 120.0
+@export var speed := 140.0
 @export var synced_position := Vector2()
 
 @onready var inputs: Node = $Inputs
