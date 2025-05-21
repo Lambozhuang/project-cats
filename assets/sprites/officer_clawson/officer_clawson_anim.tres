@@ -1,0 +1,60 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://b1uaj08iewwad"]
+
+[ext_resource type="Texture2D" uid="uid://2w5m6cmgbmpp" path="res://assets/sprites/officer_clawson/Attack/Clawson attack1.png" id="1_7ti0h"]
+[ext_resource type="Texture2D" uid="uid://d2iebudhvj62w" path="res://assets/sprites/officer_clawson/Attack/Clawson attack2.png" id="2_8xlrg"]
+[ext_resource type="Texture2D" uid="uid://dmag0mwmjp8po" path="res://assets/sprites/officer_clawson/Attack/Clawson attack3.png" id="3_7fr1t"]
+[ext_resource type="Texture2D" uid="uid://cwex5y0spiwwp" path="res://assets/sprites/officer_clawson/Attack/Clawson attack4.png" id="4_hyyrx"]
+[ext_resource type="Texture2D" uid="uid://dpcmh0dxrx35" path="res://assets/sprites/officer_clawson/Idle/Clawson idle1.png" id="5_ym4jl"]
+[ext_resource type="Texture2D" uid="uid://t8jyrch2rm23" path="res://assets/sprites/officer_clawson/Idle/Clawson idle2.png" id="6_o0a11"]
+[ext_resource type="Texture2D" uid="uid://ddcpg48gv4h3d" path="res://assets/sprites/officer_clawson/Walk/Clawson walk1.png" id="7_4g1gd"]
+[ext_resource type="Texture2D" uid="uid://m062tik1a6nj" path="res://assets/sprites/officer_clawson/Walk/Clawson walk2.png" id="8_xwxfl"]
+[ext_resource type="Texture2D" uid="uid://cpgj338egaluw" path="res://assets/sprites/officer_clawson/Walk/Clawson walk3.png" id="9_08fea"]
+[ext_resource type="Texture2D" uid="uid://botf0tgwd43f" path="res://assets/sprites/officer_clawson/Walk/Clawson walk4.png" id="10_mgaxm"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7ti0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8xlrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7fr1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hyyrx")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ym4jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_o0a11")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_4g1gd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_xwxfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_08fea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_mgaxm")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]

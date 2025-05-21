@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8fxile8qg75i"
-path="res://.godot/imported/cop.PNG-3ccc7106888b37ff3039c440c7c11ca5.ctex"
+uid="uid://dag4g5u3f74d"
+path="res://.godot/imported/Npc 2 walk2.png-2e2a91993b0b4016703793526de9d19d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/villains/cop.PNG"
-dest_files=["res://.godot/imported/cop.PNG-3ccc7106888b37ff3039c440c7c11ca5.ctex"]
+source_file="res://assets/sprites/npc2/Walk/Npc 2 walk2.png"
+dest_files=["res://.godot/imported/Npc 2 walk2.png-2e2a91993b0b4016703793526de9d19d.ctex"]
 
 [params]
 
