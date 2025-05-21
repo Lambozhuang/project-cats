@@ -1,14 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=12 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="PackedScene" uid="uid://by7mnayrkygvi" path="res://level_1_map.tscn" id="1_5c1db"]
 [ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://villain.tscn" id="2_5c1db"]
 [ext_resource type="PackedScene" uid="uid://hibqxwj4bwo3" path="res://item.tscn" id="3_5c1db"]
 [ext_resource type="SpriteFrames" uid="uid://bp8jwwutsth3x" path="res://assets/sprites/items/basketball.tres" id="4_myu03"]
+[ext_resource type="SpriteFrames" uid="uid://dvvy8duk06ce" path="res://assets/sprites/items/lucky_cat.tres" id="5_14uli"]
 [ext_resource type="SpriteFrames" uid="uid://sq5g6mss8nnt" path="res://assets/sprites/items/pop_corn.tres" id="5_akapc"]
 [ext_resource type="SpriteFrames" uid="uid://dfmtfxmx5xlan" path="res://assets/sprites/items/fish_bone.tres" id="6_3acqw"]
 [ext_resource type="SpriteFrames" uid="uid://nqtt6g1uye5c" path="res://assets/sprites/items/beer.tres" id="7_d2ue2"]
 [ext_resource type="SpriteFrames" uid="uid://d23r28wfnehph" path="res://assets/sprites/items/apple.tres" id="8_882dk"]
 [ext_resource type="PackedScene" uid="uid://q1crtgsjgscq" path="res://van.tscn" id="9_882dk"]
+[ext_resource type="SpriteFrames" uid="uid://btlo4iejgi35k" path="res://assets/sprites/items/fish.tres" id="10_1eexg"]
 
 [node name="Demo1" type="Node"]
 
@@ -24,6 +26,36 @@ position = Vector2(458, 87)
 item_type = "basketball"
 sprite_frames = ExtResource("4_myu03")
 
+[node name="basketball2" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1744, 952)
+item_type = "basketball"
+sprite_frames = ExtResource("4_myu03")
+
+[node name="basketball3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1768, 968)
+item_type = "basketball"
+sprite_frames = ExtResource("4_myu03")
+
+[node name="basketball4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2024, 1139)
+item_type = "basketball"
+sprite_frames = ExtResource("4_myu03")
+
+[node name="basketball5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2024, 1139)
+item_type = "basketball"
+sprite_frames = ExtResource("4_myu03")
+
+[node name="lucky_cat" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1208, 1117)
+item_type = "lucky_cat"
+sprite_frames = ExtResource("5_14uli")
+
+[node name="lucky_cat2" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1176, 1128)
+item_type = "lucky_cat"
+sprite_frames = ExtResource("5_14uli")
+
 [node name="pop_corn" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(431, 216)
 item_type = "pop_corn"
@@ -31,6 +63,46 @@ sprite_frames = ExtResource("5_akapc")
 
 [node name="pop_corn2" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(454, 200)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1232, 316)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1936, 216)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1960, 360)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn7" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1936, 373)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn8" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1960, 392)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn9" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2032, 432)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn10" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2032, 463)
+item_type = "pop_corn"
+sprite_frames = ExtResource("5_akapc")
+
+[node name="pop_corn6" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1920, 248)
 item_type = "pop_corn"
 sprite_frames = ExtResource("5_akapc")
 
@@ -44,6 +116,41 @@ position = Vector2(469, 256)
 item_type = "fish_bone"
 sprite_frames = ExtResource("6_3acqw")
 
+[node name="fish_bone3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1136, 384)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1493, 357)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1472, 303)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone6" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1504, 303)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone7" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1493, 325)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone8" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1528, 320)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
+[node name="fish_bone9" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1520, 368)
+item_type = "fish_bone"
+sprite_frames = ExtResource("6_3acqw")
+
 [node name="beer" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(401, 316)
 item_type = "beer"
@@ -54,10 +161,71 @@ position = Vector2(390, 342)
 item_type = "beer"
 sprite_frames = ExtResource("7_d2ue2")
 
+[node name="beer3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1136, 336)
+item_type = "beer"
+sprite_frames = ExtResource("7_d2ue2")
+
+[node name="beer4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1888, 80)
+item_type = "beer"
+sprite_frames = ExtResource("7_d2ue2")
+
+[node name="beer5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(1920, 80)
+item_type = "beer"
+sprite_frames = ExtResource("7_d2ue2")
+
+[node name="beer6" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2032, 98)
+item_type = "beer"
+sprite_frames = ExtResource("7_d2ue2")
+
+[node name="beer7" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2000, 98)
+item_type = "beer"
+sprite_frames = ExtResource("7_d2ue2")
+
 [node name="apple" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(174, 511)
 item_type = "apple"
 sprite_frames = ExtResource("8_882dk")
+
+[node name="fish" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(216, 760)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish2" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(192, 776)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish3" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(469, 816)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish4" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(584, 808)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish5" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(840, 1192)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish6" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(880, 1168)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish7" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(864, 1192)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish8" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2000, 1106)
+sprite_frames = ExtResource("10_1eexg")
+
+[node name="fish9" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(2040, 1016)
+sprite_frames = ExtResource("10_1eexg")
 
 [node name="apple2" parent="Items" instance=ExtResource("3_5c1db")]
 position = Vector2(228, 474)
@@ -89,6 +257,21 @@ position = Vector2(606, 480)
 item_type = "apple"
 sprite_frames = ExtResource("8_882dk")
 
+[node name="apple8" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(760, 1072)
+item_type = "apple"
+sprite_frames = ExtResource("8_882dk")
+
+[node name="apple9" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(792, 1083)
+item_type = "apple"
+sprite_frames = ExtResource("8_882dk")
+
+[node name="apple10" parent="Items" instance=ExtResource("3_5c1db")]
+position = Vector2(728, 1112)
+item_type = "apple"
+sprite_frames = ExtResource("8_882dk")
+
 [node name="Players" type="Node2D" parent="."]
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
@@ -98,16 +281,16 @@ spawn_path = NodePath("../Players")
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1001, 686)
+position = Vector2(1018, 666)
 
 [node name="1" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1028, 686)
+position = Vector2(1045, 666)
 
 [node name="2" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1054, 686)
+position = Vector2(1071, 666)
 
 [node name="3" type="Marker2D" parent="SpawnPoints"]
-position = Vector2(1080, 686)
+position = Vector2(1097, 666)
 
 [node name="Van" parent="." instance=ExtResource("9_882dk")]
 position = Vector2(1072, 600)
