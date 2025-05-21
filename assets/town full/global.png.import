@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://van31hg6sy21"
-path="res://.godot/imported/global.png-1266093e8f9c42610511138d38b2c0d5.ctex"
+path="res://.godot/imported/global.png-74be0eca91727b16bc93190cb6b7623b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/town full/global.png"
-dest_files=["res://.godot/imported/global.png-1266093e8f9c42610511138d38b2c0d5.ctex"]
+source_file="res://assets/town full/global.png"
+dest_files=["res://.godot/imported/global.png-74be0eca91727b16bc93190cb6b7623b.ctex"]
 
 [params]
 

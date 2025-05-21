@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cra4rdisgnvxd"
-path="res://.godot/imported/Rupert_walk2.png-e9389d2a7f85cf9cc1448fba3e0559b0.ctex"
+path="res://.godot/imported/Rupert_walk2.png-47ebce74407f374fd1a21492a7d27f80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/cats/Rupert/Walk/Rupert_walk2.png"
-dest_files=["res://.godot/imported/Rupert_walk2.png-e9389d2a7f85cf9cc1448fba3e0559b0.ctex"]
+source_file="res://assets/sprites/cats/Rupert/Walk/Rupert_walk2.png"
+dest_files=["res://.godot/imported/Rupert_walk2.png-47ebce74407f374fd1a21492a7d27f80.ctex"]
 
 [params]
 

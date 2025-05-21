@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b8l1sknhlv5pc"
-path="res://.godot/imported/l1_rocky_road4.PNG-88a63ac9fe7e63ad5fe19a179ed73193.ctex"
+path="res://.godot/imported/l1_rocky_road4.PNG-546f15b6751ddb4900bd41eba71d083e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/map/level1/l1/l1_rocky_road4.PNG"
-dest_files=["res://.godot/imported/l1_rocky_road4.PNG-88a63ac9fe7e63ad5fe19a179ed73193.ctex"]
+source_file="res://assets/sprites/map/level1/l1/l1_rocky_road4.PNG"
+dest_files=["res://.godot/imported/l1_rocky_road4.PNG-546f15b6751ddb4900bd41eba71d083e.ctex"]
 
 [params]
 

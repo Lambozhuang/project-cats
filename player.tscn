@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player.gd" id="1_onrkg"]
-[ext_resource type="Texture2D" uid="uid://8gi4nssejema" path="res://Assets/sprites/cats/Rupert/Idle/Rupert_frame1.png" id="2_i3pqv"]
-[ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://Assets/sprites/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
+[ext_resource type="Texture2D" uid="uid://8gi4nssejema" path="res://assets/sprites/cats/Rupert/Idle/Rupert_frame1.png" id="2_i3pqv"]
+[ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://assets/sprites/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player_controls.gd" id="3_i3pqv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]

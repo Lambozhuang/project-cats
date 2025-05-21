@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b6pjtqj65qg68"
-path="res://.godot/imported/fruitshop1.png-09f25e2cf0999de3dabc648e5942cf56.ctex"
+path="res://.godot/imported/fruitshop1.png-7d3659cb2cec1a270abd64585c9ba0db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/original source/fruitshop1.png"
-dest_files=["res://.godot/imported/fruitshop1.png-09f25e2cf0999de3dabc648e5942cf56.ctex"]
+source_file="res://assets/original source/fruitshop1.png"
+dest_files=["res://.godot/imported/fruitshop1.png-7d3659cb2cec1a270abd64585c9ba0db.ctex"]
 
 [params]
 

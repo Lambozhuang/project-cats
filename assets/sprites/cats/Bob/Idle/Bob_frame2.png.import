@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0y70qinn8pyi"
-path="res://.godot/imported/Bob_frame2.png-747d72880ea0a671d35ae94e2c3a76c0.ctex"
+path="res://.godot/imported/Bob_frame2.png-c89a11254d39f854a2af6a2de33cf794.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/cats/Bob/Idle/Bob_frame2.png"
-dest_files=["res://.godot/imported/Bob_frame2.png-747d72880ea0a671d35ae94e2c3a76c0.ctex"]
+source_file="res://assets/sprites/cats/Bob/Idle/Bob_frame2.png"
+dest_files=["res://.godot/imported/Bob_frame2.png-c89a11254d39f854a2af6a2de33cf794.ctex"]
 
 [params]
 

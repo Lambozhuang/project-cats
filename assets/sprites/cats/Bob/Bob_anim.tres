@@ -1,7 +1,7 @@
 [gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://clr3uijv3giuc"]
 
-[ext_resource type="Texture2D" uid="uid://bfmfeshhiyplu" path="res://Assets/sprites/cats/Bob/Idle/Bob_frame1.png" id="1_hwk4o"]
-[ext_resource type="Texture2D" uid="uid://d0y70qinn8pyi" path="res://Assets/sprites/cats/Bob/Idle/Bob_frame2.png" id="2_a833m"]
+[ext_resource type="Texture2D" uid="uid://bfmfeshhiyplu" path="res://assets/sprites/cats/Bob/Idle/Bob_frame1.png" id="1_hwk4o"]
+[ext_resource type="Texture2D" uid="uid://d0y70qinn8pyi" path="res://assets/sprites/cats/Bob/Idle/Bob_frame2.png" id="2_a833m"]
 
 [resource]
 animations = [{

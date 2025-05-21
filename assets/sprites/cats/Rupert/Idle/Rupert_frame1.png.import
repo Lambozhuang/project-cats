@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://8gi4nssejema"
-path="res://.godot/imported/Rupert_frame1.png-52244ba101bb19cef0dd205e4ecab0a0.ctex"
+path="res://.godot/imported/Rupert_frame1.png-61425231f2fdc80b5fb19047d3125b9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sprites/cats/Rupert/Idle/Rupert_frame1.png"
-dest_files=["res://.godot/imported/Rupert_frame1.png-52244ba101bb19cef0dd205e4ecab0a0.ctex"]
+source_file="res://assets/sprites/cats/Rupert/Idle/Rupert_frame1.png"
+dest_files=["res://.godot/imported/Rupert_frame1.png-61425231f2fdc80b5fb19047d3125b9e.ctex"]
 
 [params]
 

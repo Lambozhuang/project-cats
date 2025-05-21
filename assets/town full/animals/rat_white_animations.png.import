@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dfw8dkr1exnl0"
-path="res://.godot/imported/rat_white_animations.png-5f80e86a300a84694845bc1607b3042a.ctex"
+path="res://.godot/imported/rat_white_animations.png-a96a20dae30be6c2b0c7bb71cbd4bc8f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/town full/animals/rat_white_animations.png"
-dest_files=["res://.godot/imported/rat_white_animations.png-5f80e86a300a84694845bc1607b3042a.ctex"]
+source_file="res://assets/town full/animals/rat_white_animations.png"
+dest_files=["res://.godot/imported/rat_white_animations.png-a96a20dae30be6c2b0c7bb71cbd4bc8f.ctex"]
 
 [params]
 

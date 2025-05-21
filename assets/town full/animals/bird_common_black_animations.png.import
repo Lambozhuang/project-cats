@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://icklprr8aspq"
-path="res://.godot/imported/bird_common_black_animations.png-cf039b1196b0dd93d3a65e202ac1f0d9.ctex"
+path="res://.godot/imported/bird_common_black_animations.png-e11bf509fdc19acd94762a8a271ec493.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/town full/animals/bird_common_black_animations.png"
-dest_files=["res://.godot/imported/bird_common_black_animations.png-cf039b1196b0dd93d3a65e202ac1f0d9.ctex"]
+source_file="res://assets/town full/animals/bird_common_black_animations.png"
+dest_files=["res://.godot/imported/bird_common_black_animations.png-e11bf509fdc19acd94762a8a271ec493.ctex"]
 
 [params]
 

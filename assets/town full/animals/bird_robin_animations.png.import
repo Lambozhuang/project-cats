@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sljw5rfx2jrv"
-path="res://.godot/imported/bird_robin_animations.png-12e1a6216f1ad6f89e55c8e4ed57e958.ctex"
+path="res://.godot/imported/bird_robin_animations.png-452a2a0b3acfa0d987c735e4e1a51639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/town full/animals/bird_robin_animations.png"
-dest_files=["res://.godot/imported/bird_robin_animations.png-12e1a6216f1ad6f89e55c8e4ed57e958.ctex"]
+source_file="res://assets/town full/animals/bird_robin_animations.png"
+dest_files=["res://.godot/imported/bird_robin_animations.png-452a2a0b3acfa0d987c735e4e1a51639.ctex"]
 
 [params]
 
