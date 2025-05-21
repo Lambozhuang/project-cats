@@ -120,7 +120,7 @@ func begin_game() -> void:
 		spawn_point_idx += 1
 
 	for p_id: int in spawn_points:
-		var spawn_pos: Vector2 = world.get_node("level1_map").get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		var spawn_pos: Vector2 = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
 		var player := player_scene.instantiate()
 		player.synced_position = spawn_pos
 		player.name = str(p_id)

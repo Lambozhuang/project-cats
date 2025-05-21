@@ -1,10 +1,10 @@
 # Player.gd
 extends CharacterBody2D
 
-var canCarry = true
+var isCarryingItem = false 
 var carried_item: Node = null
 
-@export var speed := 150.0
+@export var speed := 120.0
 @export var synced_position := Vector2()
 
 @onready var inputs: Node = $Inputs
@@ -21,14 +21,23 @@ func _ready() -> void:
 	$AnimatedSprite2D.play()
 
 func _process(delta: float) -> void:
-	position = position.clamp(Vector2.ZERO, Vector2(1152, 648))
+	position = position.clamp(Vector2.ZERO, Vector2(2080, 1408))
 	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x > 0
-		$AnimatedSprite2D.animation = "walk"
+		if isCarryingItem:
+			$AnimatedSprite2D.animation = "walk_hold"
+		else:
+			$AnimatedSprite2D.animation = "walk"
 	elif velocity.y != 0:
-		$AnimatedSprite2D.animation = "walk"
+		if isCarryingItem:
+			$AnimatedSprite2D.animation = "walk_hold"
+		else:
+			$AnimatedSprite2D.animation = "walk"
 	else:
-		$AnimatedSprite2D.animation = "idle"
+		if isCarryingItem:
+			$AnimatedSprite2D.animation = "hold"
+		else:
+			$AnimatedSprite2D.animation = "idle"
 
 func _physics_process(delta: float) -> void:
 	if multiplayer.get_unique_id() != 1:
@@ -38,13 +47,13 @@ func _physics_process(delta: float) -> void:
 		inputs.update()
 
 	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
-		if multiplayer.get_unique_id() != 1:
-			print("s->p")
+		# if multiplayer.get_unique_id() != 1:
+		# 	print("s->p")
 		# The server updates the position that will be notified to the clients.
 		synced_position = position
 	else:
-		if multiplayer.get_unique_id() != 1:
-			print("p->s")
+		# if multiplayer.get_unique_id() != 1:
+		# 	print("p->s")
 		# The client simply updates the position to the last known one.
 		position = synced_position
 		
@@ -59,15 +68,15 @@ func _physics_process(delta: float) -> void:
 			try_to_release_item()
 
 func try_to_carry_item() -> void:
-	if not canCarry:
+	if isCarryingItem:
 		return
 	print("try to carry")
 	for body in $CarryDetector.get_overlapping_areas():
-		print(body)
+		# print(body)
 		if body.has_method("request_carry"):
 			body.request_carry.rpc(multiplayer.get_unique_id())
 			carried_item = body
-			canCarry = false
+			isCarryingItem = true
 			break
 
 func try_to_release_item() -> void:
@@ -75,16 +84,15 @@ func try_to_release_item() -> void:
 	if carried_item:
 		carried_item.request_release.rpc()
 		carried_item = null
-		canCarry = true
+		isCarryingItem = false
 
 @rpc("call_local")
 func set_player_name(value: String, peer_id: int) -> void:
-	print("lol")
-	print(multiplayer.get_unique_id())
+	# print(multiplayer.get_unique_id())
 	$Label.text = value
 	# Assign a random color to the player based on its name.
 	$Label.modulate = gamestate.get_player_color(value)
 	#$sprite.modulate = Color(0.5, 0.5, 0.5) + gamestate.get_player_color(value)
-	print("value:" + value)
+	# print("value:" + value)
 	if peer_id != 1:
 		$AnimatedSprite2D.sprite_frames = ResourceCache.player_sprites["Bob"]

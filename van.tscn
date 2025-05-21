@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://q1crtgsjgscq"]
+
+[ext_resource type="Texture2D" uid="uid://bspn7recq1bdj" path="res://assets/sprites/the_van/the_van.png" id="1_6cji5"]
+
+[node name="Van" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6cji5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-80, 40, 80, 40, 80, 8, 40, -32, 24, -32, 8, -48, -64, -48, -80, -32)

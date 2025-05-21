@@ -5,7 +5,6 @@
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player_controls.gd" id="3_i3pqv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqtel"]
-load_path = "res://.godot/imported/Rupert_frame1.png-61425231f2fdc80b5fb19047d3125b9e.ctex"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 8.0
@@ -33,25 +32,24 @@ properties/0/replication_mode = 1
 radius = 13.0
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 49
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_onrkg")
-speed = 250.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
 texture = SubResource("CompressedTexture2D_hqtel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
 sprite_frames = ExtResource("3_hqtel")
-animation = &"idle"
+animation = &"walk_hold"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 20)
 shape = SubResource("CapsuleShape2D_onrkg")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -22)
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8
@@ -60,9 +58,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -88.0
-offset_top = -38.0
+offset_top = -58.0
 offset_right = 88.0
-offset_bottom = -22.0
+offset_bottom = -42.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Player 1"
@@ -80,6 +78,7 @@ script = ExtResource("3_i3pqv")
 replication_config = SubResource("SceneReplicationConfig_hqtel")
 
 [node name="CarryDetector" type="Area2D" parent="."]
+position = Vector2(0, -20)
 collision_layer = 4
 collision_mask = 2
 
@@ -88,4 +87,5 @@ position = Vector2(0, 20)
 shape = SubResource("CircleShape2D_1jxqw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -20)
 zoom = Vector2(2, 2)

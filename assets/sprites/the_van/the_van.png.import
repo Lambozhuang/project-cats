@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da4cnrkv645du"
-path="res://.godot/imported/juice.PNG-2f5c365d69284850e4e5e95ecb9a9279.ctex"
+uid="uid://bspn7recq1bdj"
+path="res://.godot/imported/the_van.png-cb7f31a42c1430ed1b283067fff215d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/items/juice.PNG"
-dest_files=["res://.godot/imported/juice.PNG-2f5c365d69284850e4e5e95ecb9a9279.ctex"]
+source_file="res://assets/sprites/the_van/the_van.png"
+dest_files=["res://.godot/imported/the_van.png-cb7f31a42c1430ed1b283067fff215d7.ctex"]
 
 [params]
 

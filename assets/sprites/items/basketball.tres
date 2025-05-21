@@ -1,0 +1,25 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bp8jwwutsth3x"]
+
+[ext_resource type="Texture2D" uid="uid://ct45ak5x8sluv" path="res://assets/sprites/items/basketball.PNG" id="1_etwxf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6lsu"]
+atlas = ExtResource("1_etwxf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5brm"]
+atlas = ExtResource("1_etwxf")
+region = Rect2(32, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6lsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5brm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 2.0
+}]

@@ -1,7 +1,7 @@
 # Villain.gd
 extends CharacterBody2D
 
-@export var speed := 80.0
+@export var speed := 70.0
 @export var detection_range := 100.0  # how close the player must be to trigger chase
 @export var wander_time := 2.0       # how long to keep wandering in one direction
 
@@ -13,6 +13,7 @@ var _timer := 0.0
 func _ready() -> void:
 	# Schedule finding players node for after the scene is fully loaded
 	call_deferred("_find_players_node")
+	$AnimatedSprite2D.play("walk")
 	
 func _find_players_node() -> void:
 	# Look for the Players node that contains all player instances
@@ -21,7 +22,7 @@ func _find_players_node() -> void:
 		push_error("Villain couldn't find Players node")
 	
 func _process(delta: float) -> void:
-	position = position.clamp(Vector2.ZERO, Vector2(1920, 1080))
+	position = position.clamp(Vector2.ZERO, Vector2(2080, 1408))
 	
 	# Find the closest player each frame
 	_find_closest_player()
@@ -57,7 +58,7 @@ func chase_player(delta: float) -> void:
 	var direction = (_closest_player.global_position - global_position).normalized()
 	velocity = direction * speed
 	if velocity.x != 0:
-		$Sprite2D.flip_h = velocity.x < 0
+		$AnimatedSprite2D.flip_h = velocity.x >= 0 # TODO: villain animation
 	move_and_slide()
 
 func wander_around(delta: float) -> void:
@@ -70,5 +71,5 @@ func wander_around(delta: float) -> void:
 
 	velocity = _wander_direction * (speed * 0.5)  # maybe wander slower
 	if velocity.x != 0:
-		$Sprite2D.flip_h = velocity.x < 0
+		$AnimatedSprite2D.flip_h = velocity.x >= 0
 	move_and_slide()

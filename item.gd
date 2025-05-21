@@ -3,17 +3,32 @@ extends Node2D
 var isCarried = false
 var carrier_id: int = -1  # ID of the player carrying the item, -1 if none
 
+@export var item_type: String = "fish"
+@export var sprite_frames: SpriteFrames
+
 @export var synced_position := Vector2()
 
 func _ready() -> void:
 	synced_position = position
 
+	if sprite_frames == null:
+		sprite_frames = preload("res://assets/sprites/items/fish.tres")
+
+	if $AnimatedSprite2D and sprite_frames:
+		$AnimatedSprite2D.frames = sprite_frames
+		$AnimatedSprite2D.play()
+	else:
+		print("AnimatedSprite2D or sprite_frames not found")
+
 func _physics_process(delta: float) -> void:
 	if isCarried:
+		$AnimatedSprite2D.stop()
 		var player = get_tree().get_root().get_node("Demo1/Players").get_node(str(carrier_id))
 		if player:
 			var attach_point = player.get_node("Marker2D").global_position
-			var offset = Vector2(0, -20)
+			
+			# Get appropriate offset based on player's facing direction
+			var offset = get_offset_based_on_facing(player)
 			
 			# Only the server updates synced_position
 			if multiplayer.is_server():
@@ -22,9 +37,25 @@ func _physics_process(delta: float) -> void:
 			# All peers update their local position
 			self.position = attach_point + offset
 	else:
+		$AnimatedSprite2D.play()
 		# On clients, follow the synced position from the server
 		if not multiplayer.is_server():
 			self.position = synced_position
+
+# Get appropriate offset based on player's facing direction
+func get_offset_based_on_facing(player) -> Vector2:
+	# Default offset (when player is idle or facing down)
+	var offset = Vector2(0, -5)
+	
+	if not player.get_node("AnimatedSprite2D").flip_h:
+		# Item on left side
+		offset = Vector2(-5, -5)
+	# Player is facing left
+	else:
+		# Item on right side
+		offset = Vector2(5, -5)
+		
+	return offset
 
 
 # Client calls this to request a carry
@@ -59,7 +90,7 @@ func release() -> void:
 		if player:
 			# Drop item just slightly below the attach point (simulates dropping)
 			var drop_point = player.get_node("Marker2D").global_position
-			var drop_offset = Vector2(0, 20)  # Adjust as needed
+			var drop_offset = Vector2(0, 0)  # Adjust as needed
 			synced_position = drop_point + drop_offset
 			self.position = synced_position
 		
