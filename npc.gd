@@ -10,6 +10,7 @@ extends CharacterBody2D
 @export var sprite_frames: SpriteFrames  # Sprite frames resource to load
 @export var patrol_navigation_region: NavigationRegion2D  # Small patrol area
 @export var global_navigation_region: NavigationRegion2D  # Whole map for pathfinding
+@export var npc_type: String = "npc"
 
 var _players_node: Node
 var _closest_player: Node
@@ -54,7 +55,7 @@ func _setup_home_area() -> void:
 		for point in bounds:
 			sum += point
 		_home_area_center = patrol_navigation_region.global_position + sum / bounds.size()
-		print("Home area center: ", _home_area_center)
+		print("Home area center for type: ", npc_type, " is: ", _home_area_center)
 
 func _find_players_node() -> void:
 	_players_node = get_tree().get_root().get_node("Demo1").find_child("Players", true, false)

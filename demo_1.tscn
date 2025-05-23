@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=22 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="PackedScene" uid="uid://by7mnayrkygvi" path="res://level_1_map.tscn" id="1_5c1db"]
 [ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://npc.tscn" id="2_5c1db"]
@@ -41,6 +41,11 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(1696, 72, 1912, 72, 205
 vertices = PackedVector2Array(398, 402, 502, 402, 502, 420.477, 438, 500.492, 370, 466, 438, 526, 82, 526, 82, 498, 146, 498, 146, 474, 282, 474, 282, 466, 370, 340.141, 386, 324.141, 379.031, 134, 346, 134, 346, 90, 366, 114, 366, 90, 395.859, 114, 410, 154.648, 496.453, 214.594, 410, 260.141, 398, 282.758, 386, 284.141)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(3, 5, 6, 7, 8), PackedInt32Array(8, 9, 10, 3), PackedInt32Array(10, 11, 4, 3), PackedInt32Array(0, 4, 12, 13), PackedInt32Array(14, 15, 16, 17), PackedInt32Array(16, 18, 17), PackedInt32Array(14, 17, 19, 20), PackedInt32Array(20, 19, 21), PackedInt32Array(22, 20, 21), PackedInt32Array(22, 21, 23, 24), PackedInt32Array(24, 23, 0, 13)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(72, 488, 72, 536, 448, 536, 448, 504, 512, 424, 512, 392, 408, 392, 408, 288, 512, 216, 400, 104, 376, 104, 376, 80, 336, 80, 336, 144, 376, 144, 400, 160, 400, 256, 376, 280, 376, 320, 360, 336, 360, 456, 272, 456, 272, 464, 136, 464, 136, 488)])
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_itpyb"]
+vertices = PackedVector2Array(1873.1, 1382, 1210, 1382, 1210, 1320.15, 1882, 1242, 666, 1238, 666, 1114, 774, 1114, 774, 1210, 873.203, 1238, 878.367, 1210, 974.383, 1242, 1958, 1158.16, 1882, 922, 1958, 922)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 4, 7, 9), PackedInt32Array(8, 9, 10), PackedInt32Array(2, 8, 10), PackedInt32Array(2, 10, 3), PackedInt32Array(11, 0, 3), PackedInt32Array(11, 3, 12, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(656, 1104, 656, 1248, 872, 1248, 1200, 1328, 1200, 1392, 1880, 1392, 1968, 1160, 1968, 912, 1872, 912, 1872, 1232, 976, 1232, 880, 1200, 784, 1200, 784, 1104)])
 
 [node name="Demo1" type="Node"]
 
@@ -338,6 +343,9 @@ navigation_polygon = SubResource("NavigationPolygon_uy0ol")
 [node name="OfficerNavigationRegion2D1" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_bmavm")
 
+[node name="OfficerNavigationRegion2D2" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_itpyb")
+
 [node name="NPC1" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("2_5c1db")]
 position = Vector2(1608, 362)
 sprite_frames = ExtResource("12_1eexg")
@@ -362,3 +370,12 @@ wander_time = 20.0
 sprite_frames = ExtResource("15_bmavm")
 patrol_navigation_region = NodePath("../OfficerNavigationRegion2D1")
 global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+npc_type = "officer"
+
+[node name="Officer2" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("2_5c1db")]
+position = Vector2(1416, 1296)
+wander_time = 20.0
+sprite_frames = ExtResource("15_bmavm")
+patrol_navigation_region = NodePath("../OfficerNavigationRegion2D2")
+global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+npc_type = "officer"
