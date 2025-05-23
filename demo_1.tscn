@@ -28,9 +28,9 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(1448, 296, 1656, 296, 1656, 440, 1448, 440)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_14uli"]
-vertices = PackedVector2Array(1558, 381, 1638, 381, 1638, 425, 1519.21, 425, 1511.21, 401, 1466, 390.859, 1466, 309, 1558, 309, 1476.14, 401)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 0, 4, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(1456, 299, 1456, 395, 1472, 411, 1504, 411, 1512, 435, 1648, 435, 1648, 371, 1568, 371, 1568, 299)])
+vertices = PackedVector2Array(1958, 434, 2038, 434, 2038, 494, 1919.81, 494, 1911.81, 462, 1874, 462, 1874, 378, 1958, 378)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(4, 5, 6, 7, 0)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(1864, 368, 1864, 472, 1872, 472, 1904, 472, 1912, 504, 2048, 504, 2048, 424, 1968, 424, 1968, 368)])
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_uy0ol"]
 vertices = PackedVector2Array(1902, 86.1719, 1902, 110, 1838, 110, 1706, 82, 1838, 142, 1706, 142, 2046, 82, 2046, 86.0078)
@@ -330,7 +330,6 @@ position = Vector2(1097, 666)
 navigation_polygon = SubResource("NavigationPolygon_3uovo")
 
 [node name="NPCNavigationRegion2D2" type="NavigationRegion2D" parent="."]
-position = Vector2(400, 61)
 navigation_polygon = SubResource("NavigationPolygon_14uli")
 
 [node name="NPCNavigationRegion2D3" type="NavigationRegion2D" parent="."]
@@ -357,8 +356,9 @@ sprite_frames = ExtResource("14_uy0ol")
 patrol_navigation_region = NodePath("../NPCNavigationRegion2D3")
 global_navigation_region = NodePath("../GlobalNavigationRegion2D")
 
-[node name="NPC4" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("2_5c1db")]
-position = Vector2(400, 448)
+[node name="Officer1" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("2_5c1db")]
+position = Vector2(432, 192)
+wander_time = 20.0
 sprite_frames = ExtResource("15_bmavm")
 patrol_navigation_region = NodePath("../OfficerNavigationRegion2D1")
 global_navigation_region = NodePath("../GlobalNavigationRegion2D")

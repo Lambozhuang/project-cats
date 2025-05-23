@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 		_is_returning = false
 	
 	# Stop chasing if player is too far or we're too far from home
-	if _is_chasing and (distance_to_home > chase_range):
+	if _is_chasing and (distance_to_player > chase_range):
 		_is_chasing = false
 		_is_returning = true
 		_start_return_to_patrol()
@@ -190,7 +190,7 @@ func wander_in_area(delta: float) -> void:
 			_navigation_agent.set_navigation_map(patrol_navigation_region.get_navigation_map())
 	
 	# Pick a new wander target if timer is up or we've reached our target
-	if _timer <= 0.0 or _navigation_agent.is_navigation_finished() or global_position.distance_to(_wander_target) < 20.0:
+	if _timer <= 0.0 or _navigation_agent.is_navigation_finished() or global_position.distance_to(_wander_target) < 2.0:
 			_wander_target = _get_random_point_in_patrol_area()
 			_navigation_agent.target_position = _wander_target
 			_timer = wander_time
