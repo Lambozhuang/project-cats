@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 
 var isCarried = false
 var carrier_id: int = -1  # ID of the player carrying the item, -1 if none
@@ -96,3 +96,10 @@ func release() -> void:
 		
 		isCarried = false
 		carrier_id = -1
+
+		# Check if dropped in the collection area
+		var overlapping_areas = get_overlapping_areas()
+		for area in overlapping_areas:
+			print("Item dropped in area: ", area.name)
+			if area.name == "CollectionArea":
+				print(item_type)
