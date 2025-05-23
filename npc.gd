@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export var patrol_navigation_region: NavigationRegion2D  # Small patrol area
 @export var global_navigation_region: NavigationRegion2D  # Whole map for pathfinding
 @export var npc_type: String = "npc"
+@export var area2d: Area2D  # Area2D node for detecting players
 
 var _players_node: Node
 var _closest_player: Node
@@ -19,7 +20,6 @@ var _return_target := Vector2.ZERO
 var _timer := 0.0
 var _is_chasing := false
 var _is_returning := false
-var _home_area_center := Vector2.ZERO
 
 # Navigation agent for pathfinding
 @onready var _navigation_agent: NavigationAgent2D = $NavigationAgent2D
@@ -31,24 +31,14 @@ func _ready() -> void:
 	call_deferred("_find_players_node")
 	call_deferred("_find_navigation_regions")
 	$AnimatedSprite2D.play("walk")
-	
-	call_deferred("_setup_home_area")
+	_navigation_agent.navigation_layers |= patrol_navigation_region.navigation_layers
+	_navigation_agent.navigation_layers &= ~global_navigation_region.navigation_layers
 
 func _find_navigation_regions() -> void:
 	if not patrol_navigation_region:
 		push_error("NPC couldn't find patrol NavigationRegion2D")
 	if not global_navigation_region:
 		push_error("NPC couldn't find whole map NavigationRegion2D")
-
-func _setup_home_area() -> void:
-	if patrol_navigation_region and patrol_navigation_region.navigation_polygon:
-		var bounds = patrol_navigation_region.navigation_polygon.get_outline(0)
-		var sum = Vector2.ZERO
-		for point in bounds:
-			sum += point
-		_home_area_center = patrol_navigation_region.global_position + sum / bounds.size()
-		print("Home area center for type: ", npc_type, " is: ", _home_area_center)
-		print("Navigation layers: ", patrol_navigation_region.navigation_layers)
 
 func _find_players_node() -> void:
 	_players_node = get_tree().get_root().get_node("Demo1").find_child("Players", true, false)
@@ -68,7 +58,6 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var distance_to_player = global_position.distance_to(_closest_player.global_position)
-	var distance_to_home = global_position.distance_to(_home_area_center)
 	
 	# Start chasing if player is close
 	if (distance_to_player < detection_range) and !_is_returning:
@@ -105,15 +94,18 @@ func _find_closest_player() -> void:
 
 func _start_chase() -> void:
 	_is_chasing = true
+	print("Setting to global nav layer: ", _navigation_agent.navigation_layers)
+	_navigation_agent.navigation_layers &= ~patrol_navigation_region.navigation_layers
+	_navigation_agent.navigation_layers |= global_navigation_region.navigation_layers
 	
-	# Disable patrol navigation region during chase
-	if patrol_navigation_region:
-			patrol_navigation_region.enabled = false
-			print("Disabled patrol navigation region for chase")
+	# # Disable patrol navigation region during chase
+	# if patrol_navigation_region:
+	# 		patrol_navigation_region.enabled = false
+	# 		print("Disabled patrol navigation region for chase")
 	
-	# Set navigation agent to use whole map navigation for chasing
-	if global_navigation_region:
-			_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
+	# # Set navigation agent to use whole map navigation for chasing
+	# if global_navigation_region:
+	# 		_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
 
 func chase_player(delta: float) -> void:
 	if not _closest_player:
@@ -135,35 +127,23 @@ func chase_player(delta: float) -> void:
 
 func _start_return_to_patrol() -> void:
 	# Re-enable patrol navigation region
-	if patrol_navigation_region:
-					patrol_navigation_region.enabled = true
-					print("Re-enabled patrol navigation region for return")
+	# if patrol_navigation_region:
+	# 				patrol_navigation_region.enabled = true
+	# 				print("Re-enabled patrol navigation region for return")
 	
-	# Set navigation agent to use whole map navigation
-	if global_navigation_region:
-					_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
-	
-	# Return to the center of the patrol area instead of a random point
-	_return_target = _home_area_center
+	# # Set navigation agent to use whole map navigation
+	# if global_navigation_region:
+	# 				_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
+	_return_target = NavigationServer2D.region_get_closest_point(patrol_navigation_region, global_position)
 	_navigation_agent.target_position = _return_target
 
 func return_to_patrol_area(delta: float) -> void:
-	# Check if we're close to the patrol area, then switch to patrol navigation
-	var distance_to_home = global_position.distance_to(_home_area_center)
-	if distance_to_home < 50.0 and patrol_navigation_region:
-			if _navigation_agent.get_navigation_map() != patrol_navigation_region.get_navigation_map():
-					print("Switching to patrol navigation as we approach home")
-					_navigation_agent.set_navigation_map(patrol_navigation_region.get_navigation_map())
-					_navigation_agent.target_position = _return_target
-	
-	# Check if we're back in the patrol area
-	if _is_in_patrol_area(global_position):
-			_is_returning = false
-			_timer = 0.0  # Reset wander timer
-			return
-	
-	# Follow navigation path
 	if _navigation_agent.is_navigation_finished():
+			_is_returning = false
+			_timer = 0.0
+			print("Setting to patrol nav layer: ", _navigation_agent.navigation_layers)
+			_navigation_agent.navigation_layers &= ~global_navigation_region.navigation_layers
+			_navigation_agent.navigation_layers |= patrol_navigation_region.navigation_layers
 			return
 	
 	var next_path_position = _navigation_agent.get_next_path_position()
@@ -176,11 +156,6 @@ func return_to_patrol_area(delta: float) -> void:
 
 func wander_in_area(delta: float) -> void:
 	_timer -= delta
-	
-	# Set navigation agent to use patrol area navigation for wandering
-	if patrol_navigation_region and _navigation_agent.get_navigation_map() != patrol_navigation_region.get_navigation_map():
-			print("Setting navigation map to patrol area for wandering")
-			_navigation_agent.set_navigation_map(patrol_navigation_region.get_navigation_map())
 	
 	# Pick a new wander target if timer is up or we've reached our target
 	if _timer <= 0.0 or _navigation_agent.is_navigation_finished() or global_position.distance_to(_wander_target) < 2.0:
@@ -202,23 +177,3 @@ func wander_in_area(delta: float) -> void:
 					$AnimatedSprite2D.flip_h = velocity.x >= 0
 
 			move_and_slide()
-
-func _is_in_patrol_area(pos: Vector2) -> bool:
-	if not patrol_navigation_region or not patrol_navigation_region.navigation_polygon:
-		return false
-	
-	var outline = patrol_navigation_region.navigation_polygon.get_outline(0)
-	var local_pos = pos - patrol_navigation_region.global_position
-	return _point_in_polygon(local_pos, outline)
-
-func _point_in_polygon(point: Vector2, polygon: PackedVector2Array) -> bool:
-	var inside = false
-	var j = polygon.size() - 1
-	
-	for i in range(polygon.size()):
-		if ((polygon[i].y > point.y) != (polygon[j].y > point.y)) and \
-		   (point.x < (polygon[j].x - polygon[i].x) * (point.y - polygon[i].y) / (polygon[j].y - polygon[i].y) + polygon[i].x):
-			inside = !inside
-		j = i
-	
-	return inside
