@@ -35,14 +35,6 @@ func _ready() -> void:
 	call_deferred("_setup_home_area")
 
 func _find_navigation_regions() -> void:
-	# Find patrol area if not assigned
-	if not patrol_navigation_region:
-		patrol_navigation_region = get_tree().get_root().get_node("Demo1").find_child("NavigationRegion2D", true, false)
-	
-	# Find whole map navigation if not assigned
-	if not global_navigation_region:
-		global_navigation_region = get_tree().get_root().get_node("Demo1").find_child("NavigationRegion2D_WholeMap", true, false)
-	
 	if not patrol_navigation_region:
 		push_error("NPC couldn't find patrol NavigationRegion2D")
 	if not global_navigation_region:
@@ -56,6 +48,7 @@ func _setup_home_area() -> void:
 			sum += point
 		_home_area_center = patrol_navigation_region.global_position + sum / bounds.size()
 		print("Home area center for type: ", npc_type, " is: ", _home_area_center)
+		print("Navigation layers: ", patrol_navigation_region.navigation_layers)
 
 func _find_players_node() -> void:
 	_players_node = get_tree().get_root().get_node("Demo1").find_child("Players", true, false)
@@ -179,7 +172,6 @@ func return_to_patrol_area(delta: float) -> void:
 	if velocity.x != 0:
 			$AnimatedSprite2D.flip_h = velocity.x >= 0
 
-	# print("NPC returning to patrol area: ", _return_target, " direction: ", direction)
 	move_and_slide()
 
 func wander_in_area(delta: float) -> void:
@@ -192,7 +184,12 @@ func wander_in_area(delta: float) -> void:
 	
 	# Pick a new wander target if timer is up or we've reached our target
 	if _timer <= 0.0 or _navigation_agent.is_navigation_finished() or global_position.distance_to(_wander_target) < 2.0:
-			_wander_target = _get_random_point_in_patrol_area()
+			await get_tree().process_frame
+			_wander_target = NavigationServer2D.map_get_random_point(
+				patrol_navigation_region.get_navigation_map(),
+				patrol_navigation_region.navigation_layers,
+				false
+			)
 			_navigation_agent.target_position = _wander_target
 			_timer = wander_time
 	
@@ -204,32 +201,7 @@ func wander_in_area(delta: float) -> void:
 			if velocity.x != 0:
 					$AnimatedSprite2D.flip_h = velocity.x >= 0
 
-			# print("NPC wandering to: ", _wander_target, " next path pos: ", next_path_position, " direction: ", direction)
 			move_and_slide()
-
-func _get_random_point_in_patrol_area() -> Vector2:
-	if not patrol_navigation_region or not patrol_navigation_region.navigation_polygon:
-		return global_position
-	
-	var outline = patrol_navigation_region.navigation_polygon.get_outline(0)
-	if outline.size() < 3:
-		return global_position
-	
-	# Try to find a random point inside the patrol polygon
-	for i in range(20):
-		var bounds = Rect2()
-		for point in outline:
-			bounds = bounds.expand(point)
-		
-		var random_point = Vector2(
-			randf_range(bounds.position.x, bounds.position.x + bounds.size.x),
-			randf_range(bounds.position.y, bounds.position.y + bounds.size.y)
-		)
-		
-		if _point_in_polygon(random_point, outline):
-			return patrol_navigation_region.global_position + random_point
-	
-	return _home_area_center
 
 func _is_in_patrol_area(pos: Vector2) -> bool:
 	if not patrol_navigation_region or not patrol_navigation_region.navigation_polygon:
