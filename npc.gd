@@ -2,11 +2,12 @@
 extends CharacterBody2D
 
 @export var wander_speed := 35.0  # Speed when wandering in patrol area
-@export var chase_speed := 100.0  # Speed when chasing player
-@export var return_speed := 70.0  # Speed when returning to patrol area
+@export var chase_speed := 70.0  # Speed when chasing player
+@export var return_speed := 120.0  # Speed when returning to patrol area
 @export var detection_range := 100.0
 @export var chase_range := 200.0
 @export var wander_time := 3.0
+@export var sprite_frames: SpriteFrames  # Sprite frames resource to load
 @export var patrol_navigation_region: NavigationRegion2D  # Small patrol area
 @export var global_navigation_region: NavigationRegion2D  # Whole map for pathfinding
 
@@ -23,6 +24,8 @@ var _home_area_center := Vector2.ZERO
 @onready var _navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready() -> void:
+	if sprite_frames:
+		$AnimatedSprite2D.sprite_frames = sprite_frames
 	
 	call_deferred("_find_players_node")
 	call_deferred("_find_navigation_regions")
