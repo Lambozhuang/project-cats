@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-gamestate="*res://gamestate.gd"
-ResourceCache="*res://ResourceCache.gd"
+GameState="*res://game_state.gd"
+ResourceCache="*res://resource_cache.gd"
 
 [display]
 
