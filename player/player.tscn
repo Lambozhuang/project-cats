@@ -1,0 +1,97 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvscac4fx2trn"]
+
+[ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player/player.gd" id="1_onrkg"]
+[ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://player/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player/player_controls.gd" id="3_i3pqv"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqtel"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 8.0
+height = 24.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_onrkg"]
+font_size = 11
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_onrkg"]
+properties/0/path = NodePath("Label:text")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:synced_position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hqtel"]
+properties/0/path = NodePath(".:motion")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1jxqw"]
+radius = 13.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 49
+motion_mode = 1
+wall_min_slide_angle = 0.174533
+platform_on_leave = 2
+script = ExtResource("1_onrkg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("CompressedTexture2D_hqtel")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -20)
+sprite_frames = ExtResource("3_hqtel")
+animation = &"walk_hold"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -88.0
+offset_top = -58.0
+offset_right = 88.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player 1"
+label_settings = SubResource("LabelSettings_onrkg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_onrkg")
+
+[node name="Inputs" type="Node" parent="."]
+script = ExtResource("3_i3pqv")
+
+[node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs"]
+replication_config = SubResource("SceneReplicationConfig_hqtel")
+
+[node name="CarryDetector" type="Area2D" parent="."]
+position = Vector2(0, -20)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CarryDetector"]
+position = Vector2(0, 20)
+shape = SubResource("CircleShape2D_1jxqw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -20)
+zoom = Vector2(0.5, 0.5)
+limit_left = 0
+limit_top = 0
+limit_right = 2080
+limit_bottom = 1408
+position_smoothing_enabled = true

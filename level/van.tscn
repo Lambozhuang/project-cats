@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://q1crtgsjgscq"]
+
+[ext_resource type="Texture2D" uid="uid://bspn7recq1bdj" path="res://level/van/van.png" id="1_6cji5"]
+[ext_resource type="Texture2D" uid="uid://bf5nx85picrec" path="res://level/van/line.png" id="1_8opdr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6cji5"]
+size = Vector2(160, 48)
+
+[node name="Van" type="StaticBody2D"]
+
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Sprite2D2" type="Sprite2D" parent="CollectionArea"]
+position = Vector2(0.230763, 37.75)
+scale = Vector2(1.80769, 1.80769)
+texture = ExtResource("1_8opdr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+position = Vector2(0, 64)
+shape = SubResource("RectangleShape2D_6cji5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_6cji5")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-80, 40, 80, 40, 80, 8, 40, -32, 32, -32, 8, -48, -64, -48, -80, -32)
