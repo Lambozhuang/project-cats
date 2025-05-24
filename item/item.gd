@@ -12,7 +12,7 @@ func _ready() -> void:
 	synced_position = position
 
 	if sprite_frames == null:
-		sprite_frames = preload("res://assets/sprites/items/fish.tres")
+		sprite_frames = preload("res://item/items/fish.tres")
 
 	if $AnimatedSprite2D and sprite_frames:
 		$AnimatedSprite2D.frames = sprite_frames

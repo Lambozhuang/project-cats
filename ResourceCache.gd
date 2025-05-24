@@ -1,8 +1,8 @@
 extends Node
 
-const Tileset = preload("res://assets/tilesets/level1.tres")
+const Tileset = preload("res://level/map/level1.tres")
 
 @export var player_sprites = {
-	"Rupert": preload("res://assets/sprites/cats/Rupert/Rupert_anim.tres"),
-	"Bob": preload("res://assets/sprites/cats/Bob/Bob_anim.tres"),
+	"Rupert": preload("res://player/cats/Rupert/Rupert_anim.tres"),
+	"Bob": preload("res://player/cats/Bob/Bob_anim.tres"),
 }
