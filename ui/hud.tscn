@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://bhr76qwteqtyy"]
+
+[node name="Hud" type="CanvasLayer"]
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Hud"]
+layout_mode = 2
+offset_right = 204.0
+offset_bottom = 50.0
+
+[node name="RegularItem" type="ColorRect" parent="Hud/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="SpaceItem" type="ColorRect" parent="Hud/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="Time" type="ColorRect" parent="Hud"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="CatStat" type="ColorRect" parent="Hud"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_bottom = 50.0
+grow_horizontal = 0
+color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="Settings" type="ColorRect" parent="Hud"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+offset_right = 100.0
+grow_vertical = 0
+color = Color(0.32549, 0.317647, 0.317647, 1)
