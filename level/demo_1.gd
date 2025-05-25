@@ -67,6 +67,54 @@ func _process(delta):
 func game_over():
 	print("Game Over!")
 	get_tree().paused = true
+	$HUD/HUD/GameOver.show()
+	var hide_timer = Timer.new()
+	hide_timer.wait_time = 5.0
+	hide_timer.one_shot = true
+	add_child(hide_timer)
+	hide_timer.start()
+	hide_timer.timeout.connect(_on_game_over_hide)
+
+func _on_game_over_hide():
+	print("Game Over dialog hidden.")
+	calculate_and_display_win_state()
+	$HUD/HUD.hide()
+	$HUD/ScoreBoard.show()
+
+func calculate_and_display_win_state():
+	# Calculate total regular items collected and required
+	var regular_items_collected = 0
+	var regular_items_required = 0
+	var spaceship_items_collected = item_counts["et"]
+	var spaceship_items_required = ET_REQUIRED
+	
+	# Sum up all items except ET (spaceship item)
+	for item in items.values():
+			if item != "et":
+					regular_items_collected += item_counts[item]
+					regular_items_required += item_required_counts[item]
+	
+	# Update scoreboard labels
+	var regular_label = get_node("HUD/ScoreBoard/RegularItemCollected")
+	var spaceship_label = get_node("HUD/ScoreBoard/SpaceshipItemCollected")
+	var win_message_label = get_node("HUD/ScoreBoard/TopMessage")
+	
+	if regular_label:
+			regular_label.text = str(regular_items_collected) + "/" + str(regular_items_required)
+	
+	if spaceship_label:
+			spaceship_label.text = str(spaceship_items_collected) + "/" + str(spaceship_items_required)
+	
+	# Determine win message based on collection status
+	if win_message_label:
+			if regular_items_collected >= regular_items_required:
+					if spaceship_items_collected >= spaceship_items_required:
+							win_message_label.text = "PERFECT! MISSION COMPLETE!"
+					else:
+							win_message_label.text = "GOOD JOB! MISSION SUCCESS!"
+			else:
+					win_message_label.text = "MISSION FAILED!"
+					win_message_label.modulate = Color.RED
 
 func spawn_players() -> void:
 	var player_scene: PackedScene = load("res://player/player.tscn")

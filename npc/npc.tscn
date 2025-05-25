@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://daxom7074rqp3"]
 
 [ext_resource type="Script" uid="uid://2kk2vfkelymc" path="res://npc/npc.gd" id="1_hig5a"]
-[ext_resource type="SpriteFrames" uid="uid://dndq204d17lk" path="res://npc/npc1/npc1_anim.tres" id="2_xxcha"]
+[ext_resource type="SpriteFrames" uid="uid://b1uaj08iewwad" path="res://npc/officer_clawson/officer_clawson_anim.tres" id="2_nhy3c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hig5a"]
 radius = 9.0
@@ -16,7 +16,7 @@ script = ExtResource("1_hig5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
-sprite_frames = ExtResource("2_xxcha")
+sprite_frames = ExtResource("2_nhy3c")
 animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
