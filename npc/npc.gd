@@ -16,6 +16,12 @@ extends CharacterBody2D
 @export var npc_type: String = "npc"
 @export var area2d: Area2D  # Area2D node for detecting players
 
+# Synced variables for multiplayer
+@export var synced_position := Vector2()
+@export var synced_flip_h := false
+@export var synced_animation := "walk"
+@export var synced_state := "wander"  # "wander", "chase", "return", "attack"
+
 var _players_node: Node
 var _closest_player: Node
 var _wander_target := Vector2.ZERO
@@ -42,6 +48,9 @@ func _ready() -> void:
 	
 	# Connect to animation finished signal
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
+	
+	# Initialize synced position
+	synced_position = global_position
 
 func _find_navigation_regions() -> void:
 	if not patrol_navigation_region:
@@ -55,10 +64,25 @@ func _find_players_node() -> void:
 		push_error("NPC couldn't find Players node")
 
 func _process(delta: float) -> void:
-	position = position.clamp(Vector2.ZERO, Vector2(2080, 1408))
-	_find_closest_player()
+	# Only server handles logic and position clamping
+	if multiplayer.is_server():
+		position = position.clamp(Vector2.ZERO, Vector2(2080, 1408))
+		_find_closest_player()
+		synced_position = global_position
+	else:
+		# Clients smoothly interpolate to synced position
+		global_position = global_position.lerp(synced_position, delta * 10.0)
+	
+	# All clients update visual state
+	$AnimatedSprite2D.flip_h = synced_flip_h
+	if $AnimatedSprite2D.animation != synced_animation:
+		$AnimatedSprite2D.play(synced_animation)
 
 func _physics_process(delta: float) -> void:
+	# Only server handles movement logic
+	if not multiplayer.is_server():
+		return
+		
 	# Handle attack timing
 	if _is_attacking:
 		_attack_timer -= delta
@@ -115,6 +139,7 @@ func _find_closest_player() -> void:
 
 func _start_chase() -> void:
 	_is_chasing = true
+	synced_state = "chase"
 	print("Setting to global nav layer: ", _navigation_agent.navigation_layers)
 	_navigation_agent.navigation_layers &= ~patrol_navigation_region.navigation_layers
 	_navigation_agent.navigation_layers |= global_navigation_region.navigation_layers
@@ -134,7 +159,7 @@ func chase_player(delta: float) -> void:
 	var direction = (next_path_position - global_position).normalized()
 	velocity = direction * chase_speed
 	if velocity.x != 0:
-		$AnimatedSprite2D.flip_h = velocity.x >= 0
+		synced_flip_h = velocity.x >= 0
 	move_and_slide()
 
 func _start_attack() -> void:
@@ -142,23 +167,29 @@ func _start_attack() -> void:
 	_attack_timer = attack_duration
 	_attack_target = _closest_player  # Store the target we're attacking
 	velocity = Vector2.ZERO  # Stop moving
+	synced_state = "attack"
 	
 	# Face the player
 	if _closest_player:
 		var direction_to_player = _closest_player.global_position - global_position
-		$AnimatedSprite2D.flip_h = direction_to_player.x >= 0
+		synced_flip_h = direction_to_player.x >= 0
 	
-	# Play attack animation
-	$AnimatedSprite2D.play("attack")
+	# Sync attack animation
+	synced_animation = "attack"
 	print("NPC attacking!")
 
 func _stop_attack() -> void:
 	_is_attacking = false
 	_attack_target = null
+	synced_state = "wander"
 	# Return to walking animation
-	$AnimatedSprite2D.play("walk")
+	synced_animation = "walk"
 
 func _on_animation_finished() -> void:
+	# Only server handles attack logic
+	if not multiplayer.is_server():
+		return
+		
 	# Only check for hit when attack animation finishes
 	print("Animation finished: ", $AnimatedSprite2D.animation)
 	if $AnimatedSprite2D.animation == "attack" and _is_attacking and _attack_target:
@@ -177,14 +208,26 @@ func _check_attack_hit() -> void:
 
 func _on_attack_hit(target: Node) -> void:
 	print("Attack HIT! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
-	# Add your hit logic here (damage, effects, etc.)
-	# Example: if target.has_method("take_damage"): target.take_damage(10)
+	# Sync attack hit to all clients
+	attack_hit.rpc(target.name)
 
 func _on_attack_miss(target: Node) -> void:
 	print("Attack MISSED! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
+	# Sync attack miss to all clients
+	attack_miss.rpc(target.name)
+
+@rpc("authority", "call_local")
+func attack_hit(target_name: String) -> void:
+	print("Attack HIT synced! Target: ", target_name)
+	# Add your hit logic here (damage, effects, etc.)
+
+@rpc("authority", "call_local") 
+func attack_miss(target_name: String) -> void:
+	print("Attack MISSED synced! Target: ", target_name)
 	# Add your miss logic here (sound effects, etc.)
 
 func _start_return_to_patrol() -> void:
+	synced_state = "return"
 	_return_target = NavigationServer2D.region_get_closest_point(patrol_navigation_region, global_position)
 	_navigation_agent.target_position = _return_target
 
@@ -192,6 +235,7 @@ func return_to_patrol_area(delta: float) -> void:
 	if _navigation_agent.is_navigation_finished():
 			_is_returning = false
 			_timer = 0.0
+			synced_state = "wander"
 			print("Setting to patrol nav layer: ", _navigation_agent.navigation_layers)
 			_navigation_agent.navigation_layers &= ~global_navigation_region.navigation_layers
 			_navigation_agent.navigation_layers |= patrol_navigation_region.navigation_layers
@@ -201,7 +245,7 @@ func return_to_patrol_area(delta: float) -> void:
 	var direction = (next_path_position - global_position).normalized()
 	velocity = direction * return_speed
 	if velocity.x != 0:
-			$AnimatedSprite2D.flip_h = velocity.x >= 0
+			synced_flip_h = velocity.x >= 0
 
 	move_and_slide()
 
@@ -225,6 +269,6 @@ func wander_in_area(delta: float) -> void:
 			var direction = (next_path_position - global_position).normalized()
 			velocity = direction * wander_speed
 			if velocity.x != 0:
-					$AnimatedSprite2D.flip_h = velocity.x >= 0
+					synced_flip_h = velocity.x >= 0
 
 			move_and_slide()
