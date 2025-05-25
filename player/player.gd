@@ -40,8 +40,8 @@ func _process(delta: float) -> void:
 			$AnimatedSprite2D.animation = "idle"
 
 func _physics_process(delta: float) -> void:
-	if multiplayer.get_unique_id() != 1:
-			print(is_multiplayer_authority())
+	# if multiplayer.get_unique_id() != 1:
+	# 	print(is_multiplayer_authority())
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		# The client which this player represent will update the controls state, and notify it to everyone.
 		inputs.update()

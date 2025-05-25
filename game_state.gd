@@ -45,9 +45,6 @@ func all_players_ready() -> bool:
 	return true
 
 
-# -------- Current Level State --------
-
-
 # -------- Signals --------
 
 # Signals to let lobby GUI know what's going on.

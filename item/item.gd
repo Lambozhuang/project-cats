@@ -100,6 +100,7 @@ func release() -> void:
 		# Check if dropped in the collection area
 		var overlapping_areas = get_overlapping_areas()
 		for area in overlapping_areas:
-			print("Item dropped in area: ", area.name)
-			if area.name == "CollectionArea":
-				print(item_type)
+			# print("Item dropped in area: ", area.name)
+			if area.name == "CollectionArea" and multiplayer.is_server():
+				print("Item: ", item_type, " dropped in collection area")
+				get_tree().get_root().get_node("Demo1")._on_item_dropped(item_type)
