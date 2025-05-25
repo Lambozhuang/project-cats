@@ -24,4 +24,3 @@ shape = SubResource("CapsuleShape2D_hig5a")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 navigation_layers = 255
-debug_enabled = true

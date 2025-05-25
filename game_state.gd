@@ -22,10 +22,29 @@ const CATS := [
 ]
 
 var player_cat = null
+# Keep track of which player choose which cat
+var player_cats := {}
+
+func get_player_cat_list() -> Array:
+	return player_cats.values()
 
 # Names for remote players in id:name format.
 var players := {}
-var players_ready: Array[int] = []
+
+func get_player_list() -> Array:
+	return players.values()
+
+# id: true/false
+var players_ready := {}
+
+func all_players_ready() -> bool:
+	# Check if all players are ready.
+	if not players_ready[1]:
+		return false
+	for p_id: int in players:
+		if not players_ready[p_id]:
+			return false
+	return true
 
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
@@ -37,6 +56,7 @@ signal game_error(what: int)
 # Callback from SceneTree.
 func _player_connected(id: int) -> void:
 	# Registration of a client beings here, tell the connected player that we are here.
+	print("Player connected with ID: ", id)
 	register_player.rpc_id(id, player_name)
 
 
@@ -74,13 +94,18 @@ func _connected_fail() -> void:
 # Lobby management functions.
 @rpc("any_peer")
 func register_player(new_player_name: String) -> void:
+	print("Registering player: ", new_player_name)
 	var id := multiplayer.get_remote_sender_id()
 	players[id] = new_player_name
+	players_ready[id] = false
 	player_list_changed.emit()
 
 
 func unregister_player(id: int) -> void:
 	players.erase(id)
+	players_ready.erase(id)
+	if player_cats.has(id):
+		player_cats.erase(id)
 	player_list_changed.emit()
 
 
@@ -100,6 +125,8 @@ func host_game(new_player_name: String) -> void:
 	peer = ENetMultiplayerPeer.new()
 	peer.create_server(DEFAULT_PORT, MAX_PEERS)
 	multiplayer.set_multiplayer_peer(peer)
+	# players[1] = player_name
+	players_ready[1] = false
 
 
 func join_game(ip: String, new_player_name: String) -> void:
@@ -109,8 +136,16 @@ func join_game(ip: String, new_player_name: String) -> void:
 	multiplayer.set_multiplayer_peer(peer)
 
 
-func get_player_list() -> Array:
-	return players.values()
+func leave_game() -> void:
+	if peer:
+			peer.close()
+			multiplayer.set_multiplayer_peer(null)
+			peer = null
+	
+	players.clear()
+	players_ready.clear()
+	player_cats.clear()
+	player_cat = null
 
 
 func begin_game() -> void:

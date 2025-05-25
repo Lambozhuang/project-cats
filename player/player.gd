@@ -12,7 +12,7 @@ var carried_item: Node = null
 func _ready() -> void:
 	position = synced_position
 	if str(name).is_valid_int():
-		print(str(name).to_int())
+		print("Player instance name", str(name).to_int())
 		$"Inputs/InputsSync".set_multiplayer_authority(str(name).to_int())
 		if multiplayer.get_unique_id() == str(name).to_int():
 			$Camera2D.make_current()
@@ -94,5 +94,6 @@ func set_player_name(value: String, peer_id: int) -> void:
 	$Label.modulate = GameState.get_player_color(value)
 	#$sprite.modulate = Color(0.5, 0.5, 0.5) + GameState.get_player_color(value)
 	# print("value:" + value)
+	print("Player cat: ", GameState.player_cat)
 	$AnimatedSprite2D.sprite_frames = ResourceCache.player_sprites[GameState.player_cat]
 	$AnimatedSprite2D.play()

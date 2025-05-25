@@ -366,4 +366,3 @@ global_navigation_region = NodePath("../GlobalNavigationRegion2D")
 npc_type = "officer"
 
 [node name="Hud" parent="." instance=ExtResource("21_n16k1")]
-visible = false
