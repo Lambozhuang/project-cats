@@ -94,5 +94,5 @@ func set_player_name(value: String, peer_id: int) -> void:
 	$Label.modulate = GameState.get_player_color(value)
 	#$sprite.modulate = Color(0.5, 0.5, 0.5) + GameState.get_player_color(value)
 	# print("value:" + value)
-	if peer_id != 1:
-		$AnimatedSprite2D.sprite_frames = ResourceCache.player_sprites["Bob"]
+	$AnimatedSprite2D.sprite_frames = ResourceCache.player_sprites[GameState.player_cat]
+	$AnimatedSprite2D.play()

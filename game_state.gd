@@ -13,6 +13,16 @@ var peer: ENetMultiplayerPeer
 ## Our local player's name.
 var player_name := "Player 1"
 
+# Cat character list
+const CATS := [
+	"Bob",
+	"Tuna",
+	"Kiki",
+	"Rupert",
+]
+
+var player_cat = null
+
 # Names for remote players in id:name format.
 var players := {}
 var players_ready: Array[int] = []

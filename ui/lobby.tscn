@@ -22,7 +22,7 @@ font_size = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_bsayf"]
 line_spacing = -2.0
-font_size = 11
+font_size = 13
 
 [sub_resource type="LabelSettings" id="LabelSettings_8spp5"]
 font_size = 40
@@ -54,7 +54,6 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Start" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -96,6 +95,11 @@ layout_mode = 2
 theme = ExtResource("3_lyjxk")
 text = "Settings"
 
+[node name="QuitButton" type="Button" parent="Start/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_lyjxk")
+text = "Quit"
+
 [node name="Title" type="Label" parent="Start"]
 layout_mode = 1
 anchors_preset = 8
@@ -116,6 +120,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Connect" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -123,9 +128,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -128.0
-offset_top = -124.0
+offset_top = -100.0
 offset_right = 128.0
-offset_bottom = 124.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 2
@@ -206,20 +211,11 @@ text = "Join"
 layout_mode = 0
 offset_left = 8.0
 offset_top = 168.0
-offset_right = 250.0
-offset_bottom = 191.0
+offset_right = 248.0
+offset_bottom = 192.0
 size_flags_horizontal = 2
 size_flags_vertical = 0
 theme_override_colors/font_color = Color(0.820312, 0.291595, 0.291595, 1)
-
-[node name="Button" type="Button" parent="Connect"]
-layout_mode = 0
-offset_left = 72.0
-offset_top = 200.0
-offset_right = 184.0
-offset_bottom = 231.0
-theme = ExtResource("3_lyjxk")
-text = "Back to menu"
 
 [node name="Players" type="Panel" parent="."]
 visible = false
@@ -388,8 +384,9 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "Practical and experienced. Can carry two items and gets speed boosts."
+text = "Practical and experienced."
 label_settings = SubResource("LabelSettings_bsayf")
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Tuna" type="Control" parent="Characters/CharacterHBox"]
@@ -451,8 +448,9 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "Strong but dim. Moves heavy stuff and helps others reach high places."
+text = "Strong but dim. "
 label_settings = SubResource("LabelSettings_bsayf")
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Kiki" type="Control" parent="Characters/CharacterHBox"]
@@ -514,8 +512,9 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "Smart and strategic. Finds shortcuts and outsmarts humans."
+text = "Smart and strategic. "
 label_settings = SubResource("LabelSettings_bsayf")
+horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="Rupert" type="Control" parent="Characters/CharacterHBox"]
@@ -577,11 +576,12 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "Cute and sneaky. Fits in tight spots and charms humans—except animal control."
+text = "Cute and sneaky. "
 label_settings = SubResource("LabelSettings_bsayf")
+horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Button" type="Button" parent="Characters"]
+[node name="ReadyButton" type="Button" parent="Characters"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -595,6 +595,7 @@ offset_bottom = 276.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 40
+disabled = true
 toggle_mode = true
 text = "Ready!"
 
@@ -955,15 +956,21 @@ horizontal_alignment = 1
 
 [node name="ErrorDialog" type="AcceptDialog" parent="."]
 
-[node name="Button" type="Button" parent="."]
+[node name="BackButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 64.0
 offset_top = 64.0
 offset_right = 128.0
 offset_bottom = 96.0
-text = "Quit"
+text = "Back to menu"
 
+[connection signal="pressed" from="Start/VBoxContainer/StartButton" to="." method="_on_menu_start_pressed"]
 [connection signal="pressed" from="Connect/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="Connect/Join" to="." method="_on_join_pressed"]
 [connection signal="pressed" from="Players/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Players/FindPublicIP" to="." method="_on_find_public_ip_pressed"]
+[connection signal="pressed" from="Characters/CharacterHBox/Bob/Button" to="." method="_on_characters_selected" binds= ["Bob"]]
+[connection signal="pressed" from="Characters/CharacterHBox/Tuna/Button" to="." method="_on_characters_selected" binds= ["Tuna"]]
+[connection signal="pressed" from="Characters/CharacterHBox/Kiki/Button" to="." method="_on_characters_selected" binds= ["Kiki"]]
+[connection signal="pressed" from="Characters/CharacterHBox/Rupert/Button" to="." method="_on_characters_selected" binds= ["Rupert"]]
+[connection signal="pressed" from="Characters/ReadyButton" to="." method="_on_ready"]

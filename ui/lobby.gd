@@ -14,7 +14,19 @@ func _ready() -> void:
 		var desktop_path := OS.get_system_dir(OS.SYSTEM_DIR_DESKTOP).replace("\\", "/").split("/")
 		$Connect/Name.text = desktop_path[desktop_path.size() - 2]
 
+func _process(delta: float) -> void:
+	if $Start.visible:
+		$BackButton.hide()
+	else:
+		$BackButton.show()
 
+# Start
+func _on_menu_start_pressed() -> void:
+	$Start.hide()
+	$Connect.show()
+
+
+# Connect
 func _on_host_pressed() -> void:
 	if $Connect/Name.text == "":
 		$Connect/ErrorLabel.text = "Invalid name!"
@@ -28,7 +40,6 @@ func _on_host_pressed() -> void:
 	GameState.host_game(player_name)
 	get_window().title = ProjectSettings.get_setting("application/config/name") + ": Server (%s)" % $Connect/Name.text
 	refresh_lobby()
-
 
 func _on_join_pressed() -> void:
 	if $Connect/Name.text == "":
@@ -49,10 +60,43 @@ func _on_join_pressed() -> void:
 	get_window().title = ProjectSettings.get_setting("application/config/name") + ": Client (%s)" % $Connect/Name.text
 
 
+# Players
+func _on_start_pressed() -> void:
+	# GameState.begin_game()
+	$Players.hide()
+	$Characters.show()
+
+func _on_find_public_ip_pressed() -> void:
+	OS.shell_open("https://icanhazip.com/")
+
+
+# Characters
+func _on_characters_selected(cat_name: String) -> void:
+	print("Characters selected: ", cat_name)
+	var select_button = get_node("Characters/CharacterHBox/" + cat_name + "/Button")
+	select_button.disabled = true
+	select_button.text = "Selected"
+	# Reset all other buttons
+	for cat in GameState.CATS:
+		if cat != cat_name:
+			var other_button = get_node("Characters/CharacterHBox/" + cat + "/Button")
+			other_button.disabled = false
+			other_button.text = "Select"
+	$Characters/ReadyButton.disabled = false
+	GameState.player_cat = cat_name
+	print("player_cat: ", GameState.player_cat)
+
+func _on_ready() -> void:
+	# Local player ready
+	GameState.begin_game()
+	pass
+
+
+
+
 func _on_connection_success() -> void:
 	$Connect.hide()
 	$Players.show()
-
 
 func _on_connection_failed() -> void:
 	$Connect/Host.disabled = false
@@ -66,7 +110,6 @@ func _on_game_ended() -> void:
 	$Players.hide()
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
-
 
 func _on_game_error(errtxt: String) -> void:
 	$ErrorDialog.dialog_text = errtxt
@@ -84,11 +127,3 @@ func refresh_lobby() -> void:
 		$Players/VBoxContainer/List.add_item(p)
 
 	$Players/VBoxContainer/Start.disabled = not multiplayer.is_server()
-
-
-func _on_start_pressed() -> void:
-	GameState.begin_game()
-
-
-func _on_find_public_ip_pressed() -> void:
-	OS.shell_open("https://icanhazip.com/")
