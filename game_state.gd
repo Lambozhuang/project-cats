@@ -146,41 +146,6 @@ func begin_game() -> void:
 	assert(multiplayer.is_server())
 	load_world.rpc()
 
-	var world: Node = get_tree().get_root().get_node("Demo1")
-	var player_scene: PackedScene = load("res://player/player.tscn")
-
-	# Create a dictionary with peer ID. and respective spawn points.
-	# TODO: This could be improved by randomizing spawn points for players.
-	var spawn_points := {}
-	spawn_points[1] = 0  # Server in spawn point 0.
-	var spawn_point_idx := 1
-	for p: int in players:
-		spawn_points[p] = spawn_point_idx
-		spawn_point_idx += 1
-
-	print("Players: ", players)
-	print("Spawn points: ", spawn_points)
-
-	for p_id: int in spawn_points:
-		var spawn_pos: Vector2 = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
-		print("Spawning player ", p_id, " at position: ", spawn_pos)
-		var player := player_scene.instantiate()
-		player.synced_position = spawn_pos
-		player.name = str(p_id)
-		world.get_node("Players").add_child(player)
-		# The RPC must be called after the player is added to the scene tree.
-		# TODO: maybe transfer the authority to the peer of its player
-		#player.set_multiplayer_authority(p_id)
-		var name_to_set = player_name
-		var cat_to_set = player_cat
-		if p_id == multiplayer.get_unique_id():
-			pass
-		else:
-			name_to_set = players[p_id]
-			cat_to_set = player_cats[p_id]
-			
-		player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set)
-
 func end_game() -> void:
 	if has_node("/root/Demo1"):
 		# If the game is in progress, end it.

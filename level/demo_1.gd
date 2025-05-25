@@ -35,7 +35,55 @@ var item_counts := {
 }
 
 func _ready():
+	# debug
+	if not multiplayer.has_multiplayer_peer():
+		multiplayer.set_multiplayer_peer(ENetMultiplayerPeer.new())
+		multiplayer.multiplayer_peer.create_server(12345, 32)
+		multiplayer.multiplayer_peer.set_unique_id(1)
+		GameState.player_name = "Server"
+		GameState.players[1] = GameState.player_name
+		GameState.player_cats[1] = "cat_1"
+	else:
+		print("Multiplayer peer already set.")
+
 	update_item_ui()
+	if multiplayer.is_server():
+		spawn_players()
+
+func spawn_players() -> void:
+	var player_scene: PackedScene = load("res://player/player.tscn")
+
+	# Create a dictionary with peer ID and respective spawn points.
+	# TODO: This could be improved by randomizing spawn points for players.
+	var spawn_points := {}
+	spawn_points[1] = 0  # Server in spawn point 0.
+	var spawn_point_idx := 1
+	for p: int in GameState.players:
+			spawn_points[p] = spawn_point_idx
+			spawn_point_idx += 1
+
+	print("Players: ", GameState.players)
+	print("Spawn points: ", spawn_points)
+
+	for p_id: int in spawn_points:
+			var spawn_pos: Vector2 = get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+			print("Spawning player ", p_id, " at position: ", spawn_pos)
+			var player := player_scene.instantiate()
+			player.synced_position = spawn_pos
+			player.name = str(p_id)
+			get_node("Players").add_child(player)
+			# The RPC must be called after the player is added to the scene tree.
+			# TODO: maybe transfer the authority to the peer of its player
+			#player.set_multiplayer_authority(p_id)
+			var name_to_set = GameState.player_name
+			var cat_to_set = GameState.player_cat
+			if p_id == multiplayer.get_unique_id():
+					pass
+			else:
+					name_to_set = GameState.players[p_id]
+					cat_to_set = GameState.player_cats[p_id]
+					
+			player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set)
 
 func _on_item_dropped(item_type: String) -> void:
 	if items.values().has(item_type):
