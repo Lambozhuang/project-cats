@@ -104,3 +104,5 @@ func release() -> void:
 			if area.name == "CollectionArea" and multiplayer.is_server():
 				print("Item: ", item_type, " dropped in collection area")
 				get_tree().get_root().get_node("Demo1")._on_item_dropped(item_type)
+				# destroy the item after collection
+				queue_free()

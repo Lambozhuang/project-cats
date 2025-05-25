@@ -179,7 +179,7 @@ func begin_game() -> void:
 			name_to_set = players[p_id]
 			cat_to_set = player_cats[p_id]
 			
-		player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set) #TODO: set sprite
+		player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set)
 
 func end_game() -> void:
 	if has_node("/root/Demo1"):
