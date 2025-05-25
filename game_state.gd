@@ -1,5 +1,7 @@
 extends Node
 
+# -------- Constants --------
+
 # Default game server port. Can be any number between 1024 and 49151.
 # Not on the list of registered or common ports as of May 2024:
 # https://en.wikipedia.org/wiki/List_of_TCP_and_UDP_port_numbers
@@ -7,11 +9,6 @@ const DEFAULT_PORT = 10567
 
 ## The maximum number of players.
 const MAX_PEERS = 4
-
-var peer: ENetMultiplayerPeer
-
-## Our local player's name.
-var player_name := "Player 1"
 
 # Cat character list
 const CATS := [
@@ -21,22 +18,23 @@ const CATS := [
 	"Rupert",
 ]
 
+# -------- Game State --------
+var peer: ENetMultiplayerPeer
+var player_name := "Player 1"
 var player_cat = null
-# Keep track of which player choose which cat
-var player_cats := {}
 
+# other player's cats, id:cat_name
+var player_cats := {}
 func get_player_cat_list() -> Array:
 	return player_cats.values()
 
-# Names for remote players in id:name format.
+# Names for other players in id:name format.
 var players := {}
-
 func get_player_list() -> Array:
 	return players.values()
 
 # id: true/false
 var players_ready := {}
-
 func all_players_ready() -> bool:
 	# Check if all players are ready.
 	if not players_ready[1]:
@@ -46,6 +44,12 @@ func all_players_ready() -> bool:
 			return false
 	return true
 
+
+# -------- Current Level State --------
+
+
+# -------- Signals --------
+
 # Signals to let lobby GUI know what's going on.
 signal player_list_changed()
 signal connection_failed()
@@ -53,12 +57,13 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what: int)
 
+# -------- Callbacks from SceneTree --------
+
 # Callback from SceneTree.
 func _player_connected(id: int) -> void:
 	# Registration of a client beings here, tell the connected player that we are here.
 	print("Player connected with ID: ", id)
 	register_player.rpc_id(id, player_name)
-
 
 # Callback from SceneTree.
 func _player_disconnected(id: int) -> void:
@@ -72,18 +77,15 @@ func _player_disconnected(id: int) -> void:
 		# Unregister this player.
 		unregister_player(id)
 
-
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok() -> void:
 	# We just connected to a server
 	connection_succeeded.emit()
 
-
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected() -> void:
 	game_error.emit("Server disconnected")
 	end_game()
-
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail() -> void:
@@ -91,7 +93,8 @@ func _connected_fail() -> void:
 	connection_failed.emit()
 
 
-# Lobby management functions.
+# -------- Lobby Management --------
+
 @rpc("any_peer")
 func register_player(new_player_name: String) -> void:
 	print("Registering player: ", new_player_name)
@@ -100,25 +103,12 @@ func register_player(new_player_name: String) -> void:
 	players_ready[id] = false
 	player_list_changed.emit()
 
-
 func unregister_player(id: int) -> void:
 	players.erase(id)
 	players_ready.erase(id)
 	if player_cats.has(id):
 		player_cats.erase(id)
 	player_list_changed.emit()
-
-
-@rpc("call_local")
-func load_world() -> void:
-	# Change scene.
-	var world: Node = load("res://level/demo_1.tscn").instantiate()
-	get_tree().get_root().add_child(world)
-	get_tree().get_root().get_node("Lobby").hide()
-
-	# Unpause and unleash the game!
-	get_tree().paused = false
-
 
 func host_game(new_player_name: String) -> void:
 	player_name = new_player_name
@@ -128,13 +118,11 @@ func host_game(new_player_name: String) -> void:
 	# players[1] = player_name
 	players_ready[1] = false
 
-
 func join_game(ip: String, new_player_name: String) -> void:
 	player_name = new_player_name
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip, DEFAULT_PORT)
 	multiplayer.set_multiplayer_peer(peer)
-
 
 func leave_game() -> void:
 	if peer:
@@ -147,6 +135,15 @@ func leave_game() -> void:
 	player_cats.clear()
 	player_cat = null
 
+@rpc("call_local")
+func load_world() -> void:
+	# Change scene.
+	var world: Node = load("res://level/demo_1.tscn").instantiate()
+	get_tree().get_root().add_child(world)
+	get_tree().get_root().get_node("Lobby").hide()
+
+	# Unpause and unleash the game!
+	get_tree().paused = false
 
 func begin_game() -> void:
 	assert(multiplayer.is_server())
@@ -187,7 +184,6 @@ func begin_game() -> void:
 			
 		player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set) #TODO: set sprite
 
-
 func end_game() -> void:
 	if has_node("/root/Demo1"):
 		# If the game is in progress, end it.
@@ -204,6 +200,8 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_connected_fail)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 
+
+# -------- Utility Functions --------
 
 ## Returns an unique-looking player color based on the name's hash.
 func get_player_color(p_name: String) -> Color:
