@@ -6,6 +6,9 @@ extends CharacterBody2D
 @export var return_speed := 120.0  # Speed when returning to patrol area
 @export var detection_range := 100.0
 @export var chase_range := 200.0
+@export var attack_range := 30.0  # Range to start attacking
+@export var attack_hit_range := 40.0  # Range to check for successful hit
+@export var attack_duration := 2.0  # How long the attack animation lasts
 @export var wander_time := 3.0
 @export var sprite_frames: SpriteFrames  # Sprite frames resource to load
 @export var patrol_navigation_region: NavigationRegion2D  # Small patrol area
@@ -20,6 +23,9 @@ var _return_target := Vector2.ZERO
 var _timer := 0.0
 var _is_chasing := false
 var _is_returning := false
+var _is_attacking := false
+var _attack_timer := 0.0
+var _attack_target: Node  # Player we're attacking
 
 # Navigation agent for pathfinding
 @onready var _navigation_agent: NavigationAgent2D = $NavigationAgent2D
@@ -33,6 +39,9 @@ func _ready() -> void:
 	$AnimatedSprite2D.play("walk")
 	_navigation_agent.navigation_layers |= patrol_navigation_region.navigation_layers
 	_navigation_agent.navigation_layers &= ~global_navigation_region.navigation_layers
+	
+	# Connect to animation finished signal
+	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 
 func _find_navigation_regions() -> void:
 	if not patrol_navigation_region:
@@ -50,6 +59,13 @@ func _process(delta: float) -> void:
 	_find_closest_player()
 
 func _physics_process(delta: float) -> void:
+	# Handle attack timing
+	if _is_attacking:
+		_attack_timer -= delta
+		if _attack_timer <= 0.0:
+			_stop_attack()
+		return  # Don't move while attacking
+	
 	if not _closest_player:
 		if _is_returning:
 			return_to_patrol_area(delta)
@@ -58,6 +74,11 @@ func _physics_process(delta: float) -> void:
 		return
 
 	var distance_to_player = global_position.distance_to(_closest_player.global_position)
+	
+	# Check if close enough to attack
+	if _is_chasing and distance_to_player <= attack_range:
+		_start_attack()
+		return
 	
 	# Start chasing if player is close
 	if (distance_to_player < detection_range) and !_is_returning:
@@ -97,15 +118,6 @@ func _start_chase() -> void:
 	print("Setting to global nav layer: ", _navigation_agent.navigation_layers)
 	_navigation_agent.navigation_layers &= ~patrol_navigation_region.navigation_layers
 	_navigation_agent.navigation_layers |= global_navigation_region.navigation_layers
-	
-	# # Disable patrol navigation region during chase
-	# if patrol_navigation_region:
-	# 		patrol_navigation_region.enabled = false
-	# 		print("Disabled patrol navigation region for chase")
-	
-	# # Set navigation agent to use whole map navigation for chasing
-	# if global_navigation_region:
-	# 		_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
 
 func chase_player(delta: float) -> void:
 	if not _closest_player:
@@ -125,15 +137,54 @@ func chase_player(delta: float) -> void:
 		$AnimatedSprite2D.flip_h = velocity.x >= 0
 	move_and_slide()
 
-func _start_return_to_patrol() -> void:
-	# Re-enable patrol navigation region
-	# if patrol_navigation_region:
-	# 				patrol_navigation_region.enabled = true
-	# 				print("Re-enabled patrol navigation region for return")
+func _start_attack() -> void:
+	_is_attacking = true
+	_attack_timer = attack_duration
+	_attack_target = _closest_player  # Store the target we're attacking
+	velocity = Vector2.ZERO  # Stop moving
 	
-	# # Set navigation agent to use whole map navigation
-	# if global_navigation_region:
-	# 				_navigation_agent.set_navigation_map(global_navigation_region.get_navigation_map())
+	# Face the player
+	if _closest_player:
+		var direction_to_player = _closest_player.global_position - global_position
+		$AnimatedSprite2D.flip_h = direction_to_player.x >= 0
+	
+	# Play attack animation
+	$AnimatedSprite2D.play("attack")
+	print("NPC attacking!")
+
+func _stop_attack() -> void:
+	_is_attacking = false
+	_attack_target = null
+	# Return to walking animation
+	$AnimatedSprite2D.play("walk")
+
+func _on_animation_finished() -> void:
+	# Only check for hit when attack animation finishes
+	print("Animation finished: ", $AnimatedSprite2D.animation)
+	if $AnimatedSprite2D.animation == "attack" and _is_attacking and _attack_target:
+		_check_attack_hit()
+
+func _check_attack_hit() -> void:
+	if not _attack_target:
+		return
+	
+	var distance_to_target = global_position.distance_to(_attack_target.global_position)
+	print("Attack target: ", _attack_target.name, " at distance: ", distance_to_target)
+	if distance_to_target <= attack_hit_range:
+		_on_attack_hit(_attack_target)
+	else:
+		_on_attack_miss(_attack_target)
+
+func _on_attack_hit(target: Node) -> void:
+	print("Attack HIT! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
+	# Add your hit logic here (damage, effects, etc.)
+	# Example: if target.has_method("take_damage"): target.take_damage(10)
+
+func _on_attack_miss(target: Node) -> void:
+	print("Attack MISSED! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
+	# Add your miss logic here (sound effects, etc.)
+
+func _start_return_to_patrol() -> void:
 	_return_target = NavigationServer2D.region_get_closest_point(patrol_navigation_region, global_position)
 	_navigation_agent.target_position = _return_target
 
