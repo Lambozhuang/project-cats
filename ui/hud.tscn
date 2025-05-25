@@ -35,7 +35,6 @@ font_size = 30
 [node name="Hud" type="CanvasLayer"]
 
 [node name="PauseMenu" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +42,20 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rbyyf")
+
+[node name="Button" type="Button" parent="PauseMenu"]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 96.0
+text = "Quit"
+
+[node name="Button2" type="Button" parent="PauseMenu"]
+offset_left = 64.0
+offset_top = 104.0
+offset_right = 131.0
+offset_bottom = 136.0
+text = "RESUME"
 
 [node name="Hud" type="Control" parent="."]
 layout_mode = 3
@@ -605,3 +618,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 30
 text = "Continue"
+
+[node name="Button2" type="Button" parent="ScoreBoard"]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 96.0
+text = "Quit"
