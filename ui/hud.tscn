@@ -1,14 +1,48 @@
-[gd_scene format=3 uid="uid://bhr76qwteqtyy"]
+[gd_scene load_steps=15 format=3 uid="uid://bhr76qwteqtyy"]
+
+[ext_resource type="Theme" uid="uid://csgscdngqhlo6" path="res://ui/theme.tres" id="1_rbyyf"]
+[ext_resource type="Texture2D" uid="uid://bypjca7hcp2iq" path="res://ui/setting_icon.png" id="2_276te"]
+[ext_resource type="Texture2D" uid="uid://b7qcliacmgvib" path="res://player/cats/Bob/Idle/Bob_idle.png" id="3_1v5rv"]
+[ext_resource type="Texture2D" uid="uid://bawrmwi0geslj" path="res://player/cats/Tuna/Idle/Tuna idle 1.png" id="4_q43x7"]
+[ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://player/cats/Kiki/Idle/Kiki idle1.png" id="5_srpbi"]
+[ext_resource type="Texture2D" uid="uid://dgkj0c5fl8nu3" path="res://player/cats/Rupert/Idle/Rupert1.png" id="6_spcu4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_q43x7"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_276te"]
+bg_color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_276te"]
+font_size = 29
+font_color = Color(1, 0.65098, 0.301961, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rbyyf"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_ff8ar"]
+font_size = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_m0eg6"]
+font_size = 20
+
+[sub_resource type="LabelSettings" id="LabelSettings_546lt"]
+font_size = 30
 
 [node name="Hud" type="CanvasLayer"]
 
 [node name="PauseMenu" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rbyyf")
 
 [node name="Hud" type="Control" parent="."]
 layout_mode = 3
@@ -21,21 +55,58 @@ offset_right = -24.0
 offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_rbyyf")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Hud"]
+[node name="RegularItem" type="ColorRect" parent="Hud"]
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
+offset_right = 100.0
+offset_bottom = 50.0
+color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="Label" type="Label" parent="Hud/RegularItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 20.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/20"
+label_settings = SubResource("LabelSettings_1v5rv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpaceItem" type="ColorRect" parent="Hud"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+offset_left = 104.0
 offset_right = 204.0
 offset_bottom = 50.0
-
-[node name="RegularItem" type="ColorRect" parent="Hud/HBoxContainer"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
 color = Color(0.32549, 0.317647, 0.317647, 1)
 
-[node name="SpaceItem" type="ColorRect" parent="Hud/HBoxContainer"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-color = Color(0.32549, 0.317647, 0.317647, 1)
+[node name="Label" type="Label" parent="Hud/SpaceItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -27.5
+offset_top = -15.0
+offset_right = 27.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0/1"
+label_settings = SubResource("LabelSettings_1v5rv")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Time" type="ColorRect" parent="Hud"]
 custom_minimum_size = Vector2(100, 0)
@@ -48,6 +119,24 @@ offset_bottom = 50.0
 grow_horizontal = 2
 color = Color(0.32549, 0.317647, 0.317647, 1)
 
+[node name="Label" type="Label" parent="Hud/Time"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -10.0
+offset_right = 21.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_q43x7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CatStat" type="ColorRect" parent="Hud"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
@@ -58,13 +147,461 @@ offset_bottom = 50.0
 grow_horizontal = 0
 color = Color(0.32549, 0.317647, 0.317647, 1)
 
-[node name="Settings" type="ColorRect" parent="Hud"]
-custom_minimum_size = Vector2(100, 0)
+[node name="Settings" type="Button" parent="Hud"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -50.0
-offset_right = 100.0
+offset_top = -48.0
+offset_right = 48.0
 grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_276te")
+icon = ExtResource("2_276te")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Timeout" type="ColorRect" parent="Hud"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = -25.0
+offset_right = 148.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32549, 0.352941, 0.521569, 1)
+
+[node name="Label" type="Label" parent="Hud/Timeout"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = -11.5
+offset_right = 41.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "TIMES OUT!"
+label_settings = SubResource("LabelSettings_276te")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AlertMessage" type="ColorRect" parent="Hud"]
+layout_mode = 0
+offset_left = 404.0
+offset_top = 552.0
+offset_right = 700.0
+offset_bottom = 602.0
 color = Color(0.32549, 0.317647, 0.317647, 1)
+
+[node name="Label" type="Label" parent="Hud/AlertMessage"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -107.0
+offset_top = -15.0
+offset_right = 107.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tuna is captured!"
+label_settings = SubResource("LabelSettings_rbyyf")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBoard" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rbyyf")
+
+[node name="CharacterHBox" type="HBoxContainer" parent="ScoreBoard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -364.0
+offset_top = -192.0
+offset_right = 364.0
+offset_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Bob" type="Control" parent="ScoreBoard/CharacterHBox"]
+custom_minimum_size = Vector2(170, 270)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScoreBoard/CharacterHBox/Bob"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+color = Color(0.933333, 0.933333, 0.933333, 0.152941)
+
+[node name="TextureRect" type="TextureRect" parent="ScoreBoard/CharacterHBox/Bob"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+texture = ExtResource("3_1v5rv")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScoreBoard/CharacterHBox/Bob"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 68.5
+offset_right = 35.0
+offset_bottom = 117.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Bob"
+label_settings = SubResource("LabelSettings_ff8ar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScoreBoard/CharacterHBox/Bob"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 108.0
+offset_right = 40.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreBoard/CharacterHBox/Bob"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 132.0
+offset_right = 40.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "---"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Tuna" type="Control" parent="ScoreBoard/CharacterHBox"]
+custom_minimum_size = Vector2(170, 270)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScoreBoard/CharacterHBox/Tuna"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+color = Color(0.933333, 0.933333, 0.933333, 0.152941)
+
+[node name="TextureRect" type="TextureRect" parent="ScoreBoard/CharacterHBox/Tuna"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+texture = ExtResource("4_q43x7")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScoreBoard/CharacterHBox/Tuna"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 68.5
+offset_right = 35.0
+offset_bottom = 117.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tuna"
+label_settings = SubResource("LabelSettings_ff8ar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScoreBoard/CharacterHBox/Tuna"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 108.0
+offset_right = 40.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreBoard/CharacterHBox/Tuna"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 132.0
+offset_right = 40.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "---"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Kiki" type="Control" parent="ScoreBoard/CharacterHBox"]
+custom_minimum_size = Vector2(170, 270)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScoreBoard/CharacterHBox/Kiki"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+color = Color(0.933333, 0.933333, 0.933333, 0.152941)
+
+[node name="TextureRect" type="TextureRect" parent="ScoreBoard/CharacterHBox/Kiki"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+texture = ExtResource("5_srpbi")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScoreBoard/CharacterHBox/Kiki"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 68.5
+offset_right = 35.0
+offset_bottom = 117.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Kiki"
+label_settings = SubResource("LabelSettings_ff8ar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScoreBoard/CharacterHBox/Kiki"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 108.0
+offset_right = 40.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreBoard/CharacterHBox/Kiki"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 132.0
+offset_right = 40.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "---"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Rupert" type="Control" parent="ScoreBoard/CharacterHBox"]
+custom_minimum_size = Vector2(170, 270)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="ScoreBoard/CharacterHBox/Rupert"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+color = Color(0.933333, 0.933333, 0.933333, 0.152941)
+
+[node name="TextureRect" type="TextureRect" parent="ScoreBoard/CharacterHBox/Rupert"]
+layout_mode = 0
+offset_right = 170.0
+offset_bottom = 270.0
+texture = ExtResource("6_spcu4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ScoreBoard/CharacterHBox/Rupert"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = 68.5
+offset_right = 35.0
+offset_bottom = 117.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Rupert"
+label_settings = SubResource("LabelSettings_ff8ar")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScoreBoard/CharacterHBox/Rupert"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 108.0
+offset_right = 40.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE:"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreBoard/CharacterHBox/Rupert"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -39.0
+offset_top = 132.0
+offset_right = 40.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "---"
+label_settings = SubResource("LabelSettings_m0eg6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="ScoreBoard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -67.5
+offset_top = -242.5
+offset_right = 67.5
+offset_bottom = -205.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GOOD JOB!"
+label_settings = SubResource("LabelSettings_546lt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ScoreBoard"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 496.0
+offset_right = 490.0
+offset_bottom = 516.0
+text = "SCARPA'S ITEMS COLLECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="ScoreBoard"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 512.0
+offset_right = 490.0
+offset_bottom = 532.0
+text = "---"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ScoreBoard"]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 496.0
+offset_right = 874.0
+offset_bottom = 516.0
+text = "SCARPA'S ITEMS COLLECTED:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label5" type="Label" parent="ScoreBoard"]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 512.0
+offset_right = 874.0
+offset_bottom = 532.0
+text = "---"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="ScoreBoard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = 225.5
+offset_right = 68.5
+offset_bottom = 270.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Continue"

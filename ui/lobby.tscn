@@ -116,7 +116,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Connect" type="Panel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -389,7 +388,7 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "The experienced and practical one. Can carry 2 items at once. Has speed boosts."
+text = "Practical and experienced. Can carry two items and gets speed boosts."
 label_settings = SubResource("LabelSettings_bsayf")
 autowrap_mode = 2
 
@@ -452,7 +451,7 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "The strong and action-oriented one. Kind of stupid. Can move certain items, scare children, and can have other cats climb on their back to reach high places."
+text = "Strong but dim. Moves heavy stuff and helps others reach high places."
 label_settings = SubResource("LabelSettings_bsayf")
 autowrap_mode = 2
 
@@ -515,7 +514,7 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "The smart and analytic one. Can calculate shortcuts and outsmart humans. "
+text = "Smart and strategic. Finds shortcuts and outsmarts humans."
 label_settings = SubResource("LabelSettings_bsayf")
 autowrap_mode = 2
 
@@ -578,7 +577,7 @@ layout_mode = 0
 offset_top = 300.0
 offset_right = 170.0
 offset_bottom = 388.0
-text = "The cute and friendly one. Fits into small spaces and can charm the humans, except for the animal control officer."
+text = "Cute and sneaky. Fits in tight spots and charms humans—except animal control."
 label_settings = SubResource("LabelSettings_bsayf")
 autowrap_mode = 2
 
