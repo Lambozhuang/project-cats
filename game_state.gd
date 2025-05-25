@@ -164,8 +164,12 @@ func begin_game() -> void:
 		spawn_points[p] = spawn_point_idx
 		spawn_point_idx += 1
 
+	print("Players: ", players)
+	print("Spawn points: ", spawn_points)
+
 	for p_id: int in spawn_points:
 		var spawn_pos: Vector2 = world.get_node("SpawnPoints/" + str(spawn_points[p_id])).position
+		print("Spawning player ", p_id, " at position: ", spawn_pos)
 		var player := player_scene.instantiate()
 		player.synced_position = spawn_pos
 		player.name = str(p_id)
@@ -174,12 +178,14 @@ func begin_game() -> void:
 		# TODO: maybe transfer the authority to the peer of its player
 		#player.set_multiplayer_authority(p_id)
 		var name_to_set = player_name
+		var cat_to_set = player_cat
 		if p_id == multiplayer.get_unique_id():
 			pass
 		else:
 			name_to_set = players[p_id]
+			cat_to_set = player_cats[p_id]
 			
-		player.set_player_name.rpc(name_to_set, p_id)
+		player.set_player_name_and_sprite.rpc(name_to_set, p_id, cat_to_set) #TODO: set sprite
 
 
 func end_game() -> void:
