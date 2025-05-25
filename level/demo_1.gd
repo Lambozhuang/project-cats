@@ -1,5 +1,7 @@
 extends Node
 
+const TOTAL_TIME := 300.0
+
 const APPLE_REQUIRED := 5
 const BEER_REQUIRED := 5
 const FISH_REQUIRED := 5
@@ -34,6 +36,9 @@ var item_counts := {
 	"et": 0
 }
 
+@onready var timer: Timer = $Timer
+@onready var time_label: Label = $HUD/HUD/Time/Label
+
 func _ready():
 	# debug
 	if not multiplayer.has_multiplayer_peer():
@@ -46,17 +51,22 @@ func _ready():
 	else:
 		print("Multiplayer peer already set.")
 
+	timer.wait_time = TOTAL_TIME
+	timer.timeout.connect(_on_timer_timeout)
+
 	update_item_ui()
+	update_timer_ui()
+
 	if multiplayer.is_server():
 		spawn_players()
 
+func _process(delta):
+	update_timer_ui()
+
 func spawn_players() -> void:
 	var player_scene: PackedScene = load("res://player/player.tscn")
-
-	# Create a dictionary with peer ID and respective spawn points.
-	# TODO: This could be improved by randomizing spawn points for players.
 	var spawn_points := {}
-	spawn_points[1] = 0  # Server in spawn point 0.
+	spawn_points[1] = 0
 	var spawn_point_idx := 1
 	for p: int in GameState.players:
 			spawn_points[p] = spawn_point_idx
@@ -73,7 +83,7 @@ func spawn_players() -> void:
 			player.name = str(p_id)
 			get_node("Players").add_child(player)
 			# The RPC must be called after the player is added to the scene tree.
-			# TODO: maybe transfer the authority to the peer of its player
+			# TODOnot important now: maybe transfer the authority to the peer of its player
 			#player.set_multiplayer_authority(p_id)
 			var name_to_set = GameState.player_name
 			var cat_to_set = GameState.player_cat
@@ -100,3 +110,13 @@ func update_item_ui() -> void:
 		var count_label = get_node("HUD/HUD/Item" + str(item_id) + "/Label")
 		if count_label:
 			count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
+
+func _on_timer_timeout():
+	print("Time's up!")
+	# TODO: add times up logic
+
+func update_timer_ui():
+	var time_left = timer.time_left
+	var minutes = int(time_left) / 60
+	var seconds = int(time_left) % 60
+	time_label.text = "%02d:%02d" % [minutes, seconds]

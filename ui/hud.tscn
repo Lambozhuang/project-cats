@@ -342,7 +342,7 @@ label_settings = SubResource("LabelSettings_rbyyf")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Captured" type="ColorRect" parent="HUD"]
+[node name="FullScreenMessage" type="ColorRect" parent="HUD"]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -352,7 +352,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.601223, 0.601223, 0.601223, 0.137255)
 
-[node name="Label" type="Label" parent="HUD/Captured"]
+[node name="Label" type="Label" parent="HUD/FullScreenMessage"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -365,7 +365,8 @@ offset_right = 267.0
 offset_bottom = 36.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "You are captured!"
+text = "Collect the items!
+You are captured!"
 label_settings = SubResource("LabelSettings_srpbi")
 horizontal_alignment = 1
 vertical_alignment = 1

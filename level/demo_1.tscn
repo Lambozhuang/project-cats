@@ -370,3 +370,6 @@ global_navigation_region = NodePath("../GlobalNavigationRegion2D")
 npc_type = "officer"
 
 [node name="HUD" parent="." instance=ExtResource("21_n16k1")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
