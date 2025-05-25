@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvscac4fx2trn"]
+[gd_scene load_steps=11 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="SpriteFrames" uid="uid://cevdtp22uqfk2" path="res://player/cats/Tuna/Tuna_anim.tres" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player/player_controls.gd" id="3_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://eoxvhn3jges1" path="res://assets/audio/picking_up.wav" id="4_yw30f"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqtel"]
 
@@ -96,3 +97,6 @@ limit_top = 0
 limit_right = 2080
 limit_bottom = 1408
 position_smoothing_enabled = true
+
+[node name="PickingUpSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yw30f")

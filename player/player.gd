@@ -71,6 +71,7 @@ func try_to_carry_item() -> void:
 	if isCarryingItem:
 		return
 	print("try to carry")
+	$PickingUpSfx.play()
 	for body in $CarryDetector.get_overlapping_areas():
 		# print(body)
 		if body.has_method("request_carry"):
