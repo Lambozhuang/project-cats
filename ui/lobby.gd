@@ -78,12 +78,12 @@ func _on_game_error(errtxt: String) -> void:
 func refresh_lobby() -> void:
 	var players := GameState.get_player_list()
 	players.sort()
-	$Players/List.clear()
-	$Players/List.add_item(GameState.player_name + " (you)")
+	$Players/VBoxContainer/List.clear()
+	$Players/VBoxContainer/List.add_item(GameState.player_name + " (you)")
 	for p: String in players:
-		$Players/List.add_item(p)
+		$Players/VBoxContainer/List.add_item(p)
 
-	$Players/Start.disabled = not multiplayer.is_server()
+	$Players/VBoxContainer/Start.disabled = not multiplayer.is_server()
 
 
 func _on_start_pressed() -> void:
