@@ -6,6 +6,8 @@ var carried_item: Node = null
 var is_locked_up = false  # New state to track if player is locked up
 var is_knocked_out = false  # New state for knockout animation
 var is_knockout_immune = false  # Immunity after being knocked out
+var is_carrying_two_player_item = false  # New: carrying a two-player item
+var two_player_item_id = 0  # New: ID of the two-player item being carried
 
 @export var speed := 140.0
 @export var knockout_duration := 2.0  # How long the knockout lasts
@@ -14,6 +16,7 @@ var is_knockout_immune = false  # Immunity after being knocked out
 @export var synced_locked_up := false  # Synced version for multiplayer
 @export var synced_knocked_out := false  # Synced knockout state
 @export var synced_knockout_immune := false  # Synced immunity state
+@export var synced_carrying_two_player := false  # New: synced two-player carry state
 
 @onready var inputs: Node = $Inputs
 var knockout_timer := 0.0
@@ -41,6 +44,7 @@ func _process(delta: float) -> void:
 		is_locked_up = synced_locked_up
 		is_knocked_out = synced_knocked_out
 		is_knockout_immune = synced_knockout_immune
+		is_carrying_two_player_item = synced_carrying_two_player
 	
 	# Handle knockout timer
 	if is_knocked_out:
@@ -63,19 +67,21 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.modulate = Color.WHITE
 	
 	# Normal animation logic (only if not knocked out)
+	var is_carrying = is_carrying_item or is_carrying_two_player_item
+	
 	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x > 0
-		if is_carrying_item:
+		if is_carrying:
 			$AnimatedSprite2D.animation = "walk_hold"
 		else:
 			$AnimatedSprite2D.animation = "walk"
 	elif velocity.y != 0:
-		if is_carrying_item:
+		if is_carrying:
 			$AnimatedSprite2D.animation = "walk_hold"
 		else:
 			$AnimatedSprite2D.animation = "walk"
 	else:
-		if is_carrying_item:
+		if is_carrying:
 			$AnimatedSprite2D.animation = "hold"
 		else:
 			$AnimatedSprite2D.animation = "idle"
@@ -86,9 +92,10 @@ func _physics_process(delta: float) -> void:
 
 	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
 		synced_position = position
-		synced_locked_up = is_locked_up  # Sync locked up state
-		synced_knocked_out = is_knocked_out  # Sync knockout state
-		synced_knockout_immune = is_knockout_immune  # Sync immunity state
+		synced_locked_up = is_locked_up
+		synced_knocked_out = is_knocked_out
+		synced_knockout_immune = is_knockout_immune
+		synced_carrying_two_player = is_carrying_two_player_item
 	else:
 		position = synced_position
 		
@@ -109,6 +116,14 @@ func _physics_process(delta: float) -> void:
 		elif inputs.carry_released:
 			try_to_release_item()
 
+# New: RPC to set two-player carry state
+@rpc("authority", "call_local")
+func set_carrying_two_player_item(carrying: bool, item_id: int) -> void:
+	is_carrying_two_player_item = carrying
+	synced_carrying_two_player = carrying
+	two_player_item_id = item_id
+	print("Player ", name, " two-player carry state: ", carrying)
+
 @rpc("authority", "call_local")
 func set_knocked_out() -> void:
 	if is_knocked_out or is_knockout_immune:
@@ -124,6 +139,15 @@ func set_knocked_out() -> void:
 		carried_item.request_release.rpc()
 		carried_item = null
 		is_carrying_item = false
+	
+	# Drop two-player item when knocked out
+	if is_carrying_two_player_item and two_player_item_id != 0:
+		var item = instance_from_id(two_player_item_id)
+		if item:
+			item.request_release.rpc()
+		is_carrying_two_player_item = false
+		synced_carrying_two_player = false
+		two_player_item_id = 0
 	
 	# Play knockout animation
 	$AnimatedSprite2D.animation = "knockout"
@@ -160,30 +184,51 @@ func set_locked_up(locked: bool) -> void:
 			carried_item.request_release.rpc()
 			carried_item = null
 			is_carrying_item = false
+		
+		# Drop two-player item when locked up
+		if is_carrying_two_player_item and two_player_item_id != 0:
+			var item = instance_from_id(two_player_item_id)
+			if item:
+				item.request_release.rpc()
+			is_carrying_two_player_item = false
+			synced_carrying_two_player = false
+			two_player_item_id = 0
+		
 		print("Player ", name, " is now locked up")
 	else:
 		print("Player ", name, " has been released from jail")
 
 func try_to_carry_item() -> void:
-	if is_carrying_item or is_locked_up or is_knocked_out:
+	if is_carrying_item or is_carrying_two_player_item or is_locked_up or is_knocked_out:
 		return
 	print("try to carry")
 	for body in $CarryDetector.get_overlapping_areas():
 		if body.has_method("request_carry"):
 			body.request_carry.rpc(multiplayer.get_unique_id())
-			carried_item = body
-			is_carrying_item = true
-			$PickingUpSfx.play()
+			# For single-player items, set carried_item immediately
+			if not body.is_two_player_item:
+				carried_item = body
+				is_carrying_item = true
+				$PickingUpSfx.play()
+			# For two-player items, the item will call set_carrying_two_player_item
 			break
 
 func try_to_release_item() -> void:
 	if is_locked_up or is_knocked_out:
 		return
 	print("try to release")
+	
+	# Release single-player item
 	if carried_item:
 		carried_item.request_release.rpc()
 		carried_item = null
 		is_carrying_item = false
+	
+	# Release two-player item
+	if is_carrying_two_player_item and two_player_item_id != 0:
+		var item = instance_from_id(two_player_item_id)
+		if item:
+			item.request_release.rpc()
 
 @rpc("call_local")
 func set_player_name_and_sprite(value: String, peer_id: int, cat: String) -> void:
