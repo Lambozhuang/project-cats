@@ -121,7 +121,7 @@ func set_knocked_out() -> void:
 	
 	# Drop any carried item when knocked out
 	if is_carrying_item and carried_item:
-		carried_item.request_release.rpc()
+		carried_item.request_release.rpc_id(1, multiplayer.get_unique_id())
 		carried_item = null
 		is_carrying_item = false
 	
@@ -157,7 +157,7 @@ func set_locked_up(locked: bool) -> void:
 	if locked:
 		# Drop any carried item when locked up
 		if is_carrying_item and carried_item:
-			carried_item.request_release.rpc()
+			carried_item.request_release.rpc_id(1, multiplayer.get_unique_id())
 			carried_item = null
 			is_carrying_item = false
 		print("Player ", name, " is now locked up")
@@ -181,7 +181,7 @@ func try_to_release_item() -> void:
 		return
 	print("try to release")
 	if carried_item:
-		carried_item.request_release.rpc()
+		carried_item.request_release.rpc_id(1, multiplayer.get_unique_id())
 		carried_item = null
 		is_carrying_item = false
 

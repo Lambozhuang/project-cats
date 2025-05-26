@@ -368,6 +368,12 @@ position = Vector2(590, 491)
 item_type = "apple"
 sprite_frames = ExtResource("9_y85pg")
 
+[node name="multi" parent="Items" instance=ExtResource("3_2mhcq")]
+position = Vector2(816, 653)
+item_type = "lucky_cats"
+sprite_frames = ExtResource("5_pxh38")
+requires_two_carriers = true
+
 [node name="apple7" parent="Items" instance=ExtResource("3_2mhcq")]
 position = Vector2(606, 480)
 item_type = "apple"
