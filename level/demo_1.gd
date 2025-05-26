@@ -3,6 +3,7 @@ extends Node
 
 @export var isRegularBgmPlaying := true
 var _lastRegularBgmPlaying := true
+var is_paused := false
 
 const APPLE_REQUIRED := 5
 const BEER_REQUIRED := 5
@@ -75,6 +76,8 @@ func _ready():
 	if has_node("HUD/ScoreBoard/Button"):
 		print("Connecting ScoreBoard Button pressed signal.")
 		$HUD/ScoreBoard/Button.connect("pressed", _on_continue_pressed)
+	if has_node("HUD/PauseMenu/Button2"):
+		$HUD/PauseMenu/Button2.connect("pressed", _on_resume_pressed)
 
 func _process(delta):
 	update_timer_ui()
@@ -88,7 +91,12 @@ func _process(delta):
 
 		_lastRegularBgmPlaying = isRegularBgmPlaying
 
-
+func _input(event):
+	if event.is_action_pressed("pause"):
+		if is_paused:
+			resume_game.rpc()
+		else:
+			pause_game.rpc()
 
 
 @rpc("authority", "call_local")
@@ -308,3 +316,42 @@ func _on_continue_pressed():
 func return_to_level_selection():
 	print("Returning to level selection...")
 	GameState.return_to_level_selection()
+
+func _on_resume_pressed():
+	print("Resume button pressed.")
+	if is_paused:
+		resume_game.rpc()
+	else:
+		pause_game.rpc()
+
+@rpc("any_peer", "call_local")
+func pause_game():
+	print("Game paused by peer: ", multiplayer.get_remote_sender_id())
+	is_paused = true
+	
+	# Pause gameplay elements
+	$Players.process_mode = Node.PROCESS_MODE_DISABLED
+	$Timer.paused = true
+	if has_node("NPCs"):
+		$NPCs.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	# Show pause menu
+	if has_node("HUD/PauseMenu"):
+		$HUD/PauseMenu.show()
+	else:
+		print("Warning: HUD/PauseMenu node not found")
+
+@rpc("any_peer", "call_local")
+func resume_game():
+	print("Game resumed by peer: ", multiplayer.get_remote_sender_id())
+	is_paused = false
+	
+	# Resume gameplay elements
+	$Players.process_mode = Node.PROCESS_MODE_INHERIT
+	$Timer.paused = false
+	if has_node("NPCs"):
+		$NPCs.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	# Hide pause menu
+	if has_node("HUD/PauseMenu"):
+		$HUD/PauseMenu.hide()

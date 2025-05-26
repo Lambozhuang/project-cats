@@ -223,3 +223,37 @@ func _on_return_to_level_selection() -> void:
 	
 	# Clear ready states
 	GameState.players_ready.clear()
+
+
+func _on_back_button_pressed() -> void:
+	# Disconnect from multiplayer
+	GameState.leave_game()
+	
+	# Reset all UI states
+	$Start.show()
+	$Connect.hide()
+	$Players.hide()
+	$Characters.hide()
+	$Maps.hide()
+	$Levels.hide()
+	
+	# Reset error messages and button states
+	$Connect/ErrorLabel.text = ""
+	$Connect/Host.disabled = false
+	$Connect/Join.disabled = false
+	
+	# Reset character selection states
+	for cat in GameState.CATS:
+		var button = get_node("Characters/CharacterHBox/" + cat + "/Button")
+		button.disabled = false
+		button.text = "Select"
+		var player_label = get_node("Characters/CharacterHBox/" + cat + "/PlayerLabel")
+		player_label.text = "Not selected"
+	
+	$Characters/ReadyButton.disabled = true
+	
+	# Clear ready states
+	GameState.players_ready.clear()
+	
+	# Reset window title
+	get_window().title = ProjectSettings.get_setting("application/config/name")

@@ -1205,3 +1205,4 @@ text = "Back to menu"
 [connection signal="pressed" from="Characters/ReadyButton" to="." method="_on_ready"]
 [connection signal="pressed" from="Maps/1" to="." method="_on_map_selected" binds= [1]]
 [connection signal="pressed" from="Levels/LevelHBox/Level1/Button" to="." method="_on_level_play" binds= [1]]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
