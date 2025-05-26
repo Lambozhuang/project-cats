@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt4dij2usnx11"
-path="res://.godot/imported/whitedoor0.png-1b1f80b8e1c89469b429f28e34972dbe.ctex"
+uid="uid://cm3ha4mnv4v0i"
+path="res://.godot/imported/jail_door_open.png-1e3b73e0d820511c0ace83f99990f3cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level/map/whitedoor0.png"
-dest_files=["res://.godot/imported/whitedoor0.png-1b1f80b8e1c89469b429f28e34972dbe.ctex"]
+source_file="res://level/map/jail_door_open.png"
+dest_files=["res://.godot/imported/jail_door_open.png-1e3b73e0d820511c0ace83f99990f3cd.ctex"]
 
 [params]
 

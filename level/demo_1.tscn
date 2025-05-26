@@ -1,9 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=29 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="Script" uid="uid://b8qfn44xix1qo" path="res://level/demo_1.gd" id="1_2mhcq"]
 [ext_resource type="PackedScene" uid="uid://q1crtgsjgscq" path="res://level/van.tscn" id="1_fm3gc"]
 [ext_resource type="PackedScene" uid="uid://by7mnayrkygvi" path="res://level/map/level_1_map.tscn" id="2_n16k1"]
 [ext_resource type="PackedScene" uid="uid://hibqxwj4bwo3" path="res://item/item.tscn" id="3_2mhcq"]
+[ext_resource type="Script" uid="uid://dun21sfsiellv" path="res://level/jail_door.gd" id="4_mllp4"]
+[ext_resource type="Texture2D" uid="uid://bt4dij2usnx11" path="res://level/map/jail_door_close.png" id="4_pxh38"]
 [ext_resource type="SpriteFrames" uid="uid://bp8jwwutsth3x" path="res://item/items/basketball.tres" id="4_ycd54"]
 [ext_resource type="SpriteFrames" uid="uid://dvvy8duk06ce" path="res://item/items/lucky_cat.tres" id="5_pxh38"]
 [ext_resource type="SpriteFrames" uid="uid://sq5g6mss8nnt" path="res://item/items/pop_corn.tres" id="6_mllp4"]
@@ -30,6 +32,12 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Arr
 outlines = Array[PackedVector2Array]([PackedVector2Array(0, 0, 0, 1408, 2080, 1408, 2080, 0)])
 agent_radius = 15.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mllp4"]
+size = Vector2(64, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pxh38"]
+size = Vector2(64, 20)
+
 [node name="Demo1" type="Node"]
 script = ExtResource("1_2mhcq")
 
@@ -41,6 +49,24 @@ z_index = 49
 position = Vector2(1072, 600)
 
 [node name="level1_map" parent="GlobalNavigationRegion2D" instance=ExtResource("2_n16k1")]
+
+[node name="JailDoor" type="StaticBody2D" parent="GlobalNavigationRegion2D"]
+z_index = 48
+position = Vector2(160, 435)
+script = ExtResource("4_mllp4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlobalNavigationRegion2D/JailDoor"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_mllp4")
+
+[node name="Sprite2D" type="Sprite2D" parent="GlobalNavigationRegion2D/JailDoor"]
+texture = ExtResource("4_pxh38")
+
+[node name="Area2D" type="Area2D" parent="GlobalNavigationRegion2D/JailDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GlobalNavigationRegion2D/JailDoor/Area2D"]
+position = Vector2(0, 21)
+shape = SubResource("RectangleShape2D_pxh38")
 
 [node name="Items" type="Node" parent="."]
 
@@ -378,5 +404,5 @@ autostart = true
 
 [node name="RegularBgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("23_ycd54")
-volume_db = -23.78
+volume_db = -42.399
 autoplay = true

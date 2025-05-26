@@ -8,3 +8,8 @@ const Tileset = preload("res://level/map/level1.tres")
 	"Kiki": preload("res://player/cats/Kiki/Kiki_anim.tres"),
 	"Rupert": preload("res://player/cats/Rupert/Rupert_anim.tres"),
 }
+
+@export var jail_door = {
+	"open": preload("res://level/map/jail_door_open.png"),
+	"closed": preload("res://level/map/jail_door_close.png"),
+}
