@@ -108,4 +108,9 @@ func release() -> void:
 				$ItemCollectedSfx.play()
 				# destroy the item after collection
 				await get_tree().create_timer(1.0).timeout
-				queue_free()
+				destroy_item.rpc()
+
+@rpc("authority", "call_local")
+func destroy_item() -> void:
+	print("Destroying item: ", item_type)
+	queue_free()
