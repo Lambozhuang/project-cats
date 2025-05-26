@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=38 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="Script" uid="uid://b8qfn44xix1qo" path="res://level/demo_1.gd" id="1_2mhcq"]
 [ext_resource type="PackedScene" uid="uid://q1crtgsjgscq" path="res://level/van.tscn" id="1_fm3gc"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://daxom7074rqp3" path="res://npc/npc.tscn" id="16_pu0qh"]
 [ext_resource type="SpriteFrames" uid="uid://dndq204d17lk" path="res://npc/npc1/npc1_anim.tres" id="17_vo6yg"]
 [ext_resource type="SpriteFrames" uid="uid://c4xvd2cau840n" path="res://npc/npc2/npc2_anim.tres" id="18_c4fc7"]
+[ext_resource type="SpriteFrames" uid="uid://20p2yfqu41mn" path="res://item/items/blue_thing.tres" id="18_ke5m0"]
 [ext_resource type="SpriteFrames" uid="uid://dhswd3p88r1jx" path="res://npc/npc3/npc3_anim.tres" id="19_sbnpo"]
 [ext_resource type="SpriteFrames" uid="uid://b1uaj08iewwad" path="res://npc/officer_clawson/officer_clawson_anim.tres" id="20_4bb8i"]
 [ext_resource type="PackedScene" uid="uid://bhr76qwteqtyy" path="res://ui/hud.tscn" id="21_n16k1"]
@@ -309,6 +310,11 @@ sprite_frames = ExtResource("10_um6aa")
 position = Vector2(192, 776)
 sprite_frames = ExtResource("10_um6aa")
 
+[node name="et" parent="Items" instance=ExtResource("3_2mhcq")]
+position = Vector2(88, 896)
+item_type = "et"
+sprite_frames = ExtResource("18_ke5m0")
+
 [node name="fish3" parent="Items" instance=ExtResource("3_2mhcq")]
 position = Vector2(469, 816)
 sprite_frames = ExtResource("10_um6aa")
@@ -423,38 +429,40 @@ navigation_layers = 16
 navigation_polygon = ExtResource("15_uxhqm")
 navigation_layers = 32
 
-[node name="NPC1" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="NPC1" parent="NPCs" node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
 position = Vector2(1608, 362)
 sprite_frames = ExtResource("17_vo6yg")
-patrol_navigation_region = NodePath("../NPCNavigationRegion2D")
-global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+patrol_navigation_region = NodePath("../../NPCNavigationRegion2D")
+global_navigation_region = NodePath("../../GlobalNavigationRegion2D")
 
-[node name="NPC2" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
+[node name="NPC2" parent="NPCs" node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
 position = Vector2(1928, 448)
 sprite_frames = ExtResource("18_c4fc7")
-patrol_navigation_region = NodePath("../NPCNavigationRegion2D2")
-global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+patrol_navigation_region = NodePath("../../NPCNavigationRegion2D2")
+global_navigation_region = NodePath("../../GlobalNavigationRegion2D")
 
-[node name="NPC3" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
+[node name="NPC3" parent="NPCs" node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
 position = Vector2(1752, 112)
 sprite_frames = ExtResource("19_sbnpo")
-patrol_navigation_region = NodePath("../NPCNavigationRegion2D3")
-global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+patrol_navigation_region = NodePath("../../NPCNavigationRegion2D3")
+global_navigation_region = NodePath("../../GlobalNavigationRegion2D")
 
-[node name="Officer1" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
+[node name="Officer1" parent="NPCs" node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
 position = Vector2(432, 192)
 wander_time = 20.0
 sprite_frames = ExtResource("20_4bb8i")
-patrol_navigation_region = NodePath("../OfficerNavigationRegion2D1")
-global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+patrol_navigation_region = NodePath("../../OfficerNavigationRegion2D1")
+global_navigation_region = NodePath("../../GlobalNavigationRegion2D")
 npc_type = "officer"
 
-[node name="Officer2" parent="." node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
+[node name="Officer2" parent="NPCs" node_paths=PackedStringArray("patrol_navigation_region", "global_navigation_region") instance=ExtResource("16_pu0qh")]
 position = Vector2(1483, 1280)
 wander_time = 100.0
 sprite_frames = ExtResource("20_4bb8i")
-patrol_navigation_region = NodePath("../OfficerNavigationRegion2D2")
-global_navigation_region = NodePath("../GlobalNavigationRegion2D")
+patrol_navigation_region = NodePath("../../OfficerNavigationRegion2D2")
+global_navigation_region = NodePath("../../GlobalNavigationRegion2D")
 npc_type = "officer"
 
 [node name="HUD" parent="." instance=ExtResource("21_n16k1")]

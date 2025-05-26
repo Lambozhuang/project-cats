@@ -53,6 +53,7 @@ signal connection_failed()
 signal connection_succeeded()
 signal game_ended()
 signal game_error(what: int)
+signal return_to_level_selection_requested()
 
 # -------- Callbacks from SceneTree --------
 
@@ -153,6 +154,29 @@ func end_game() -> void:
 
 	game_ended.emit()
 	players.clear()
+
+func return_to_level_selection() -> void:
+	# Clean up current game state
+	if has_node("/root/Demo1"):
+		get_node("/root/Demo1").queue_free()
+	
+	# Reset game variables
+	players_ready.clear()
+	
+	# Reset player cats selection
+	for player_id in player_cats.keys():
+		if player_id != multiplayer.get_unique_id():
+			player_cats.erase(player_id)
+	
+	# Show lobby and emit signal to reset to level selection
+	if has_node("/root/Lobby"):
+		get_node("/root/Lobby").show()
+		return_to_level_selection_requested.emit()
+	else:
+		get_tree().change_scene_to_file("res://lobby.tscn")
+	
+	# Unpause the game
+	get_tree().paused = false
 
 
 func _ready() -> void:

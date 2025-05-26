@@ -7,6 +7,7 @@ func _ready() -> void:
 	GameState.player_list_changed.connect(refresh_lobby)
 	GameState.game_ended.connect(_on_game_ended)
 	GameState.game_error.connect(_on_game_error)
+	GameState.return_to_level_selection_requested.connect(_on_return_to_level_selection)
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
@@ -199,3 +200,26 @@ func refresh_lobby() -> void:
 
 	$Players/VBoxContainer/Start.disabled = not multiplayer.is_server()
 	print("Players in lobby: ", GameState.players)
+
+
+func _on_return_to_level_selection() -> void:
+	# Reset lobby state and show level selection
+	$Start.hide()
+	$Connect.hide()
+	$Players.hide()
+	$Characters.hide()
+	$Maps.hide()
+	$Levels.show()  # Show level selection directly
+	
+	# Reset character selection states
+	for cat in GameState.CATS:
+		var button = get_node("Characters/CharacterHBox/" + cat + "/Button")
+		button.disabled = false
+		button.text = "Select"
+		var player_label = get_node("Characters/CharacterHBox/" + cat + "/PlayerLabel")
+		player_label.text = "Not selected"
+	
+	$Characters/ReadyButton.disabled = true
+	
+	# Clear ready states
+	GameState.players_ready.clear()

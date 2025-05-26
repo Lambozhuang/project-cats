@@ -72,6 +72,10 @@ func _ready():
 		spawn_players()	
 	$RegularBgm.play()
 
+	if has_node("HUD/ScoreBoard/Button"):
+		print("Connecting ScoreBoard Button pressed signal.")
+		$HUD/ScoreBoard/Button.connect("pressed", _on_continue_pressed)
+
 func _process(delta):
 	update_timer_ui()
 	
@@ -90,7 +94,12 @@ func _process(delta):
 @rpc("authority", "call_local")
 func game_over():
 	print("Game Over!")
-	get_tree().paused = true
+	# Instead of pausing the entire tree, pause specific gameplay nodes
+	$Players.process_mode = Node.PROCESS_MODE_DISABLED
+	$Timer.paused = true
+	if has_node("NPCs"):
+		$NPCs.process_mode = Node.PROCESS_MODE_DISABLED
+	
 	$HUD/HUD/GameOver.show()
 	var hide_timer = Timer.new()
 	hide_timer.wait_time = 5.0
@@ -289,3 +298,13 @@ func show_jail_message(player_id: int) -> void:
 			$HUD/HUD/AlertMessage.hide()
 			hide_timer.queue_free()
 		)
+
+func _on_continue_pressed():
+	print("Continue button pressed, returning to level selection.")
+	if multiplayer.is_server():
+		return_to_level_selection.rpc()
+
+@rpc("authority", "call_local")
+func return_to_level_selection():
+	print("Returning to level selection...")
+	GameState.return_to_level_selection()
