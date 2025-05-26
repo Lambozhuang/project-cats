@@ -220,9 +220,14 @@ func all_items_collected() -> bool:
 func update_item_ui() -> void:
 	# Update the UI with the current item counts
 	for item_id in items.keys():
-		var count_label = get_node("HUD/HUD/ScarpaItem/Item" + str(item_id) + "/Label")
-		if count_label:
-			count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
+		if item_id < 6:
+			var count_label = get_node("HUD/HUD/ScarpaItem/Item" + str(item_id) + "/Label")
+			if count_label:
+				count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
+		else:
+			var count_label = get_node("HUD/HUD/SpaceshipItem/Item" + str(item_id - 5) + "/Label")
+			if count_label:
+				count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
 	
 	# Calculate and display total percentage for regular items (excluding ET)
 	var regular_items_collected = 0
