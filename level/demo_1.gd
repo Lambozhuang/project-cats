@@ -76,6 +76,8 @@ func _ready():
 	if has_node("HUD/ScoreBoard/Button"):
 		print("Connecting ScoreBoard Button pressed signal.")
 		$HUD/ScoreBoard/Button.connect("pressed", _on_continue_pressed)
+	if has_node("HUD/ScoreBoard/Button2"):
+		$HUD/ScoreBoard/Button.connect("pressed", _on_back_to_menu_pressed)
 	if has_node("HUD/PauseMenu/Button"):
 		$HUD/PauseMenu/Button.connect("pressed", _on_back_to_menu_pressed)
 	if has_node("HUD/PauseMenu/Button2"):
