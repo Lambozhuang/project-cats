@@ -6,6 +6,7 @@ extends Node
 
 var carry_pressed := false
 var carry_released := false
+var carry_held := false
 
 func update() -> void:
 	var m := Vector2()
@@ -25,3 +26,4 @@ func update() -> void:
 	# Capture carry input state
 	carry_pressed = Input.is_action_just_pressed("carry")
 	carry_released = Input.is_action_just_released("carry")
+	carry_held = Input.is_action_pressed("carry")
