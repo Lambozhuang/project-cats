@@ -12,6 +12,9 @@ var is_locked_up = false  # New state to track if player is locked up
 @onready var inputs: Node = $Inputs
 
 func _ready() -> void:
+	# Add player to a group for easy identification
+	add_to_group("player")
+	
 	position = synced_position
 	if str(name).is_valid_int():
 		print("Player instance name: ", str(name).to_int())
@@ -29,11 +32,9 @@ func _process(delta: float) -> void:
 	if not multiplayer.is_server():
 		is_locked_up = synced_locked_up
 	
-	# Don't update animations if locked up
+	# Don't update animations if locked up, but allow movement
 	if is_locked_up:
-		$AnimatedSprite2D.animation = "idle"
 		$AnimatedSprite2D.modulate = Color.GRAY  # Visual indication of being locked up
-		return
 	else:
 		$AnimatedSprite2D.modulate = Color.WHITE
 	
@@ -64,11 +65,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		position = synced_position
 		
+	# Allow movement even when locked up (they can move within jail)
 	velocity = inputs.motion * speed
 	move_and_slide()
 	
-	# Handle carry logic
-	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
+	# Handle carry logic - only if not locked up
+	if not is_locked_up and (multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name)):
 		if inputs.carry_pressed:
 			try_to_carry_item()
 		elif inputs.carry_released:
@@ -84,6 +86,9 @@ func set_locked_up(locked: bool) -> void:
 			carried_item.request_release.rpc()
 			carried_item = null
 			is_carrying_item = false
+		print("Player ", name, " is now locked up")
+	else:
+		print("Player ", name, " has been released from jail")
 
 func try_to_carry_item() -> void:
 	if is_carrying_item or is_locked_up:

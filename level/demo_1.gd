@@ -210,14 +210,12 @@ func teleport_player_to_jail(player_id: int) -> void:
 	var player = players_node.get_node(str(player_id))
 	
 	if player:
-		print("Teleporting player ", player_id, " to jail (0,0)")
+		print("Teleporting player ", player_id, " to jail (200, 160)")
 		# Set player as locked up
 		player.set_locked_up.rpc(true)
-		# Teleport to jail position (0,0)
 		player.synced_position = Vector2(200, 160)
 		player.global_position = Vector2(200, 160)
 		
-		# Optional: Add visual feedback
 		show_jail_message(player_id)
 
 func show_jail_message(player_id: int) -> void:
