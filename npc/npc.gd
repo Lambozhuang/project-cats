@@ -132,6 +132,10 @@ func _find_closest_player() -> void:
 	_closest_player = null
 	
 	for player in _players_node.get_children():
+		# Skip locked up players
+		if player.has_method("set_locked_up") and player.is_locked_up:
+			continue
+			
 		var distance = global_position.distance_to(player.global_position)
 		if distance < min_distance:
 			min_distance = distance

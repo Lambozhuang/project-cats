@@ -211,6 +211,8 @@ func teleport_player_to_jail(player_id: int) -> void:
 	
 	if player:
 		print("Teleporting player ", player_id, " to jail (0,0)")
+		# Set player as locked up
+		player.set_locked_up.rpc(true)
 		# Teleport to jail position (0,0)
 		player.synced_position = Vector2(200, 160)
 		player.global_position = Vector2(200, 160)
