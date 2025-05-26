@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=37 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="Script" uid="uid://b8qfn44xix1qo" path="res://level/demo_1.gd" id="1_2mhcq"]
 [ext_resource type="PackedScene" uid="uid://q1crtgsjgscq" path="res://level/van.tscn" id="1_fm3gc"]
@@ -10,6 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dvvy8duk06ce" path="res://item/items/lucky_cat.tres" id="5_pxh38"]
 [ext_resource type="SpriteFrames" uid="uid://sq5g6mss8nnt" path="res://item/items/pop_corn.tres" id="6_mllp4"]
 [ext_resource type="Script" uid="uid://ccobm2j0s7ejf" path="res://level/fence_door.gd" id="6_tvotv"]
+[ext_resource type="AudioStream" uid="uid://b108nnw8ghcev" path="res://assets/audio/door_close.wav" id="6_um6aa"]
 [ext_resource type="Texture2D" uid="uid://bww72qbjfxxed" path="res://level/map/blue_fence_door_close.png" id="7_nlyl5"]
 [ext_resource type="SpriteFrames" uid="uid://dfmtfxmx5xlan" path="res://item/items/fish_bone.tres" id="7_tvotv"]
 [ext_resource type="SpriteFrames" uid="uid://nqtt6g1uye5c" path="res://item/items/beer.tres" id="8_nlyl5"]
@@ -83,6 +84,10 @@ texture = ExtResource("4_pxh38")
 position = Vector2(0, 21)
 shape = SubResource("RectangleShape2D_c6n0c")
 
+[node name="DoorSfx" type="AudioStreamPlayer" parent="GlobalNavigationRegion2D/JailDoor"]
+stream = ExtResource("6_um6aa")
+volume_db = -30.0
+
 [node name="FenceDoor" type="StaticBody2D" parent="GlobalNavigationRegion2D"]
 z_index = 48
 position = Vector2(1456, 1200)
@@ -98,6 +103,10 @@ texture = ExtResource("7_nlyl5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlobalNavigationRegion2D/FenceDoor/Area2D"]
 shape = SubResource("RectangleShape2D_um6aa")
+
+[node name="DoorSfx" type="AudioStreamPlayer" parent="GlobalNavigationRegion2D/FenceDoor"]
+stream = ExtResource("6_um6aa")
+volume_db = -30.0
 
 [node name="FenceDoor2" type="StaticBody2D" parent="GlobalNavigationRegion2D"]
 z_index = 48
@@ -115,6 +124,10 @@ texture = ExtResource("8_y85pg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GlobalNavigationRegion2D/FenceDoor2/Area2D"]
 shape = SubResource("RectangleShape2D_pxh38")
+
+[node name="DoorSfx" type="AudioStreamPlayer" parent="GlobalNavigationRegion2D/FenceDoor2"]
+stream = ExtResource("6_um6aa")
+volume_db = -30.0
 
 [node name="Items" type="Node" parent="."]
 

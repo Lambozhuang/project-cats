@@ -47,6 +47,7 @@ func open_door():
 		is_open = true
 		update_door_state()
 		print("Jail door opened!")
+		$DoorSfx.play()
 		
 		# Optionally close the door after some time
 		var close_timer = Timer.new()
