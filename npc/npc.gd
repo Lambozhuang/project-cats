@@ -21,6 +21,7 @@ extends CharacterBody2D
 @export var synced_flip_h := false
 @export var synced_animation := "walk"
 @export var synced_state := "wander"  # "wander", "chase", "return", "attack"
+@export var synced_exclamation_visible := false
 
 var _players_node: Node
 var _closest_player: Node
@@ -36,6 +37,7 @@ var _was_chasing := false
 
 # Navigation agent for pathfinding
 @onready var _navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var _exclamation_sprite: Sprite2D = $Exclamation
 
 func get_demo_scene() -> Node:
 	return get_tree().get_root().get_node("Demo1")
@@ -54,8 +56,10 @@ func _ready() -> void:
 	# Connect to animation finished signal
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
 	
-	# Initialize synced position
+	# Initialize synced position and hide exclamation
 	synced_position = global_position
+	if _exclamation_sprite:
+		_exclamation_sprite.visible = false
 
 func _find_navigation_regions() -> void:
 	if not patrol_navigation_region:
@@ -82,6 +86,10 @@ func _process(delta: float) -> void:
 	$AnimatedSprite2D.flip_h = synced_flip_h
 	if $AnimatedSprite2D.animation != synced_animation:
 		$AnimatedSprite2D.play(synced_animation)
+	
+	# Update exclamation visibility
+	if _exclamation_sprite:
+		_exclamation_sprite.visible = synced_exclamation_visible
 
 func _physics_process(delta: float) -> void:
 	# Only server handles movement logic
@@ -119,6 +127,7 @@ func _physics_process(delta: float) -> void:
 	if _is_chasing and (distance_to_player > chase_range):
 		_is_chasing = false
 		_is_returning = true
+		synced_exclamation_visible = false  # Hide exclamation when stopping chase
 		_start_return_to_patrol()
 		if _was_chasing:
 			$ChasingBgm.stop()
@@ -166,6 +175,7 @@ func _find_closest_player() -> void:
 func _start_chase() -> void:
 	_is_chasing = true
 	synced_state = "chase"
+	synced_exclamation_visible = true  # Show exclamation when chasing starts
 	print("Setting to global nav layer: ", _navigation_agent.navigation_layers)
 	_navigation_agent.navigation_layers &= ~patrol_navigation_region.navigation_layers
 	_navigation_agent.navigation_layers |= global_navigation_region.navigation_layers
@@ -269,6 +279,7 @@ func return_to_patrol_area(delta: float) -> void:
 			_is_returning = false
 			_timer = 0.0
 			synced_state = "wander"
+			synced_exclamation_visible = false
 			print("Setting to patrol nav layer: ", _navigation_agent.navigation_layers)
 			_navigation_agent.navigation_layers &= ~global_navigation_region.navigation_layers
 			_navigation_agent.navigation_layers |= patrol_navigation_region.navigation_layers

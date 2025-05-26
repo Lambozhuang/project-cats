@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://daxom7074rqp3"]
+[gd_scene load_steps=7 format=3 uid="uid://daxom7074rqp3"]
 
 [ext_resource type="Script" uid="uid://2kk2vfkelymc" path="res://npc/npc.gd" id="1_hig5a"]
-[ext_resource type="SpriteFrames" uid="uid://dhswd3p88r1jx" path="res://npc/npc3/npc3_anim.tres" id="2_nhy3c"]
+[ext_resource type="SpriteFrames" uid="uid://b1uaj08iewwad" path="res://npc/officer_clawson/officer_clawson_anim.tres" id="2_o6cys"]
 [ext_resource type="AudioStream" uid="uid://eo105x2c31rd" path="res://assets/audio/being_chased.wav" id="3_3i1kj"]
+[ext_resource type="Texture2D" uid="uid://5xhwdrdu2u47" path="res://npc/exclamation.png" id="4_ldo70"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hig5a"]
 radius = 9.0
@@ -21,6 +22,9 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:synced_state")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath(".:synced_exclamation_visible")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="NPC" type="CharacterBody2D"]
 collision_layer = 2
@@ -31,10 +35,8 @@ script = ExtResource("1_hig5a")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -14)
-sprite_frames = ExtResource("2_nhy3c")
+sprite_frames = ExtResource("2_o6cys")
 animation = &"attack"
-frame = 4
-frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_hig5a")
@@ -49,3 +51,8 @@ replication_config = SubResource("SceneReplicationConfig_nhy3c")
 [node name="ChasingBgm" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_3i1kj")
 volume_db = -23.0
+
+[node name="Exclamation" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -56)
+texture = ExtResource("4_ldo70")
