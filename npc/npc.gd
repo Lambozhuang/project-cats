@@ -235,6 +235,10 @@ func _on_attack_hit(target: Node) -> void:
 	# Sync attack hit to all clients
 	# attack_hit.rpc(target.name)
 
+	# Call knockout on the target player
+	if target.has_method("set_knocked_out"):
+		target.set_knocked_out.rpc()
+
 	var demo_scene = get_tree().get_root().get_node("Demo1")
 	if demo_scene and demo_scene.has_method("handle_npc_attack"):
 		demo_scene.handle_npc_attack(npc_type, target.name.to_int())
