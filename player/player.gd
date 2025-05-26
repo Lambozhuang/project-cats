@@ -8,6 +8,7 @@ var is_knocked_out = false  # New state for knockout animation
 var is_knockout_immune = false  # Immunity after being knocked out
 var is_carrying_two_player_item = false  # New: carrying a two-player item
 var two_player_item_id = 0  # New: ID of the two-player item being carried
+var is_holding_carry_key = false  # New: track if player is holding carry key
 
 @export var speed := 140.0
 @export var knockout_duration := 2.0  # How long the knockout lasts
@@ -111,10 +112,25 @@ func _physics_process(delta: float) -> void:
 	
 	# Handle carry logic - only if not locked up and not knocked out
 	if not is_locked_up and not is_knocked_out and (multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name)):
+		# Update carry key state
+		var previous_holding = is_holding_carry_key
+		is_holding_carry_key = inputs.carry_held  # New: track if key is being held
+		
 		if inputs.carry_pressed:
 			try_to_carry_item()
 		elif inputs.carry_released:
 			try_to_release_item()
+		
+		# New: Check if player stopped holding carry key while carrying two-player item
+		if previous_holding and not is_holding_carry_key and is_carrying_two_player_item:
+			notify_carry_key_released()
+
+# New: Notify item that this player released the carry key
+func notify_carry_key_released() -> void:
+	if is_carrying_two_player_item and two_player_item_id != 0:
+		var item = instance_from_id(two_player_item_id)
+		if item:
+			item.carrier_released_key.rpc(multiplayer.get_unique_id())
 
 # New: RPC to set two-player carry state
 @rpc("authority", "call_local")

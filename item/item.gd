@@ -6,6 +6,7 @@ var carrier_id: int = -1  # ID of the player carrying the item, -1 if none
 var is_two_player_item = false  # New: whether this item requires two players
 var carriers: Array[int] = []  # New: array to store multiple carrier IDs
 var max_carry_distance = 100.0  # New: maximum distance between carriers
+var carriers_holding_key: Array[int] = []  # New: track which carriers are holding the key
 
 @export var item_type: String = "fish"
 @export var sprite_frames: SpriteFrames
@@ -67,6 +68,20 @@ func _handle_two_player_carry():
 				release.rpc()
 			return
 		
+		# New: Check if both players are still holding the carry key
+		if multiplayer.is_server():
+			var all_holding = true
+			for carrier_id in carriers:
+				var player = get_tree().get_root().get_node("Demo1/Players").get_node(str(carrier_id))
+				if player and not player.is_holding_carry_key:
+					all_holding = false
+					break
+			
+			if not all_holding:
+				print("Not all players holding carry key, dropping item")
+				release.rpc()
+				return
+		
 		# Position item at midpoint between players
 		var midpoint = (pos1 + pos2) / 2.0
 		var offset = Vector2(0, -10)  # Slightly above midpoint
@@ -75,6 +90,13 @@ func _handle_two_player_carry():
 			synced_position = midpoint + offset
 		
 		self.position = midpoint + offset
+
+# New: Handle when a carrier releases the carry key
+@rpc("any_peer", "call_local")
+func carrier_released_key(player_id: int) -> void:
+	if multiplayer.is_server() and is_two_player_item and carriers.has(player_id):
+		print("Player ", player_id, " released carry key, dropping two-player item")
+		release.rpc()
 
 # Get appropriate offset based on player's facing direction
 func get_offset_based_on_facing(player) -> Vector2:
@@ -172,6 +194,7 @@ func release() -> void:
 				self.position = synced_position
 			
 			carriers.clear()
+			carriers_holding_key.clear()  # New: clear holding key tracking
 		else:
 			# Handle single player release
 			var player = get_tree().get_root().get_node("Demo1/Players").get_node(str(carrier_id))
