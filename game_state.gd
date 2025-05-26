@@ -44,6 +44,57 @@ func all_players_ready() -> bool:
 			return false
 	return true
 
+@rpc("call_local")
+func return_to_players_state() -> void:
+	# Clean up current game state if in game
+	if has_node("/root/Demo1"):
+		get_node("/root/Demo1").queue_free()
+	
+	# Reset ready states but keep player connections
+	players_ready.clear()
+	for player_id in players.keys():
+		players_ready[player_id] = false
+	players_ready[1] = false  # Server ready state
+	
+	# Reset player cats selection
+	player_cats.clear()
+	player_cat = null
+	
+	# Show lobby and emit signal to reset to Players state
+	if has_node("/root/Lobby"):
+		get_node("/root/Lobby").show()
+		# Emit a new signal for returning to Players state
+		players_state_requested.emit()
+	
+	# Unpause the game
+	get_tree().paused = false
+
+func reset_to_start_menu() -> void:
+	# Clean up current game state
+	if has_node("/root/Demo1"):
+		get_node("/root/Demo1").queue_free()
+	
+	# Reset all multiplayer state
+	if peer:
+		peer.close()
+		multiplayer.set_multiplayer_peer(null)
+		peer = null
+	
+	players.clear()
+	players_ready.clear()
+	player_cats.clear()
+	player_cat = null
+	
+	# Show lobby and emit signal to reset to start menu
+	if has_node("/root/Lobby"):
+		get_node("/root/Lobby").show()
+		game_ended.emit()
+	else:
+		get_tree().change_scene_to_file("res://lobby.tscn")
+	
+	# Unpause the game
+	get_tree().paused = false
+
 
 # -------- Signals --------
 
@@ -54,6 +105,7 @@ signal connection_succeeded()
 signal game_ended()
 signal game_error(what: int)
 signal return_to_level_selection_requested()
+signal players_state_requested()
 
 # -------- Callbacks from SceneTree --------
 
@@ -65,15 +117,12 @@ func _player_connected(id: int) -> void:
 
 # Callback from SceneTree.
 func _player_disconnected(id: int) -> void:
-	if has_node("/root/World"):
+	if has_node("/root/World") or has_node("/root/Demo1"):
 		# Game is in progress.
-		if multiplayer.is_server():
-			game_error.emit("Player " + players[id] + " disconnected")
-			end_game()
+		return_to_players_state.rpc()
 	else:
-		# Game is not in progress.
-		# Unregister this player.
 		unregister_player(id)
+		return_to_players_state.rpc()
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_ok() -> void:
@@ -82,8 +131,7 @@ func _connected_ok() -> void:
 
 # Callback from SceneTree, only for clients (not server).
 func _server_disconnected() -> void:
-	game_error.emit("Server disconnected")
-	end_game()
+	reset_to_start_menu()
 
 # Callback from SceneTree, only for clients (not server).
 func _connected_fail() -> void:
@@ -160,13 +208,13 @@ func return_to_level_selection() -> void:
 	if has_node("/root/Demo1"):
 		get_node("/root/Demo1").queue_free()
 	
-	# Reset game variables
-	players_ready.clear()
+	# # Reset game variables
+	# players_ready.clear()
 	
-	# Reset player cats selection
-	for player_id in player_cats.keys():
-		if player_id != multiplayer.get_unique_id():
-			player_cats.erase(player_id)
+	# # Reset player cats selection
+	# for player_id in player_cats.keys():
+	# 	if player_id != multiplayer.get_unique_id():
+	# 		player_cats.erase(player_id)
 	
 	# Show lobby and emit signal to reset to level selection
 	if has_node("/root/Lobby"):

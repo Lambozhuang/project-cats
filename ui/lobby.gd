@@ -8,6 +8,8 @@ func _ready() -> void:
 	GameState.game_ended.connect(_on_game_ended)
 	GameState.game_error.connect(_on_game_error)
 	GameState.return_to_level_selection_requested.connect(_on_return_to_level_selection)
+	GameState.players_state_requested.connect(_on_return_to_players_state)  # New connection
+
 	# Set the player name according to the system username. Fallback to the path.
 	if OS.has_environment("USERNAME"):
 		$Connect/Name.text = OS.get_environment("USERNAME")
@@ -257,3 +259,26 @@ func _on_back_button_pressed() -> void:
 	
 	# Reset window title
 	get_window().title = ProjectSettings.get_setting("application/config/name")
+
+
+func _on_return_to_players_state() -> void:
+	# Reset to Players state when a client disconnects
+	$Start.hide()
+	$Connect.hide()
+	$Characters.hide()
+	$Maps.hide()
+	$Levels.hide()
+	$Players.show()  # Show Players state
+	
+	# Reset character selection states
+	for cat in GameState.CATS:
+		var button = get_node("Characters/CharacterHBox/" + cat + "/Button")
+		button.disabled = false
+		button.text = "Select"
+		var player_label = get_node("Characters/CharacterHBox/" + cat + "/PlayerLabel")
+		player_label.text = "Not selected"
+	
+	$Characters/ReadyButton.disabled = true
+	
+	# Refresh the lobby to show current players
+	refresh_lobby()

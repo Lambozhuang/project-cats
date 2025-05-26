@@ -76,6 +76,8 @@ func _ready():
 	if has_node("HUD/ScoreBoard/Button"):
 		print("Connecting ScoreBoard Button pressed signal.")
 		$HUD/ScoreBoard/Button.connect("pressed", _on_continue_pressed)
+	if has_node("HUD/PauseMenu/Button"):
+		$HUD/PauseMenu/Button.connect("pressed", _on_back_to_menu_pressed)
 	if has_node("HUD/PauseMenu/Button2"):
 		$HUD/PauseMenu/Button2.connect("pressed", _on_resume_pressed)
 
@@ -355,3 +357,11 @@ func resume_game():
 	# Hide pause menu
 	if has_node("HUD/PauseMenu"):
 		$HUD/PauseMenu.hide()
+
+func _on_back_to_menu_pressed():
+	print("Back to menu button pressed.")
+	back_to_menu.rpc()
+
+@rpc("any_peer", "call_local")
+func back_to_menu():
+	GameState.return_to_level_selection()
