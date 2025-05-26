@@ -77,6 +77,7 @@ func try_to_carry_item() -> void:
 			body.request_carry.rpc(multiplayer.get_unique_id())
 			carried_item = body
 			isCarryingItem = true
+			$PickingUpSfx.play()
 			break
 
 func try_to_release_item() -> void:

@@ -56,6 +56,7 @@ func _ready():
 
 	if multiplayer.is_server():
 		spawn_players()
+	$RegularBgm.play()
 
 func _process(delta):
 	update_timer_ui()
