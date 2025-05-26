@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bgnn78kuqqjks"]
+[gd_scene load_steps=42 format=3 uid="uid://bgnn78kuqqjks"]
 
 [ext_resource type="Script" uid="uid://b8qfn44xix1qo" path="res://level/demo_1.gd" id="1_2mhcq"]
 [ext_resource type="PackedScene" uid="uid://q1crtgsjgscq" path="res://level/van.tscn" id="1_fm3gc"]
@@ -26,6 +26,7 @@
 [ext_resource type="SpriteFrames" uid="uid://dndq204d17lk" path="res://npc/npc1/npc1_anim.tres" id="17_vo6yg"]
 [ext_resource type="SpriteFrames" uid="uid://c4xvd2cau840n" path="res://npc/npc2/npc2_anim.tres" id="18_c4fc7"]
 [ext_resource type="SpriteFrames" uid="uid://20p2yfqu41mn" path="res://item/items/blue_thing.tres" id="18_ke5m0"]
+[ext_resource type="Texture2D" uid="uid://cfbt87mrvt7av" path="res://item/wealthcat.png" id="19_c6n0c"]
 [ext_resource type="SpriteFrames" uid="uid://dhswd3p88r1jx" path="res://npc/npc3/npc3_anim.tres" id="19_sbnpo"]
 [ext_resource type="SpriteFrames" uid="uid://b1uaj08iewwad" path="res://npc/officer_clawson/officer_clawson_anim.tres" id="20_4bb8i"]
 [ext_resource type="PackedScene" uid="uid://bhr76qwteqtyy" path="res://ui/hud.tscn" id="21_n16k1"]
@@ -54,6 +55,28 @@ size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxh38"]
 size = Vector2(64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6puk"]
+atlas = ExtResource("19_c6n0c")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_726qq"]
+atlas = ExtResource("19_c6n0c")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uxhqm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6puk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_726qq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Demo1" type="Node"]
 script = ExtResource("1_2mhcq")
@@ -371,7 +394,7 @@ sprite_frames = ExtResource("9_y85pg")
 [node name="multi" parent="Items" instance=ExtResource("3_2mhcq")]
 position = Vector2(816, 653)
 item_type = "lucky_cats"
-sprite_frames = ExtResource("5_pxh38")
+sprite_frames = SubResource("SpriteFrames_uxhqm")
 requires_two_carriers = true
 
 [node name="apple7" parent="Items" instance=ExtResource("3_2mhcq")]
