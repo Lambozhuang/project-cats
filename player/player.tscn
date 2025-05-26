@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvscac4fx2trn"]
+[gd_scene load_steps=12 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player/player.gd" id="1_onrkg"]
 [ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://player/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player/player_controls.gd" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://eoxvhn3jges1" path="res://assets/audio/picking_up.wav" id="4_yw30f"]
+[ext_resource type="AudioStream" uid="uid://dpomhht2aaqkt" path="res://assets/audio/got_hit.wav" id="5_qjkh3"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqtel"]
 
@@ -99,3 +100,7 @@ position_smoothing_enabled = true
 [node name="PickingUpSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_yw30f")
 volume_db = -35.0
+
+[node name="GothitSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_qjkh3")
+volume_db = -20.0
