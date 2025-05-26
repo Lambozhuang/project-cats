@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bo16iftbp70rn"]
+[gd_scene load_steps=18 format=3 uid="uid://bo16iftbp70rn"]
 
 [ext_resource type="Script" uid="uid://b1bilrlxwea01" path="res://ui/lobby.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bs6y2ox0t323b" path="res://ui/ui_background.png" id="2_hgmly"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bawrmwi0geslj" path="res://player/cats/Tuna/Idle/Tuna idle 1.png" id="6_8spp5"]
 [ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://player/cats/Kiki/Idle/Kiki idle1.png" id="7_luvcb"]
 [ext_resource type="Texture2D" uid="uid://dgkj0c5fl8nu3" path="res://player/cats/Rupert/Idle/Rupert1.png" id="8_1bu3t"]
+[ext_resource type="Texture2D" uid="uid://b4tsxp4a0ab0i" path="res://ui/maps.png" id="9_luvcb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_nmq56"]
 font = ExtResource("3_4sfkc")
@@ -25,6 +26,10 @@ line_spacing = -2.0
 font_size = 13
 
 [sub_resource type="LabelSettings" id="LabelSettings_1bu3t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oyvhv"]
+font_size = 30
+font_color = Color(1, 0.65098, 0.301961, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8spp5"]
 font_size = 40
@@ -56,6 +61,7 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Start" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -675,7 +681,6 @@ toggle_mode = true
 text = "Ready!"
 
 [node name="Maps" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -683,45 +688,147 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="TextureRect2" type="TextureRect" parent="Maps"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -512.0
+offset_top = -292.0
+offset_right = 512.0
+offset_bottom = 292.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_luvcb")
+expand_mode = 1
+stretch_mode = 4
+
 [node name="1" type="Button" parent="Maps"]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 304.0
-offset_right = 435.0
-offset_bottom = 332.0
-text = "Map 1"
+offset_left = 262.0
+offset_top = 429.0
+offset_right = 306.0
+offset_bottom = 471.0
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "1"
+flat = true
 
 [node name="2" type="Button" parent="Maps"]
 layout_mode = 0
-offset_left = 474.0
-offset_top = 304.0
-offset_right = 528.0
-offset_bottom = 332.0
-text = "Map 2"
+offset_left = 352.0
+offset_top = 264.0
+offset_right = 392.0
+offset_bottom = 303.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "2"
+flat = true
 
 [node name="3" type="Button" parent="Maps"]
 layout_mode = 0
-offset_left = 560.0
-offset_top = 304.0
-offset_right = 614.0
-offset_bottom = 332.0
-text = "Map 3"
+offset_left = 584.0
+offset_top = 272.0
+offset_right = 624.0
+offset_bottom = 317.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "3"
+flat = true
 
 [node name="4" type="Button" parent="Maps"]
 layout_mode = 0
-offset_left = 644.0
-offset_top = 304.0
-offset_right = 698.0
-offset_bottom = 332.0
-text = "Map 4"
+offset_left = 702.0
+offset_top = 158.0
+offset_right = 742.0
+offset_bottom = 203.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "4"
+flat = true
 
 [node name="5" type="Button" parent="Maps"]
 layout_mode = 0
-offset_left = 729.0
-offset_top = 304.0
-offset_right = 783.0
-offset_bottom = 332.0
-text = "Map 5"
+offset_left = 846.0
+offset_top = 175.0
+offset_right = 886.0
+offset_bottom = 220.0
+theme_override_colors/font_disabled_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "5"
+flat = true
+
+[node name="Label" type="Label" parent="Maps"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 496.0
+offset_right = 346.0
+offset_bottom = 533.0
+text = "Market"
+label_settings = SubResource("LabelSettings_oyvhv")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Maps"]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 203.0
+offset_right = 420.0
+offset_bottom = 240.0
+text = "Plaza"
+label_settings = SubResource("LabelSettings_oyvhv")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Maps"]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 351.0
+offset_right = 666.0
+offset_bottom = 388.0
+text = "Rooftop"
+label_settings = SubResource("LabelSettings_oyvhv")
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Maps"]
+layout_mode = 0
+offset_left = 664.0
+offset_top = 100.0
+offset_right = 778.0
+offset_bottom = 137.0
+text = "Restaurant"
+label_settings = SubResource("LabelSettings_oyvhv")
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="Maps"]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 240.0
+offset_right = 930.0
+offset_bottom = 277.0
+text = "Alley"
+label_settings = SubResource("LabelSettings_oyvhv")
+horizontal_alignment = 1
 
 [node name="Levels" type="Control" parent="."]
 visible = false
