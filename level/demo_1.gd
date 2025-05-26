@@ -1,4 +1,8 @@
+# demo1.gd
 extends Node
+
+@export var isRegularBgmPlaying := true
+var _lastRegularBgmPlaying := true
 
 const APPLE_REQUIRED := 1
 const BEER_REQUIRED := 0
@@ -55,11 +59,20 @@ func _ready():
 	update_timer_ui()
 
 	if multiplayer.is_server():
-		spawn_players()
+		spawn_players()	
 	$RegularBgm.play()
 
 func _process(delta):
 	update_timer_ui()
+	
+	if isRegularBgmPlaying != _lastRegularBgmPlaying:
+		if isRegularBgmPlaying:
+			if not $RegularBgm.playing:
+				$RegularBgm.play()
+		else:
+			$RegularBgm.stop()	
+
+		_lastRegularBgmPlaying = isRegularBgmPlaying
 
 
 

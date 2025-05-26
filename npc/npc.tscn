@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://daxom7074rqp3"]
+[gd_scene load_steps=6 format=3 uid="uid://daxom7074rqp3"]
 
 [ext_resource type="Script" uid="uid://2kk2vfkelymc" path="res://npc/npc.gd" id="1_hig5a"]
 [ext_resource type="SpriteFrames" uid="uid://dhswd3p88r1jx" path="res://npc/npc3/npc3_anim.tres" id="2_nhy3c"]
+[ext_resource type="AudioStream" uid="uid://eo105x2c31rd" path="res://assets/audio/being_chased.wav" id="3_3i1kj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hig5a"]
 radius = 9.0
@@ -42,3 +43,7 @@ debug_enabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_nhy3c")
+
+[node name="ChasingBgm" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3i1kj")
+volume_db = -23.0

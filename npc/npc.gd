@@ -32,9 +32,14 @@ var _is_returning := false
 var _is_attacking := false
 var _attack_timer := 0.0
 var _attack_target: Node  # Player we're attacking
+var _was_chasing := false
 
 # Navigation agent for pathfinding
 @onready var _navigation_agent: NavigationAgent2D = $NavigationAgent2D
+
+func get_demo_scene() -> Node:
+	return get_tree().get_root().get_node("Demo1")
+
 
 func _ready() -> void:
 	if sprite_frames:
@@ -115,11 +120,25 @@ func _physics_process(delta: float) -> void:
 		_is_chasing = false
 		_is_returning = true
 		_start_return_to_patrol()
+		if _was_chasing:
+			$ChasingBgm.stop()
+			_was_chasing = false
+		var demo_scene = get_demo_scene()
+		if demo_scene:
+			demo_scene.isRegularBgmPlaying = true
 	
 	if _is_chasing:
 		chase_player(delta)
+		var demo_scene = get_demo_scene()
+		if demo_scene:
+			demo_scene.isRegularBgmPlaying = false
+		if not _was_chasing:
+			$ChasingBgm.play()
+			_was_chasing = true
+		
 	elif _is_returning:
 		return_to_patrol_area(delta)
+	
 	else:
 		wander_in_area(delta)
 
@@ -143,6 +162,7 @@ func _start_chase() -> void:
 	print("Setting to global nav layer: ", _navigation_agent.navigation_layers)
 	_navigation_agent.navigation_layers &= ~patrol_navigation_region.navigation_layers
 	_navigation_agent.navigation_layers |= global_navigation_region.navigation_layers
+	
 
 func chase_player(delta: float) -> void:
 	if not _closest_player:
