@@ -1,3 +1,4 @@
+# item.gd
 extends Area2D
 
 var isCarried = false
@@ -104,5 +105,7 @@ func release() -> void:
 			if area.name == "CollectionArea" and multiplayer.is_server():
 				print("Item: ", item_type, " dropped in collection area")
 				get_tree().get_root().get_node("Demo1")._on_item_dropped(item_type)
+				$ItemCollectedSfx.play()
 				# destroy the item after collection
+				await get_tree().create_timer(1.0).timeout
 				queue_free()

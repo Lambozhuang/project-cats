@@ -129,6 +129,8 @@ func set_knocked_out() -> void:
 	$AnimatedSprite2D.animation = "knockout"
 	$AnimatedSprite2D.play()
 	print("Player ", name, " has been knocked out!")
+	
+	$GothitSfx.play()
 
 func _end_knockout() -> void:
 	is_knocked_out = false

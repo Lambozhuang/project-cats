@@ -41,6 +41,7 @@ func open_door():
 	if not is_open:
 		is_open = true
 		update_door_state()
+		$DoorSfx.play()
 		
 		# Optionally close the door after some time
 		var close_timer = Timer.new()
