@@ -289,6 +289,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="GameOver" type="Panel" parent="HUD"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -322,6 +323,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AlertMessage" type="Panel" parent="HUD"]
+visible = false
 layout_mode = 0
 offset_left = 404.0
 offset_top = 552.0
@@ -385,6 +387,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rbyyf")
+
+[node name="ColorRect" type="ColorRect" parent="ScoreBoard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.145098, 0.145098, 0.145098, 0.309804)
 
 [node name="CharacterHBox" type="HBoxContainer" parent="ScoreBoard"]
 layout_mode = 1
@@ -450,7 +461,7 @@ offset_right = 40.0
 offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Captured:"
+text = "Item collected:"
 label_settings = SubResource("LabelSettings_m0eg6")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -522,7 +533,7 @@ offset_right = 40.0
 offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Captured:"
+text = "Item collected:"
 label_settings = SubResource("LabelSettings_m0eg6")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -594,7 +605,7 @@ offset_right = 40.0
 offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Captured:"
+text = "Item collected:"
 label_settings = SubResource("LabelSettings_m0eg6")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -666,7 +677,7 @@ offset_right = 40.0
 offset_bottom = 133.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Captured:"
+text = "Item collected:"
 label_settings = SubResource("LabelSettings_m0eg6")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -689,7 +700,7 @@ label_settings = SubResource("LabelSettings_m0eg6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label" type="Label" parent="ScoreBoard"]
+[node name="TopMessage" type="Label" parent="ScoreBoard"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -717,7 +728,7 @@ text = "SCARPA'S ITEMS COLLECTED:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label4" type="Label" parent="ScoreBoard"]
+[node name="RegularItemCollected" type="Label" parent="ScoreBoard"]
 layout_mode = 0
 offset_left = 280.0
 offset_top = 512.0
@@ -733,11 +744,11 @@ offset_left = 664.0
 offset_top = 496.0
 offset_right = 874.0
 offset_bottom = 516.0
-text = "SCARPA'S ITEMS COLLECTED:"
+text = "SPACESHIP ITEMS COLLECTED:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label5" type="Label" parent="ScoreBoard"]
+[node name="SpaceshipItemCollected" type="Label" parent="ScoreBoard"]
 layout_mode = 0
 offset_left = 664.0
 offset_top = 512.0

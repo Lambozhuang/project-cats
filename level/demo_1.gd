@@ -1,13 +1,11 @@
 extends Node
 
-const TOTAL_TIME := 300.0
-
-const APPLE_REQUIRED := 5
-const BEER_REQUIRED := 5
-const FISH_REQUIRED := 5
-const FISH_BONE_REQUIRED := 5
-const POP_CORN_REQUIRED := 5
-const ET_REQUIRED := 1
+const APPLE_REQUIRED := 1
+const BEER_REQUIRED := 0
+const FISH_REQUIRED := 0
+const FISH_BONE_REQUIRED := 0
+const POP_CORN_REQUIRED := 0
+const ET_REQUIRED := 0
 
 var item_required_counts := {
 	"apple": APPLE_REQUIRED,
@@ -51,7 +49,6 @@ func _ready():
 	else:
 		print("Multiplayer peer already set.")
 
-	timer.wait_time = TOTAL_TIME
 	timer.timeout.connect(_on_timer_timeout)
 
 	update_item_ui()
@@ -62,6 +59,62 @@ func _ready():
 
 func _process(delta):
 	update_timer_ui()
+
+
+
+
+@rpc("authority", "call_local")
+func game_over():
+	print("Game Over!")
+	get_tree().paused = true
+	$HUD/HUD/GameOver.show()
+	var hide_timer = Timer.new()
+	hide_timer.wait_time = 5.0
+	hide_timer.one_shot = true
+	add_child(hide_timer)
+	hide_timer.start()
+	hide_timer.timeout.connect(_on_game_over_hide)
+
+func _on_game_over_hide():
+	print("Game Over dialog hidden.")
+	calculate_and_display_win_state()
+	$HUD/HUD.hide()
+	$HUD/ScoreBoard.show()
+
+func calculate_and_display_win_state():
+	# Calculate total regular items collected and required
+	var regular_items_collected = 0
+	var regular_items_required = 0
+	var spaceship_items_collected = item_counts["et"]
+	var spaceship_items_required = ET_REQUIRED
+	
+	# Sum up all items except ET (spaceship item)
+	for item in items.values():
+			if item != "et":
+					regular_items_collected += item_counts[item]
+					regular_items_required += item_required_counts[item]
+	
+	# Update scoreboard labels
+	var regular_label = get_node("HUD/ScoreBoard/RegularItemCollected")
+	var spaceship_label = get_node("HUD/ScoreBoard/SpaceshipItemCollected")
+	var win_message_label = get_node("HUD/ScoreBoard/TopMessage")
+	
+	if regular_label:
+			regular_label.text = str(regular_items_collected) + "/" + str(regular_items_required)
+	
+	if spaceship_label:
+			spaceship_label.text = str(spaceship_items_collected) + "/" + str(spaceship_items_required)
+	
+	# Determine win message based on collection status
+	if win_message_label:
+			if regular_items_collected >= regular_items_required:
+					if spaceship_items_collected >= spaceship_items_required:
+							win_message_label.text = "PERFECT! MISSION COMPLETE!"
+					else:
+							win_message_label.text = "GOOD JOB! MISSION SUCCESS!"
+			else:
+					win_message_label.text = "MISSION FAILED!"
+					win_message_label.modulate = Color.RED
 
 func spawn_players() -> void:
 	var player_scene: PackedScene = load("res://player/player.tscn")
@@ -103,6 +156,21 @@ func _on_item_dropped(item_type: String) -> void:
 func update_item_count(item_type: String) -> void:
 	item_counts[item_type] += 1
 	update_item_ui()
+	if multiplayer.is_server():
+		for item in items.values():
+			if item_counts[item] >= item_required_counts[item]:
+				print("All required items collected for: ", item)
+				# check if all items in all categories are collected
+				if all_items_collected():
+					print("All items collected! Game Over!")
+					game_over.rpc()
+					return
+
+func all_items_collected() -> bool:
+	for item in items.values():
+		if item_counts[item] < item_required_counts[item]:
+			return false
+	return true
 
 func update_item_ui() -> void:
 	# Update the UI with the current item counts
@@ -112,8 +180,9 @@ func update_item_ui() -> void:
 			count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
 
 func _on_timer_timeout():
-	print("Time's up!")
-	# TODO: add times up logic
+	print("Time's up! Game Over!")
+	if multiplayer.is_server():
+		game_over.rpc()
 
 func update_timer_ui():
 	var time_left = timer.time_left
