@@ -178,10 +178,10 @@ func _on_connection_failed() -> void:
 
 func _on_game_ended() -> void:
 	show()
-	$Connect.show()
 	$Players.hide()
 	$Connect/Host.disabled = false
 	$Connect/Join.disabled = false
+	$Start.show()
 
 func _on_game_error(errtxt: String) -> void:
 	$ErrorDialog.dialog_text = errtxt
