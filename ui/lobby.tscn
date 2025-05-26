@@ -61,7 +61,6 @@ expand_mode = 1
 stretch_mode = 6
 
 [node name="Start" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -681,6 +680,7 @@ toggle_mode = true
 text = "Ready!"
 
 [node name="Maps" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

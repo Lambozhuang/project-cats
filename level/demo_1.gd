@@ -4,12 +4,12 @@ extends Node
 @export var isRegularBgmPlaying := true
 var _lastRegularBgmPlaying := true
 
-const APPLE_REQUIRED := 2
-const BEER_REQUIRED := 0
-const FISH_REQUIRED := 0
-const FISH_BONE_REQUIRED := 0
-const POP_CORN_REQUIRED := 0
-const ET_REQUIRED := 0
+const APPLE_REQUIRED := 5
+const BEER_REQUIRED := 5
+const FISH_REQUIRED := 5
+const FISH_BONE_REQUIRED := 5
+const POP_CORN_REQUIRED := 5
+const ET_REQUIRED := 1
 
 var item_required_counts := {
 	"apple": APPLE_REQUIRED,
