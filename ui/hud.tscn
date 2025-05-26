@@ -1,11 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://bhr76qwteqtyy"]
+[gd_scene load_steps=21 format=3 uid="uid://bhr76qwteqtyy"]
 
 [ext_resource type="Theme" uid="uid://csgscdngqhlo6" path="res://ui/theme.tres" id="1_rbyyf"]
 [ext_resource type="Texture2D" uid="uid://bkb5u3qmi1omc" path="res://ui/question_mark.png" id="2_1v5rv"]
 [ext_resource type="StyleBox" uid="uid://flpkn1gbstgh" path="res://ui/hud_element_bg.tres" id="2_q43x7"]
+[ext_resource type="Texture2D" uid="uid://6losm8njk204" path="res://ui/scarpa_face.png" id="2_spcu4"]
+[ext_resource type="Texture2D" uid="uid://bq37gs73cu7m8" path="res://ui/apple.png" id="2_srpbi"]
 [ext_resource type="Texture2D" uid="uid://b7qcliacmgvib" path="res://player/cats/Bob/Idle/Bob_idle.png" id="3_1v5rv"]
+[ext_resource type="Texture2D" uid="uid://cyurr303wxcjx" path="res://ui/et.png" id="4_ff8ar"]
 [ext_resource type="Texture2D" uid="uid://bawrmwi0geslj" path="res://player/cats/Tuna/Idle/Tuna idle 1.png" id="4_q43x7"]
 [ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://player/cats/Kiki/Idle/Kiki idle1.png" id="5_srpbi"]
+[ext_resource type="Texture2D" uid="uid://b6yxawy8ucf85" path="res://ui/hour_glass.png" id="6_m0eg6"]
 [ext_resource type="Texture2D" uid="uid://dgkj0c5fl8nu3" path="res://player/cats/Rupert/Idle/Rupert1.png" id="6_spcu4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
@@ -83,156 +87,160 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_rbyyf")
 
-[node name="Item1" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-offset_right = 100.0
-offset_bottom = 50.0
+[node name="ScarpaItem" type="Panel" parent="HUD"]
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 256.0
 theme_override_styles/panel = ExtResource("2_q43x7")
 
-[node name="Label" type="Label" parent="HUD/Item1"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.5
-offset_top = -15.0
-offset_right = 20.5
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Progress" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 93.0
+offset_bottom = 48.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Progress"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_spcu4")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Progress"]
+layout_mode = 2
+text = "0%"
+label_settings = SubResource("LabelSettings_1v5rv")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Item1" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 48.0
+offset_right = 93.0
+offset_bottom = 88.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Item1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_srpbi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Item1"]
+layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item2" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-offset_top = 56.0
-offset_right = 100.0
-offset_bottom = 106.0
-theme_override_styles/panel = ExtResource("2_q43x7")
+[node name="Item2" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 88.0
+offset_right = 93.0
+offset_bottom = 128.0
 
-[node name="Label" type="Label" parent="HUD/Item2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 20.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Item2"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_srpbi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Item2"]
+layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item3" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-offset_top = 112.0
-offset_right = 100.0
-offset_bottom = 162.0
-theme_override_styles/panel = ExtResource("2_q43x7")
+[node name="Item3" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 93.0
+offset_bottom = 168.0
 
-[node name="Label" type="Label" parent="HUD/Item3"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 20.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Item3"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_srpbi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Item3"]
+layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item4" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
+[node name="Item4" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
 offset_top = 168.0
-offset_right = 100.0
-offset_bottom = 218.0
-theme_override_styles/panel = ExtResource("2_q43x7")
+offset_right = 93.0
+offset_bottom = 208.0
 
-[node name="Label" type="Label" parent="HUD/Item4"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 20.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Item4"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_srpbi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Item4"]
+layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item5" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-offset_top = 224.0
-offset_right = 100.0
-offset_bottom = 274.0
-theme_override_styles/panel = ExtResource("2_q43x7")
+[node name="Item5" type="HBoxContainer" parent="HUD/ScarpaItem"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 208.0
+offset_right = 93.0
+offset_bottom = 248.0
 
-[node name="Label" type="Label" parent="HUD/Item5"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 20.0
-offset_bottom = 10.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="TextureRect" type="TextureRect" parent="HUD/ScarpaItem/Item5"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_srpbi")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/ScarpaItem/Item5"]
+layout_mode = 2
 text = "0/5"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Item6" type="Panel" parent="HUD"]
-custom_minimum_size = Vector2(100, 50)
-layout_mode = 2
-offset_left = 106.0
-offset_right = 206.0
-offset_bottom = 50.0
+[node name="SpaceshipItem" type="Panel" parent="HUD"]
+layout_mode = 0
+offset_left = 112.0
+offset_right = 216.0
+offset_bottom = 56.0
 theme_override_styles/panel = ExtResource("2_q43x7")
 
-[node name="Label" type="Label" parent="HUD/Item6"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -27.5
-offset_top = -15.0
-offset_right = 27.5
-offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Item1" type="HBoxContainer" parent="HUD/SpaceshipItem"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 93.0
+offset_bottom = 48.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/SpaceshipItem/Item1"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("4_ff8ar")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="HUD/SpaceshipItem/Item1"]
+layout_mode = 2
 text = "0/1"
 label_settings = SubResource("LabelSettings_1v5rv")
 horizontal_alignment = 1
@@ -243,8 +251,8 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
+offset_left = -64.0
+offset_right = 64.0
 offset_bottom = 50.0
 grow_horizontal = 2
 theme_override_styles/panel = ExtResource("2_q43x7")
@@ -256,16 +264,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
-offset_top = -10.0
-offset_right = 21.0
-offset_bottom = 10.0
+offset_left = -15.0
+offset_top = -17.0
+offset_right = 47.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_q43x7")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Time"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+texture = ExtResource("6_m0eg6")
+expand_mode = 1
 
 [node name="CatStat" type="Panel" parent="HUD"]
 custom_minimum_size = Vector2(100, 0)

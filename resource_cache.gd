@@ -20,3 +20,12 @@ const Tileset = preload("res://level/map/level1.tres")
 	"brown_open": preload("res://level/map/brown_fence_door_open.png"),
 	"brown_closed": preload("res://level/map/brown_fence_door_close.png"),
 }
+
+@export var demo1_item_icons = {
+	"apple": preload("res://ui/apple.png"),
+	"beer": preload("res://ui/beer.png"),
+	"fish": preload("res://ui/fish.png"),
+	"fish_bone": preload("res://ui/fish_bone.png"),
+	"pop_corn": preload("res://ui/pop_corn.png"),
+	"et": preload("res://ui/et.png"),
+}

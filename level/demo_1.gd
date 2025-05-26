@@ -4,7 +4,7 @@ extends Node
 @export var isRegularBgmPlaying := true
 var _lastRegularBgmPlaying := true
 
-const APPLE_REQUIRED := 1
+const APPLE_REQUIRED := 2
 const BEER_REQUIRED := 0
 const FISH_REQUIRED := 0
 const FISH_BONE_REQUIRED := 0
@@ -57,6 +57,16 @@ func _ready():
 
 	update_item_ui()
 	update_timer_ui()
+
+	for item_id in items.keys():
+		if item_id < 6:
+			var item_icon_texture_rect = get_node("HUD/HUD/ScarpaItem/Item" + str(item_id) + "/TextureRect")
+			if item_icon_texture_rect:
+				item_icon_texture_rect.texture = ResourceCache.demo1_item_icons[items[item_id]]
+		else:
+			var item_icon_texture_rect = get_node("HUD/HUD/SpaceshipItem/Item" + str(item_id) + "/TextureRect")
+			if item_icon_texture_rect:
+				item_icon_texture_rect.texture = ResourceCache.demo1_item_icons[items[item_id]]
 
 	if multiplayer.is_server():
 		spawn_players()	
@@ -189,9 +199,28 @@ func all_items_collected() -> bool:
 func update_item_ui() -> void:
 	# Update the UI with the current item counts
 	for item_id in items.keys():
-		var count_label = get_node("HUD/HUD/Item" + str(item_id) + "/Label")
+		var count_label = get_node("HUD/HUD/ScarpaItem/Item" + str(item_id) + "/Label")
 		if count_label:
 			count_label.text = str(item_counts[items[item_id]]) + "/" + str(item_required_counts[items[item_id]])
+	
+	# Calculate and display total percentage for regular items (excluding ET)
+	var regular_items_collected = 0
+	var regular_items_required = 0
+	
+	for item in items.values():
+		if item != "et":  # Exclude spaceship item
+			regular_items_collected += item_counts[item]
+			regular_items_required += item_required_counts[item]
+	
+	# Calculate percentage (avoid division by zero)
+	var percentage = 0
+	if regular_items_required > 0:
+		percentage = int((float(regular_items_collected) / float(regular_items_required)) * 100.0)
+	
+	# Update the progress label
+	var progress_label = get_node("HUD/HUD/ScarpaItem/Progress/Label")
+	if progress_label:
+		progress_label.text = str(percentage) + "%"
 
 func _on_timer_timeout():
 	print("Time's up! Game Over!")
