@@ -98,3 +98,4 @@ position_smoothing_enabled = true
 
 [node name="PickingUpSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_yw30f")
+volume_db = -35.0

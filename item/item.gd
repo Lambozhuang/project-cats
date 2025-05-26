@@ -106,3 +106,4 @@ func release() -> void:
 				get_tree().get_root().get_node("Demo1")._on_item_dropped(item_type)
 				# destroy the item after collection
 				queue_free()
+				$ItemCollectedSfx.play()
