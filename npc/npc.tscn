@@ -32,6 +32,8 @@ script = ExtResource("1_hig5a")
 position = Vector2(0, -14)
 sprite_frames = ExtResource("2_nhy3c")
 animation = &"attack"
+frame = 4
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_hig5a")

@@ -1,12 +1,16 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://bdt1nvhwcxpm8"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://bdt1nvhwcxpm8"]
 
 [ext_resource type="Texture2D" uid="uid://reqkxh61bywv" path="res://player/cats/Rupert/Walk hold/Rupert_walk_hold1and3.png" id="1_ecn3o"]
 [ext_resource type="Texture2D" uid="uid://dgkj0c5fl8nu3" path="res://player/cats/Rupert/Idle/Rupert1.png" id="2_7ksxs"]
 [ext_resource type="Texture2D" uid="uid://le2hhply0sje" path="res://player/cats/Rupert/Idle/Rupert2.png" id="3_k8ic5"]
 [ext_resource type="Texture2D" uid="uid://cra4rdisgnvxd" path="res://player/cats/Rupert/Walk/Rupert_walk2.png" id="4_6x24m"]
+[ext_resource type="Texture2D" uid="uid://crlb4g26ifnce" path="res://player/cats/Rupert/Knockout/Rupert knockout1.png" id="4_bierr"]
 [ext_resource type="Texture2D" uid="uid://c11m7b6nqpbsi" path="res://player/cats/Rupert/Walk/Rupert_walk1and3.png" id="4_l1mhg"]
 [ext_resource type="Texture2D" uid="uid://cbtloe3v56w4y" path="res://player/cats/Rupert/Walk/Rupert_walk4.png" id="5_egmkh"]
+[ext_resource type="Texture2D" uid="uid://dv8jeok5bimra" path="res://player/cats/Rupert/Knockout/Rupert knockout2.png" id="5_la1q8"]
+[ext_resource type="Texture2D" uid="uid://xpdigkvrwvsl" path="res://player/cats/Rupert/Knockout/Rupert knockout3.png" id="6_uw0xe"]
 [ext_resource type="Texture2D" uid="uid://dkat63esrhfth" path="res://player/cats/Rupert/Walk hold/Rupert_walk_hold2.png" id="7_21y5m"]
+[ext_resource type="Texture2D" uid="uid://bs2nfv5weckia" path="res://player/cats/Rupert/Knockout/Rupert knockout4.png" id="7_xkto6"]
 [ext_resource type="Texture2D" uid="uid://djpam156mudr7" path="res://player/cats/Rupert/Walk hold/Rupert_walk_hold4.png" id="8_fimct"]
 
 [resource]
@@ -29,6 +33,37 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7ksxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_ecn3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_7ksxs")
+}],
+"loop": false,
+"name": &"interact",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_bierr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_la1q8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uw0xe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xkto6")
+}],
+"loop": true,
+"name": &"knockout",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,

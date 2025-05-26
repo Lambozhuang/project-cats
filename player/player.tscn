@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dvscac4fx2trn"]
 
 [ext_resource type="Script" uid="uid://cb5wl1h7r5ucn" path="res://player/player.gd" id="1_onrkg"]
-[ext_resource type="SpriteFrames" uid="uid://cevdtp22uqfk2" path="res://player/cats/Tuna/Tuna_anim.tres" id="2_g1dw6"]
+[ext_resource type="SpriteFrames" uid="uid://bdt1nvhwcxpm8" path="res://player/cats/Rupert/Rupert_anim.tres" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://d2e630ro1y8k2" path="res://player/player_controls.gd" id="3_i3pqv"]
 [ext_resource type="AudioStream" uid="uid://eoxvhn3jges1" path="res://assets/audio/picking_up.wav" id="4_yw30f"]
 
@@ -45,10 +45,8 @@ texture = SubResource("CompressedTexture2D_hqtel")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -20)
-sprite_frames = ExtResource("2_g1dw6")
-animation = &"idle"
-frame = 1
-frame_progress = 0.380056
+sprite_frames = ExtResource("3_hqtel")
+animation = &"knockout"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_onrkg")

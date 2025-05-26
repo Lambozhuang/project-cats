@@ -1,11 +1,15 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://clr3uijv3giuc"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://clr3uijv3giuc"]
 
 [ext_resource type="Texture2D" uid="uid://cssm8tss5vwk4" path="res://player/cats/Bob/Walk hold/Bob_walking_hold1and3.png" id="1_8e55f"]
 [ext_resource type="Texture2D" uid="uid://b7qcliacmgvib" path="res://player/cats/Bob/Idle/Bob_idle.png" id="2_ivp84"]
 [ext_resource type="Texture2D" uid="uid://rrgcrvcsrnlf" path="res://player/cats/Bob/Idle/Bob_idle(1).png" id="3_48a5m"]
 [ext_resource type="Texture2D" uid="uid://dyrrhfc57x768" path="res://player/cats/Bob/Walk/Bob_walking1_3.png" id="4_thi1r"]
+[ext_resource type="Texture2D" uid="uid://cenp5eh1uc5r" path="res://player/cats/Bob/Knockout/Bob knockout1.png" id="4_vodet"]
+[ext_resource type="Texture2D" uid="uid://dabcysqfr1do4" path="res://player/cats/Bob/Knockout/Bob knockout2.png" id="5_eqjwn"]
 [ext_resource type="Texture2D" uid="uid://cc30ju1jgf3yr" path="res://player/cats/Bob/Walk/Bob_walking2.png" id="5_s3gq3"]
+[ext_resource type="Texture2D" uid="uid://dx6jin1g5b047" path="res://player/cats/Bob/Knockout/Bob knockout3.png" id="6_4klyd"]
 [ext_resource type="Texture2D" uid="uid://c7b2a2ym2igof" path="res://player/cats/Bob/Walk/Bob_walking4.png" id="6_c8d8i"]
+[ext_resource type="Texture2D" uid="uid://rggjjvuj83m3" path="res://player/cats/Bob/Knockout/Bob knockout4.png" id="7_efe13"]
 [ext_resource type="Texture2D" uid="uid://bjt3snd16rbfj" path="res://player/cats/Bob/Walk hold/Bob_walking_hold2.png" id="7_xtdol"]
 [ext_resource type="Texture2D" uid="uid://cth6hwkj2cyue" path="res://player/cats/Bob/Walk hold/Bob_walking_hold4.png" id="8_7g6cc"]
 
@@ -29,6 +33,37 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ivp84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_8e55f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ivp84")
+}],
+"loop": false,
+"name": &"interact",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_vodet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_eqjwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4klyd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_efe13")
+}],
+"loop": true,
+"name": &"knockout",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,

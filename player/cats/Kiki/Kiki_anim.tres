@@ -1,19 +1,23 @@
-[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://cy0djklu3q530"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://cy0djklu3q530"]
 
-[ext_resource type="Texture2D" uid="uid://dmiad7rocegpb" path="res://player/cats/Kiki/Hold walk/Kiki walk hold1and3.png" id="1_ww8d2"]
+[ext_resource type="Texture2D" uid="uid://ciptgqerapybk" path="res://player/cats/Kiki/Hold walk/Kiki walk hold redo1and3.png" id="1_jpq72"]
 [ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://player/cats/Kiki/Idle/Kiki idle1.png" id="2_2bdbd"]
 [ext_resource type="Texture2D" uid="uid://caepydrakh7v2" path="res://player/cats/Kiki/Idle/Kiki idle2.png" id="3_leeyr"]
+[ext_resource type="Texture2D" uid="uid://c6nmt5cx25bui" path="res://player/cats/Kiki/Knockout/Kiki knockout1.png" id="4_gi8x4"]
 [ext_resource type="Texture2D" uid="uid://c8noyvhhkpcje" path="res://player/cats/Kiki/Walk/Kiki walk1and3.png" id="4_mhyol"]
+[ext_resource type="Texture2D" uid="uid://0nvwrwxawed6" path="res://player/cats/Kiki/Knockout/Kiki knockout2.png" id="5_ke0yl"]
 [ext_resource type="Texture2D" uid="uid://v52rqlsq3oeo" path="res://player/cats/Kiki/Walk/Kiki walk2.png" id="5_moe26"]
 [ext_resource type="Texture2D" uid="uid://bggwixj1bvdew" path="res://player/cats/Kiki/Walk/Kiki walk4.png" id="6_8s56c"]
-[ext_resource type="Texture2D" uid="uid://dlr5thnehbd2v" path="res://player/cats/Kiki/Hold walk/Kiki walk hold2.png" id="7_0gph2"]
-[ext_resource type="Texture2D" uid="uid://cg7yumme12kgx" path="res://player/cats/Kiki/Hold walk/Kiki walk hold4.png" id="8_phej8"]
+[ext_resource type="Texture2D" uid="uid://do0v6p3maobrw" path="res://player/cats/Kiki/Knockout/Kiki knockout3.png" id="6_165fe"]
+[ext_resource type="Texture2D" uid="uid://bc5krd4w2d3si" path="res://player/cats/Kiki/Hold walk/Kiki walk hold redo2.png" id="7_14s5y"]
+[ext_resource type="Texture2D" uid="uid://buu7u1xd5hk8g" path="res://player/cats/Kiki/Knockout/Kiki knockout4.png" id="7_ry0wk"]
+[ext_resource type="Texture2D" uid="uid://cl66jtsa0uspa" path="res://player/cats/Kiki/Hold walk/Kiki walk hold redo4.png" id="8_36byf"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ww8d2")
+"texture": ExtResource("1_jpq72")
 }],
 "loop": true,
 "name": &"hold",
@@ -29,6 +33,37 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2bdbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_jpq72")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2bdbd")
+}],
+"loop": false,
+"name": &"interact",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_gi8x4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ke0yl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_165fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ry0wk")
+}],
+"loop": true,
+"name": &"knockout",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -49,16 +84,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_ww8d2")
+"texture": ExtResource("1_jpq72")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_0gph2")
+"texture": ExtResource("7_14s5y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_ww8d2")
+"texture": ExtResource("1_jpq72")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_phej8")
+"texture": ExtResource("8_36byf")
 }],
 "loop": true,
 "name": &"walk_hold",
