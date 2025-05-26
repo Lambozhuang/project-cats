@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bhr76qwteqtyy"]
+[gd_scene load_steps=23 format=3 uid="uid://bhr76qwteqtyy"]
 
 [ext_resource type="Script" uid="uid://cdu1on8y8q1ts" path="res://ui/hud.gd" id="1_b00kl"]
 [ext_resource type="Theme" uid="uid://csgscdngqhlo6" path="res://ui/theme.tres" id="1_rbyyf"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://civqtb32rwqkv" path="res://player/cats/Kiki/Idle/Kiki idle1.png" id="5_srpbi"]
 [ext_resource type="Texture2D" uid="uid://b6yxawy8ucf85" path="res://ui/hour_glass.png" id="6_m0eg6"]
 [ext_resource type="Texture2D" uid="uid://dgkj0c5fl8nu3" path="res://player/cats/Rupert/Idle/Rupert1.png" id="6_spcu4"]
+[ext_resource type="Texture2D" uid="uid://bkgahqwrxmtji" path="res://ui/tutorial.png" id="9_so1yu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1v5rv"]
 font_size = 24
@@ -49,6 +50,32 @@ font_size = 30
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_b00kl")
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_rbyyf")
+
+[node name="Button" type="Button" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 128.0
+offset_bottom = 96.0
+text = "Back to menu"
+
+[node name="Button2" type="Button" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 104.0
+offset_right = 131.0
+offset_bottom = 136.0
+text = "Resume"
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -270,19 +297,6 @@ offset_bottom = 50.0
 grow_horizontal = 0
 theme_override_styles/panel = ExtResource("2_q43x7")
 
-[node name="Help" type="Button" parent="HUD"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -48.0
-offset_right = 48.0
-grow_vertical = 0
-theme_override_styles/normal = ExtResource("2_q43x7")
-icon = ExtResource("2_1v5rv")
-icon_alignment = 1
-expand_icon = true
-
 [node name="AlertMessage" type="Panel" parent="HUD"]
 visible = false
 layout_mode = 0
@@ -386,40 +400,29 @@ label_settings = SubResource("LabelSettings_276te")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="PauseMenu" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_rbyyf")
+[node name="TutorialPage" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_left = -33.0
+offset_top = -35.0
+offset_right = 1185.0
+offset_bottom = 618.0
+texture = ExtResource("9_so1yu")
+expand_mode = 2
 
-[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
+[node name="Help" type="Button" parent="HUD"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 2
+anchor_top = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.145098, 0.145098, 0.145098, 0.784314)
-
-[node name="Button" type="Button" parent="PauseMenu"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 64.0
-offset_right = 128.0
-offset_bottom = 96.0
-text = "Back to menu"
-
-[node name="Button2" type="Button" parent="PauseMenu"]
-layout_mode = 0
-offset_left = 64.0
-offset_top = 104.0
-offset_right = 131.0
-offset_bottom = 136.0
-text = "Resume"
+offset_left = -2.0
+offset_top = -51.0
+offset_right = 46.0
+offset_bottom = -3.0
+grow_vertical = 0
+theme_override_styles/normal = ExtResource("2_q43x7")
+icon = ExtResource("2_1v5rv")
+icon_alignment = 1
+expand_icon = true
 
 [node name="ScoreBoard" type="Control" parent="."]
 visible = false
