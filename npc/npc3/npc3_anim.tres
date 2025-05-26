@@ -11,6 +11,23 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_e787r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_le18r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_r62kn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_w22nj")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_wphiy")
 }, {
 "duration": 1.0,

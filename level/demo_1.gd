@@ -189,3 +189,60 @@ func update_timer_ui():
 	var minutes = int(time_left) / 60
 	var seconds = int(time_left) % 60
 	time_label.text = "%02d:%02d" % [minutes, seconds]
+
+func handle_npc_attack(attacker_type: String, target_player_id: int) -> void:
+	print("NPC Attack - Type: ", attacker_type, " Target: ", target_player_id)
+	
+	# Handle different types of NPC attacks
+	match attacker_type:
+		"officer":  # Add variations of officer type names
+			teleport_player_to_jail.rpc(target_player_id)
+		"npc":
+			# Could add different behavior for guards
+			pass
+		_:
+			print("Unknown NPC type: ", attacker_type)
+
+@rpc("authority", "call_local")
+func teleport_player_to_jail(player_id: int) -> void:
+	var players_node = get_node("Players")
+	var player = players_node.get_node(str(player_id))
+	
+	if player:
+		print("Teleporting player ", player_id, " to jail (0,0)")
+		# Teleport to jail position (0,0)
+		player.synced_position = Vector2(200, 160)
+		player.global_position = Vector2(200, 160)
+		
+		# Optional: Add visual feedback
+		show_jail_message(player_id)
+
+func show_jail_message(player_id: int) -> void:
+	# Optional: Show a message that the player was caught
+	print("Player ", player_id, " was captured!")
+	if player_id == multiplayer.get_unique_id():
+		$HUD/HUD/FullScreenMessage/Label.text = "You were captured and locked up!"
+		$HUD/HUD/FullScreenMessage.show()
+		# Hide after 3 seconds
+		var hide_timer = Timer.new()
+		hide_timer.wait_time = 3.0
+		hide_timer.one_shot = true
+		add_child(hide_timer)
+		hide_timer.start()
+		hide_timer.timeout.connect(func(): 
+			$HUD/HUD/FullScreenMessage.hide()
+			hide_timer.queue_free()
+		)
+	else:
+		$HUD/HUD/AlertMessage/Label.text = str(GameState.players[player_id]) + " was captured!"
+		$HUD/HUD/AlertMessage.show()
+		# Hide after 3 seconds
+		var hide_timer = Timer.new()
+		hide_timer.wait_time = 3.0
+		hide_timer.one_shot = true
+		add_child(hide_timer)
+		hide_timer.start()
+		hide_timer.timeout.connect(func(): 
+			$HUD/HUD/AlertMessage.hide()
+			hide_timer.queue_free()
+		)

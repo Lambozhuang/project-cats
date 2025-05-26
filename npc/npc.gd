@@ -209,22 +209,26 @@ func _check_attack_hit() -> void:
 func _on_attack_hit(target: Node) -> void:
 	print("Attack HIT! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
 	# Sync attack hit to all clients
-	attack_hit.rpc(target.name)
+	# attack_hit.rpc(target.name)
+
+	var demo_scene = get_tree().get_root().get_node("Demo1")
+	if demo_scene and demo_scene.has_method("handle_npc_attack"):
+		demo_scene.handle_npc_attack(npc_type, target.name.to_int())
+	else:
+		push_error("Demo scene does not have handle_npc_attack method")
 
 func _on_attack_miss(target: Node) -> void:
 	print("Attack MISSED! Target: ", target.name, " at distance: ", global_position.distance_to(target.global_position))
 	# Sync attack miss to all clients
-	attack_miss.rpc(target.name)
+	# attack_miss.rpc(target.name)
 
-@rpc("authority", "call_local")
-func attack_hit(target_name: String) -> void:
-	print("Attack HIT synced! Target: ", target_name)
-	# Add your hit logic here (damage, effects, etc.)
+# @rpc("authority", "call_local")
+# func attack_hit(target_name: String) -> void:
+# 	print("Attack HIT synced! Target: ", target_name)
 
-@rpc("authority", "call_local") 
-func attack_miss(target_name: String) -> void:
-	print("Attack MISSED synced! Target: ", target_name)
-	# Add your miss logic here (sound effects, etc.)
+# @rpc("authority", "call_local") 
+# func attack_miss(target_name: String) -> void:
+# 	print("Attack MISSED synced! Target: ", target_name)
 
 func _start_return_to_patrol() -> void:
 	synced_state = "return"
