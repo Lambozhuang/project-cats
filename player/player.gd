@@ -5,15 +5,19 @@ var is_carrying_item = false
 var carried_item: Node = null
 var is_locked_up = false  # New state to track if player is locked up
 var is_knocked_out = false  # New state for knockout animation
+var is_knockout_immune = false  # Immunity after being knocked out
 
 @export var speed := 140.0
 @export var knockout_duration := 2.0  # How long the knockout lasts
+@export var knockout_cooldown := 3.0  # Immunity period after knockout
 @export var synced_position := Vector2()
 @export var synced_locked_up := false  # Synced version for multiplayer
 @export var synced_knocked_out := false  # Synced knockout state
+@export var synced_knockout_immune := false  # Synced immunity state
 
 @onready var inputs: Node = $Inputs
 var knockout_timer := 0.0
+var immunity_timer := 0.0
 
 func _ready() -> void:
 	# Add player to a group for easy identification
@@ -36,12 +40,19 @@ func _process(delta: float) -> void:
 	if not multiplayer.is_server():
 		is_locked_up = synced_locked_up
 		is_knocked_out = synced_knocked_out
+		is_knockout_immune = synced_knockout_immune
 	
 	# Handle knockout timer
 	if is_knocked_out:
 		knockout_timer -= delta
 		if knockout_timer <= 0.0 and multiplayer.is_server():
 			_end_knockout()
+	
+	# Handle immunity timer
+	if is_knockout_immune:
+		immunity_timer -= delta
+		if immunity_timer <= 0.0 and multiplayer.is_server():
+			_end_immunity()
 	
 	# Visual effects for different states
 	if is_knocked_out:
@@ -77,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		synced_position = position
 		synced_locked_up = is_locked_up  # Sync locked up state
 		synced_knocked_out = is_knocked_out  # Sync knockout state
+		synced_knockout_immune = is_knockout_immune  # Sync immunity state
 	else:
 		position = synced_position
 		
@@ -99,8 +111,9 @@ func _physics_process(delta: float) -> void:
 
 @rpc("authority", "call_local")
 func set_knocked_out() -> void:
-	if is_knocked_out:
-		return  # Already knocked out
+	if is_knocked_out or is_knockout_immune:
+		print("Player ", name, " is immune to knockout!")
+		return  # Already knocked out or immune
 	
 	is_knocked_out = true
 	synced_knocked_out = true
@@ -121,7 +134,19 @@ func _end_knockout() -> void:
 	is_knocked_out = false
 	synced_knocked_out = false
 	knockout_timer = 0.0
-	print("Player ", name, " has recovered from knockout")
+	
+	# Start immunity period
+	is_knockout_immune = true
+	synced_knockout_immune = true
+	immunity_timer = knockout_cooldown
+	
+	print("Player ", name, " has recovered from knockout and is now immune for ", knockout_cooldown, " seconds")
+
+func _end_immunity() -> void:
+	is_knockout_immune = false
+	synced_knockout_immune = false
+	immunity_timer = 0.0
+	print("Player ", name, " is no longer immune to knockout")
 
 @rpc("authority", "call_local")
 func set_locked_up(locked: bool) -> void:
