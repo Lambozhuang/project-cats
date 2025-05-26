@@ -71,13 +71,13 @@ func try_to_carry_item() -> void:
 	if isCarryingItem:
 		return
 	print("try to carry")
-	$PickingUpSfx.play()
 	for body in $CarryDetector.get_overlapping_areas():
 		# print(body)
 		if body.has_method("request_carry"):
 			body.request_carry.rpc(multiplayer.get_unique_id())
 			carried_item = body
 			isCarryingItem = true
+			$PickingUpSfx.play()
 			break
 
 func try_to_release_item() -> void:
