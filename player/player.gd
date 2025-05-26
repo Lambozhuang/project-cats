@@ -1,7 +1,7 @@
 # Player.gd
 extends CharacterBody2D
 
-var isCarryingItem = false 
+var is_carrying_item = false 
 var carried_item: Node = null
 
 @export var speed := 140.0
@@ -24,17 +24,17 @@ func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, Vector2(2080, 1408))
 	if velocity.x != 0:
 		$AnimatedSprite2D.flip_h = velocity.x > 0
-		if isCarryingItem:
+		if is_carrying_item:
 			$AnimatedSprite2D.animation = "walk_hold"
 		else:
 			$AnimatedSprite2D.animation = "walk"
 	elif velocity.y != 0:
-		if isCarryingItem:
+		if is_carrying_item:
 			$AnimatedSprite2D.animation = "walk_hold"
 		else:
 			$AnimatedSprite2D.animation = "walk"
 	else:
-		if isCarryingItem:
+		if is_carrying_item:
 			$AnimatedSprite2D.animation = "hold"
 		else:
 			$AnimatedSprite2D.animation = "idle"
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 			try_to_release_item()
 
 func try_to_carry_item() -> void:
-	if isCarryingItem:
+	if is_carrying_item:
 		return
 	print("try to carry")
 	for body in $CarryDetector.get_overlapping_areas():
@@ -76,7 +76,7 @@ func try_to_carry_item() -> void:
 		if body.has_method("request_carry"):
 			body.request_carry.rpc(multiplayer.get_unique_id())
 			carried_item = body
-			isCarryingItem = true
+			is_carrying_item = true
 			$PickingUpSfx.play()
 			break
 
@@ -85,7 +85,7 @@ func try_to_release_item() -> void:
 	if carried_item:
 		carried_item.request_release.rpc()
 		carried_item = null
-		isCarryingItem = false
+		is_carrying_item = false
 
 @rpc("call_local")
 func set_player_name_and_sprite(value: String, peer_id: int, cat: String) -> void:
